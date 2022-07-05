@@ -13,4 +13,12 @@
     <string name="join_fb_description">We\'ll help you create a new account in a few easy steps.</string>
     <string name="next">Next</string>
     <string name="already_have_an_account_txt">Already have an account?</string>
+    <string name="name_heading">What\'s your name?</string>
+    <string name="name_description">Enter the name you use in real life</string>
+    <string name="first_name_tv">First Name</string>
+    <string name="last_name_tv">Last Name</string>
+    <string name="name">Name</string>
+    <string name="birthday_title">Birthday</string>
+    <string name="what_s_your_birthday">What\'s your birthday?</string>
+    <string name="bday_description">Choose your date of birth.You can always make this private later</string>
 </resources>

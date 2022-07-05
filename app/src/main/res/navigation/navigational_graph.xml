@@ -22,7 +22,15 @@
         <action
             android:id="@+id/action_createAccJoinPageFragment_to_loginPageFragment2"
             app:destination="@id/loginPageFragment" />
+        <action
+            android:id="@+id/action_createAccJoinPageFragment_to_createAccountNamePageFragment2"
+            app:destination="@id/createAccountNamePageFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/createAccountNamePageFragment"
+        android:name="com.example.facebook.CreateAccountNamePageFragment"
+        android:label="CreateAccountNamePageFragment"
+        tools:layout="@layout/fragment_create_account_name_pag"/>
 
 
 </navigation>
