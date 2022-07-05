@@ -49,4 +49,9 @@
     <string name="signup_contacts_skip_btn_tv">Sign up without uploading my contacts</string>
     <string name="years_tv">years</string>
     <string name="home_page_tv">Home Page</string>
+    <string name="username_tv">Jaya Supriya</string>
+    <string name="ph_num_tv">91xxxxxxxx</string>
+    <string name="gender_tv">Female</string>
+    <string name="sampler_gmail_tv">sampleuser@gmail.com</string>
+    <string name="dob_tv">20-03-2000</string>
 </resources>
