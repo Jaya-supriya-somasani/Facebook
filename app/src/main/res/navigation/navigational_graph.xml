@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigational_graph"
+    app:startDestination="@id/loginPageFragment">
+
+    <fragment
+        android:id="@+id/loginPageFragment"
+        android:name="com.example.facebook.LoginPageFragment"
+        android:label="LoginPageFragment"
+        tools:layout="@layout/fragment_login_page">
+        <action
+            android:id="@+id/action_loginPageFragment_to_createAccJoinPageFragment"
+            app:destination="@id/createAccJoinPageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createAccJoinPageFragment"
+        android:name="com.example.facebook.CreateAccJoinPageFragment"
+        android:label="CreateAccJoinPageFragment"
+        tools:layout="@layout/fragment_create_account_join_pg">
+        <action
+            android:id="@+id/action_createAccJoinPageFragment_to_loginPageFragment2"
+            app:destination="@id/loginPageFragment" />
+    </fragment>
+
+
+</navigation>
