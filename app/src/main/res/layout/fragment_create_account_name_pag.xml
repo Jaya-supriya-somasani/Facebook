@@ -61,46 +61,29 @@
         android:layout_marginTop="15dp"
         />
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/firstnameTv"
+        android:id="@+id/usernameTv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/name_description_tv"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/lastname_tv"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="5dp"
         android:layout_marginTop="40dp"
         app:endIconMode="clear_text"
-        android:hint="@string/first_name_tv">
+        android:hint="@string/user_name_tv">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             />
     </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/lastname_tv"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/name_description_tv"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/firstnameTv"
-        android:layout_marginEnd="15dp"
-        android:layout_marginTop="40dp"
-        app:endIconMode="clear_text"
-        android:layout_marginStart="5dp"
-        android:hint="@string/last_name_tv">
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
-        </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/next_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/firstnameTv"
+        app:layout_constraintTop_toBottomOf="@id/usernameTv"
         android:layout_marginTop="100dp"
         android:text="@string/next"
         android:textAllCaps="false"

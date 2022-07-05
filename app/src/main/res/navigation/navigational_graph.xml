@@ -11,8 +11,9 @@
         android:label="LoginPageFragment"
         tools:layout="@layout/fragment_login_page">
         <action
-            android:id="@+id/action_loginPageFragment_to_createAccJoinPageFragment"
+            android:id="@+id/navigation_login_to_create_acc_join_page"
             app:destination="@id/createAccJoinPageFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/createAccJoinPageFragment"
@@ -20,17 +21,71 @@
         android:label="CreateAccJoinPageFragment"
         tools:layout="@layout/fragment_create_account_join_pg">
         <action
-            android:id="@+id/action_createAccJoinPageFragment_to_loginPageFragment2"
+            android:id="@+id/nav_createAccJoinPageFragment_to_loginPageFragment"
             app:destination="@id/loginPageFragment" />
         <action
-            android:id="@+id/action_createAccJoinPageFragment_to_createAccountNamePageFragment2"
+            android:id="@+id/nav_createAccJoinPageFragment_to_createUserNamePageFragment"
             app:destination="@id/createAccountNamePageFragment" />
     </fragment>
     <fragment
         android:id="@+id/createAccountNamePageFragment"
         android:name="com.example.facebook.CreateAccountNamePageFragment"
         android:label="CreateAccountNamePageFragment"
-        tools:layout="@layout/fragment_create_account_name_pag"/>
+        tools:layout="@layout/fragment_create_account_name_pag">
+        <action
+            android:id="@+id/nav_createAccUserNameFragment_to_createAccBDayFragment"
+            app:destination="@id/createAccountBDayFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createAccountBDayFragment"
+        android:name="com.example.facebook.CreateAccountBDayFragment"
+        android:label="CreateAccountBDayFragment"
+        tools:layout="@layout/fragment_create_account_bday_page">
+        <action
+            android:id="@+id/nav_createAccBDayFragment_to_createAccGenderFragment"
+            app:destination="@id/createAccountGenderFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createAccountGenderFragment"
+        android:name="com.example.facebook.CreateAccountGenderFragment"
+        android:label="CreateAccountGenderFragment"
+        tools:layout="@layout/fragment_create_account_gender_page">
+        <action
+            android:id="@+id/nav_createAccGenderFragment_to_createAccPhnumFragment"
+            app:destination="@id/createAccountMobileNumFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createAccountMobileNumFragment"
+        android:name="com.example.facebook.CreateAccountMobileNumFragment"
+        android:label="CreateAccountMobileNumFragment"
+        tools:layout="@layout/fragment_create_account_phnum">
+        <action
+            android:id="@+id/nav_createAccPhNumFragment_to_createAccPswdFragment"
+            app:destination="@id/createAccountPasswordFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createAccountPasswordFragment"
+        android:name="com.example.facebook.CreateAccountPasswordFragment"
+        android:label="CreateAccountPasswordFragment"
+        tools:layout="@layout/fragment_create_account_password">
+        <action
+            android:id="@+id/nav_createAccPswdFragment_to_createAccEmailFragment"
+            app:destination="@id/createAccountEmailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createAccountEmailFragment"
+        android:name="com.example.facebook.CreateAccountEmailFragment"
+        android:label="CreateAccountEmailFragment"
+        tools:layout="@layout/fragment_create_account_mail">
+        <action
+            android:id="@+id/nav_createAccEmailFragment_to_createAccTermsFragment"
+            app:destination="@id/createAccountTermsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createAccountTermsFragment"
+        android:name="com.example.facebook.CreateAccountTermsFragment"
+        android:label="CreateAccountTermsFragment"
+        tools:layout="@layout/fragment_create_account_terms_privacy"/>
 
 
 </navigation>

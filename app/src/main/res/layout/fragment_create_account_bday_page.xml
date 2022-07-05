@@ -61,5 +61,25 @@
         android:text="@string/bday_description"
         android:textSize="12sp"
         />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/next_btn"
+        android:layout_marginBottom="60dp"
+        android:hint="@string/years_tv"/>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/next_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="200dp"
+        android:text="@string/next"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:background="#E62B77E8"
+        android:layout_marginHorizontal="10dp"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
