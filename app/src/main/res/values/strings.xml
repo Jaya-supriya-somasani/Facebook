@@ -48,4 +48,5 @@
     <string name="sign_up_tv">Sign up</string>
     <string name="signup_contacts_skip_btn_tv">Sign up without uploading my contacts</string>
     <string name="years_tv">years</string>
+    <string name="home_page_tv">Home Page</string>
 </resources>

@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModel
 
 abstract class BaseFragment<Binding: ViewDataBinding,VM:ViewModel>:Fragment() {
     abstract fun getViewModel():Class<VM>
-    private lateinit var viewModel: VM
+    lateinit var viewModel: VM
     abstract fun getResourceId():Int
     protected lateinit var dataBinding: Binding
     abstract fun initViews()

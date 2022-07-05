@@ -13,6 +13,20 @@
         <action
             android:id="@+id/navigation_login_to_create_acc_join_page"
             app:destination="@id/createAccJoinPageFragment" />
+        <action
+            android:id="@+id/action_loginPageFragment_to_homePageFragment"
+            app:destination="@id/homePageFragment" />
+        <argument
+            android:name="username"
+            android:defaultValue="@null"
+            app:argType="String"
+            app:nullable="true"
+            />
+        <argument
+            android:name="password"
+            app:argType="String"
+            android:defaultValue="@null"
+            app:nullable="true"/>
 
     </fragment>
     <fragment
@@ -86,6 +100,11 @@
         android:name="com.example.facebook.CreateAccountTermsFragment"
         android:label="CreateAccountTermsFragment"
         tools:layout="@layout/fragment_create_account_terms_privacy"/>
+    <fragment
+        android:id="@+id/homePageFragment"
+        android:name="com.example.facebook.HomePageFragment"
+        android:label="HomePageFragment"
+        tools:layout="@layout/fragment_home_page"/>
 
 
 </navigation>

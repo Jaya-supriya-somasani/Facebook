@@ -28,60 +28,58 @@
         android:layout_marginTop="30dp"
         app:dividerColor="#777575"
         app:layout_constraintBottom_toBottomOf="@id/facebookTxt" />
-    <androidx.appcompat.widget.AppCompatTextView
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/email_or_phnum_tv"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/mobile_number_or_email"
         app:layout_constraintTop_toBottomOf="@id/dividerLine"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/ph_email_edt"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
+        android:hint="@string/mobile_number_or_email"
+        android:layout_marginHorizontal="10dp"
         android:textColor="@color/black"
-        android:textSize="15sp"
-        />
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/ph_email_edt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/email_or_phnum_tv"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="5dp"
-        android:background="#4892BBDC"
-        android:inputType="text"/>
-    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_marginTop="20dp"
+        app:errorMessage="@{loginVM.userNameErrorMsg}"
+        app:errorEnabled="true"
+        android:textSize="15sp">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/ph_email_edt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#4892BBDC"
+            android:inputType="text"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/password_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/ph_email_edt"
-        app:layout_constraintStart_toStartOf="parent"
-        android:text="@string/password"
-        android:layout_marginTop="5dp"
-        android:textColor="@color/black"
-        />
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/password_edt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/password_tv"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="5dp"
-        android:background="#4892BBDC"
-        app:layout_constraintBottom_toTopOf="@id/login_btn"
-        android:inputType="text"/>
+        app:layout_constraintTop_toBottomOf="@id/email_or_phnum_tv"
+        android:layout_marginTop="10dp"
+        android:hint="@string/password"
+        android:layout_marginHorizontal="10dp"
+        app:errorEnabled="true"
+        app:errorMessage="@{loginVM.userPswdErrorMsg}"
+        android:textColor="@color/black">
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#4892BBDC"
+            android:inputType="text"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/login_btn"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        app:layout_constraintTop_toBottomOf="@id/password_edt"
+        app:layout_constraintTop_toBottomOf="@id/password_tv"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="10dp"
         android:background="#E62B77E8"
         android:textColor="@color/white"
         android:textStyle="bold"
         android:textAllCaps="false"
+        android:layout_marginHorizontal="10dp"
+        android:onClick="@{()->loginVM.loginBtnClicked()}"
         android:text="@string/login"/>
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/forgot_pswd_tv"
@@ -92,6 +90,7 @@
         android:textAllCaps="false"
         android:textColor="#E62B77E8"
         android:layout_marginStart="0dp"
+        android:onClick="@{()->loginVM.forgotPswdBtnClicked()}"
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:text="@string/forgot_passwprd"/>
     <com.google.android.material.divider.MaterialDivider
@@ -135,6 +134,7 @@
         android:paddingEnd="10dp"
         android:layout_marginTop="10dp"
         android:textColor="@color/white"
+        android:onClick="@{()->loginVM.createAccBtnClicked()}"
         android:background="#ED0B8E46"/>
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/english_tv"
