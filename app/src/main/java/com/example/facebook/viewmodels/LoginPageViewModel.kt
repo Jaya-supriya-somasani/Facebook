@@ -1,41 +1,26 @@
 package com.example.facebook.viewmodels
 
+import androidx.lifecycle.viewModelScope
 import com.example.facebook.util.BaseViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 
 class LoginPageViewModel : BaseViewModel() {
     val userName = MutableStateFlow("")
     val userPassword = MutableStateFlow("")
 
-    val userNameErrorMsg = MutableStateFlow("")
-    val userPswdErrorMsg = MutableStateFlow("")
+    private val loginEventChannel = Channel<Unit>()
+    val loginEvent = loginEventChannel.receiveAsFlow()
 
-    private val navigateToCreateAccChannel= Channel<Unit> (Channel.BUFFERED)
-    val navigateToCreateAccount=navigateToCreateAccChannel.receiveAsFlow()
-
-    private val navigateToLoginChannel=Channel<Unit>(Channel.BUFFERED)
-    val navigateToLoginScreenToHome=navigateToLoginChannel.receiveAsFlow()
-
+    private val createAccountEventChannel = Channel<Unit>()
+    val createAccountEvent = createAccountEventChannel.receiveAsFlow()
 
     fun loginBtnClicked() {
-        loginChecking()
-    }
-
-    private fun loginChecking() {
-        if (userName.value.isEmpty()) {
-            userNameErrorMsg.value = "Please Enter Email or Phone Number"
-        } else if (userPassword.value.isEmpty()) {
-            userPswdErrorMsg.value = "Please Enter Password"
-        } else {
-            login()
+        viewModelScope.launch {
+            loginEventChannel.send(Unit)
         }
-
     }
 
     fun forgotPswdBtnClicked() {
@@ -43,16 +28,8 @@ class LoginPageViewModel : BaseViewModel() {
     }
 
     fun createAccBtnClicked() {
-        navigateToCreateAccChannel.trySend(Unit)
-    }
-
-    private fun login() {
-        navigateToLoginChannel.trySend(Unit)
+        viewModelScope.launch {
+            createAccountEventChannel.send(Unit)
+        }
     }
 }
-fun <T> StateFlow<T>.sendValues(t:T){
-    Channel<T>(Channel.BUFFERED).trySend(t)
-}
-suspend fun <T> ConflatedChannels(): StateFlow<T> = Channel<T>(Channel.BUFFERED).receiveAsFlow().stateIn(
-    CoroutineScope(Dispatchers.IO)
-)

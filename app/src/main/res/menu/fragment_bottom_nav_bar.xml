@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/home_nav_btn"
+        android:icon="@drawable/ic_baseline_home"
+        android:title="@string/home_tv"/>
+    <item
+        android:id="@+id/friends_nav_btn"
+        android:icon="@drawable/ic_baseline_friends"
+        android:title="@string/friends_tv"/>
+    <item
+        android:id="@+id/profile_nav_btn"
+        android:icon="@drawable/ic_baseline_user"
+        android:title="@string/profile_tv"/>
+    <item
+        android:id="@+id/create_post_nav_btn"
+        android:icon="@drawable/ic_baseline_add"
+        android:title="@string/create_post_tv"/>
+</menu>

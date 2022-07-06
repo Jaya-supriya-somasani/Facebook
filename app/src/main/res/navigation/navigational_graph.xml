@@ -7,31 +7,31 @@
 
     <fragment
         android:id="@+id/loginPageFragment"
-        android:name="com.example.facebook.LoginPageFragment"
+        android:name="com.example.facebook.fragment.LoginPageFragment"
         android:label="LoginPageFragment"
         tools:layout="@layout/fragment_login_page">
         <action
             android:id="@+id/navigation_login_to_create_acc_join_page"
             app:destination="@id/createAccJoinPageFragment" />
         <action
-            android:id="@+id/action_loginPageFragment_to_homePageFragment"
-            app:destination="@id/homePageFragment" />
-        <argument
-            android:name="username"
-            android:defaultValue="@null"
-            app:argType="String"
-            app:nullable="true"
-            />
-        <argument
-            android:name="password"
-            app:argType="String"
-            android:defaultValue="@null"
-            app:nullable="true"/>
+            android:id="@+id/action_loginPageFragment_to_homeFragment2"
+            app:destination="@id/homeFragment2" />
+        <!--        <argument-->
+        <!--            android:name="username"-->
+        <!--            android:defaultValue="@null"-->
+        <!--            app:argType="String"-->
+        <!--            app:nullable="true"-->
+        <!--            />-->
+        <!--        <argument-->
+        <!--            android:name="password"-->
+        <!--            app:argType="String"-->
+        <!--            android:defaultValue="@null"-->
+        <!--            app:nullable="true"/>-->
 
     </fragment>
     <fragment
         android:id="@+id/createAccJoinPageFragment"
-        android:name="com.example.facebook.CreateAccJoinPageFragment"
+        android:name="com.example.facebook.fragment.CreateAccJoinPageFragment"
         android:label="CreateAccJoinPageFragment"
         tools:layout="@layout/fragment_create_account_join_pg">
         <action
@@ -43,7 +43,7 @@
     </fragment>
     <fragment
         android:id="@+id/createAccountNamePageFragment"
-        android:name="com.example.facebook.CreateAccountNamePageFragment"
+        android:name="com.example.facebook.fragment.CreateAccountNamePageFragment"
         android:label="CreateAccountNamePageFragment"
         tools:layout="@layout/fragment_create_account_name_pag">
         <action
@@ -52,7 +52,7 @@
     </fragment>
     <fragment
         android:id="@+id/createAccountBDayFragment"
-        android:name="com.example.facebook.CreateAccountBDayFragment"
+        android:name="com.example.facebook.fragment.CreateAccountBDayFragment"
         android:label="CreateAccountBDayFragment"
         tools:layout="@layout/fragment_create_account_bday_page">
         <action
@@ -61,7 +61,7 @@
     </fragment>
     <fragment
         android:id="@+id/createAccountGenderFragment"
-        android:name="com.example.facebook.CreateAccountGenderFragment"
+        android:name="com.example.facebook.fragment.CreateAccountGenderFragment"
         android:label="CreateAccountGenderFragment"
         tools:layout="@layout/fragment_create_account_gender_page">
         <action
@@ -70,7 +70,7 @@
     </fragment>
     <fragment
         android:id="@+id/createAccountMobileNumFragment"
-        android:name="com.example.facebook.CreateAccountMobileNumFragment"
+        android:name="com.example.facebook.fragment.CreateAccountMobileNumFragment"
         android:label="CreateAccountMobileNumFragment"
         tools:layout="@layout/fragment_create_account_phnum">
         <action
@@ -79,7 +79,7 @@
     </fragment>
     <fragment
         android:id="@+id/createAccountPasswordFragment"
-        android:name="com.example.facebook.CreateAccountPasswordFragment"
+        android:name="com.example.facebook.fragment.CreateAccountPasswordFragment"
         android:label="CreateAccountPasswordFragment"
         tools:layout="@layout/fragment_create_account_password">
         <action
@@ -88,7 +88,7 @@
     </fragment>
     <fragment
         android:id="@+id/createAccountEmailFragment"
-        android:name="com.example.facebook.CreateAccountEmailFragment"
+        android:name="com.example.facebook.fragment.CreateAccountEmailFragment"
         android:label="CreateAccountEmailFragment"
         tools:layout="@layout/fragment_create_account_mail">
         <action
@@ -97,14 +97,22 @@
     </fragment>
     <fragment
         android:id="@+id/createAccountTermsFragment"
-        android:name="com.example.facebook.CreateAccountTermsFragment"
+        android:name="com.example.facebook.fragment.CreateAccountTermsFragment"
         android:label="CreateAccountTermsFragment"
-        tools:layout="@layout/fragment_create_account_terms_privacy"/>
+        tools:layout="@layout/fragment_create_account_terms_privacy">
+        <action
+            android:id="@+id/action_createAccountTermsFragment_to_loginPageFragment"
+            app:destination="@id/loginPageFragment" />
+    </fragment>
     <fragment
-        android:id="@+id/homePageFragment"
-        android:name="com.example.facebook.HomePageFragment"
-        android:label="HomePageFragment"
-        tools:layout="@layout/fragment_home_page"/>
+        android:id="@+id/profilePageFragment"
+        android:name="com.example.facebook.fragment.ProfilePageFragment"
+        android:label="ProfilePageFragment"
+        tools:layout="@layout/fragment_profile_page" />
+    <fragment
+        android:id="@+id/homeFragment2"
+        android:name="com.example.facebook.home.HomeFragment"
+        android:label="HomeFragment" />
 
 
 </navigation>

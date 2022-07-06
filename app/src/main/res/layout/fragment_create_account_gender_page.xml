@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="userGenderVM"
+            type="com.example.facebook.viewmodels.CreateAccGenderViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -135,6 +142,7 @@
             app:layout_constraintTop_toBottomOf="@id/gender_radio_btn"
             android:layout_marginTop="100dp"
             android:text="@string/next"
+            android:onClick="@{()->userGenderVM.createGenderBtn()}"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:background="#E62B77E8"

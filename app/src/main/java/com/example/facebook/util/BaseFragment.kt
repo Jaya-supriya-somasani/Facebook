@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 
 abstract class BaseFragment<Binding: ViewDataBinding,VM:ViewModel>:Fragment() {
     abstract fun getViewModel():Class<VM>
@@ -28,6 +29,7 @@ abstract class BaseFragment<Binding: ViewDataBinding,VM:ViewModel>:Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         dataBinding.lifecycleOwner=viewLifecycleOwner
+        viewModel = ViewModelProvider(this)[getViewModel()]
         initViews()
     }
 }

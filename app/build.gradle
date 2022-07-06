@@ -62,4 +62,8 @@ dependencies {
 
     //coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1")
+
+
+    //gson
+    implementation 'com.google.code.gson:gson:2.9.0'
 }

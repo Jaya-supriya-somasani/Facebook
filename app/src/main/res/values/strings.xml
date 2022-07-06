@@ -3,10 +3,10 @@
     <string name="facebook_tv">Facebook</string>
     <string name="mobile_number_or_email">Mobile number or email</string>
     <string name="password">Password</string>
-    <string name="login">Log in</string>
+    <string name="login">Login</string>
     <string name="forgot_passwprd">Forgot password?</string>
     <string name="or">or</string>
-    <string name="create_new_account">Create new account</string>
+    <string name="create_new_account">Create new Facebook account</string>
     <string name="english_tv">English (US)</string>
     <string name="more_languages_tv">More languages…</string>
     <string name="join_facebook">Join Facebook</string>
@@ -50,8 +50,31 @@
     <string name="years_tv">years</string>
     <string name="home_page_tv">Home Page</string>
     <string name="username_tv">Jaya Supriya</string>
-    <string name="ph_num_tv">91xxxxxxxx</string>
+    <string name="ph_num_tv">9876543210</string>
     <string name="gender_tv">Female</string>
     <string name="sampler_gmail_tv">sampleuser@gmail.com</string>
     <string name="dob_tv">20-03-2000</string>
+    <string name="add_to_story_tv">Add to story</string>
+    <string name="edit_profile_tv">Edit Profile</string>
+    <string name="settings_tv">...</string>
+    <string name="contact_info_tv">Contact info</string>
+    <string name="mobile_tv">Mobile</string>
+    <string name="mail_tv">Mail</string>
+    <string name="basic_info_tv">Basic info</string>
+    <string name="birthday_tv">Birthday</string>
+    <string name="home_tv">Home</string>
+    <string name="friends_tv">Friends</string>
+    <string name="profile_tv">Profile</string>
+    <string name="create_post_tv">Create Post</string>
+    <string name="messenger">MESSENGER</string>
+    <string name="search">SEARCH</string>
+    <string name="people_may_know">People you may know</string>
+    <string name="write_something_here">Write something here…</string>
+    <string name="add_friend">AddFriend</string>
+    <string name="remove">Remove</string>
+    <string name="post">Post</string>
+    <string name="see_all">See all</string>
+    <string name="title_activity_splash_screen">SplashScreen</string>
+    <string name="previous">Previous</string><string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 </resources>
