@@ -53,10 +53,10 @@
     <string name="ph_num_tv">9876543210</string>
     <string name="gender_tv">Female</string>
     <string name="sampler_gmail_tv">sampleuser@gmail.com</string>
-    <string name="dob_tv">20-03-2000</string>
+    <string name="dob_tv">20–03–2000</string>
     <string name="add_to_story_tv">Add to story</string>
     <string name="edit_profile_tv">Edit Profile</string>
-    <string name="settings_tv">...</string>
+    <string name="settings_tv">…</string>
     <string name="contact_info_tv">Contact info</string>
     <string name="mobile_tv">Mobile</string>
     <string name="mail_tv">Mail</string>
@@ -77,4 +77,9 @@
     <string name="title_activity_splash_screen">SplashScreen</string>
     <string name="previous">Previous</string><string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="sign_up_desc_tv">It\'s quick and easy</string>
+    <string name="new_password_tv">New Password</string>
+    <string name="phone_number_tv">Phone Number</string>
+    <string name="email_tv">Email</string>
+    <string name="terms_tv">I agree to the terms and conditions</string>
 </resources>

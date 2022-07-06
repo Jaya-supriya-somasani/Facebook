@@ -19,8 +19,8 @@ class CreateAccountTermsFragment:BaseFragment<FragmentCreateAccountTermsPrivacyB
         dataBinding.termsVM=viewModel
         viewLifecycleOwner.lifecycleScope.launchWhenResumed {
             viewModel.termsConditionsEvent.collectLatest {
-                val action= CreateAccountTermsFragmentDirections.actionCreateAccountTermsFragmentToLoginPageFragment()
-                findNavController().navigate(action)
+//                val action= CreateAccountTermsFragmentDirections.actionCreateAccountTermsFragmentToLoginPageFragment()
+//                findNavController().navigate(action)
             }
         }
     }

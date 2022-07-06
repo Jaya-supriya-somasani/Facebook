@@ -1,11 +1,11 @@
 package com.example.facebook.fragment
 
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.example.facebook.R
-import com.example.facebook.home.HomeFragment
-import com.example.facebook.home.HomeMainFragment
 import com.example.facebook.util.BaseFragment
 import com.example.facebook.viewmodels.HomePageViewModel
+import kotlinx.coroutines.flow.collectLatest
 
 class HomePageFragment :
     BaseFragment<com.example.facebook.databinding.FragmentHomePageBinding, HomePageViewModel>() {
@@ -20,13 +20,18 @@ class HomePageFragment :
     override fun initViews() {
         viewModel = ViewModelProvider(this)[getViewModel()]
         dataBinding.homeViewModel = viewModel
-        dataBinding.bottomNavigation.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.home_nav_btn ->{
-                   HomeMainFragment()
-                }
+        viewLifecycleOwner.lifecycleScope.launchWhenResumed {
+            viewModel.profilePgEvent.collectLatest {
+//                dataBinding.bottomNavigation.setOnItemSelectedListener { item ->
+//                    when (item.itemId) {
+//                        R.id.home_nav_btn ->{
+//                    LoginPageFragment()
+//                        }
+//                    }
+//                    true
+//                }
             }
-            true
         }
+
     }
 }

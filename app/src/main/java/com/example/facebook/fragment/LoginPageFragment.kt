@@ -26,7 +26,7 @@ class LoginPageFragment : BaseFragment<FragmentLoginPageBinding, LoginPageViewMo
         }
         viewLifecycleOwner.lifecycleScope.launchWhenResumed {
             viewModel.createAccountEvent.collectLatest {
-                val action= LoginPageFragmentDirections.navigationLoginToCreateAccJoinPage()
+                val action= LoginPageFragmentDirections.actionLoginPageFragmentToCreateAccountFragment()
                 findNavController().navigate(action)
             }
         }
@@ -46,7 +46,7 @@ class LoginPageFragment : BaseFragment<FragmentLoginPageBinding, LoginPageViewMo
     }
 
     private fun login() {
-        val action = LoginPageFragmentDirections.actionLoginPageFragmentToHomeFragment2()
-        findNavController().navigate(action)
+        val action = LoginPageFragmentDirections.actionLoginPageFragmentToProfilePageFragment2()
+       findNavController().navigate(action)
     }
 }

@@ -11,22 +11,11 @@
         android:label="LoginPageFragment"
         tools:layout="@layout/fragment_login_page">
         <action
-            android:id="@+id/navigation_login_to_create_acc_join_page"
-            app:destination="@id/createAccJoinPageFragment" />
+            android:id="@+id/action_loginPageFragment_to_createAccountFragment"
+            app:destination="@id/createAccountFragment" />
         <action
-            android:id="@+id/action_loginPageFragment_to_homeFragment2"
-            app:destination="@id/homeFragment2" />
-        <!--        <argument-->
-        <!--            android:name="username"-->
-        <!--            android:defaultValue="@null"-->
-        <!--            app:argType="String"-->
-        <!--            app:nullable="true"-->
-        <!--            />-->
-        <!--        <argument-->
-        <!--            android:name="password"-->
-        <!--            app:argType="String"-->
-        <!--            android:defaultValue="@null"-->
-        <!--            app:nullable="true"/>-->
+            android:id="@+id/action_loginPageFragment_to_profilePageFragment2"
+            app:destination="@id/profilePageFragment" />
 
     </fragment>
     <fragment
@@ -34,9 +23,6 @@
         android:name="com.example.facebook.fragment.CreateAccJoinPageFragment"
         android:label="CreateAccJoinPageFragment"
         tools:layout="@layout/fragment_create_account_join_pg">
-        <action
-            android:id="@+id/nav_createAccJoinPageFragment_to_loginPageFragment"
-            app:destination="@id/loginPageFragment" />
         <action
             android:id="@+id/nav_createAccJoinPageFragment_to_createUserNamePageFragment"
             app:destination="@id/createAccountNamePageFragment" />
@@ -99,11 +85,7 @@
         android:id="@+id/createAccountTermsFragment"
         android:name="com.example.facebook.fragment.CreateAccountTermsFragment"
         android:label="CreateAccountTermsFragment"
-        tools:layout="@layout/fragment_create_account_terms_privacy">
-        <action
-            android:id="@+id/action_createAccountTermsFragment_to_loginPageFragment"
-            app:destination="@id/loginPageFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_create_account_terms_privacy"/>
     <fragment
         android:id="@+id/profilePageFragment"
         android:name="com.example.facebook.fragment.ProfilePageFragment"
@@ -111,8 +93,22 @@
         tools:layout="@layout/fragment_profile_page" />
     <fragment
         android:id="@+id/homeFragment2"
-        android:name="com.example.facebook.home.HomeFragment"
-        android:label="HomeFragment" />
+        android:name="com.example.facebook.fragment.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home_page">
+        <action
+            android:id="@+id/action_homeFragment2_to_profilePageFragment"
+            app:destination="@id/profilePageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createAccountFragment"
+        android:name="com.example.facebook.fragment.CreateAccountFragment"
+        android:label="CreateAccountFragment"
+        tools:layout="@layout/fragment_create_account">
+        <action
+            android:id="@+id/action_createAccountFragment_to_profilePageFragment2"
+            app:destination="@id/profilePageFragment" />
+    </fragment>
 
 
 </navigation>
