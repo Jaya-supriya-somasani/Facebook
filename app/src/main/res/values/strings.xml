@@ -92,4 +92,5 @@
     <string name="total_friends_tv">110 Friends</string>
     <string name="mutual_friends_tv">6 mutual friends</string>
     <string name="remove_frd">Remove</string>
+    <string name="confirm_password_tv">Confirm Password</string>
 </resources>

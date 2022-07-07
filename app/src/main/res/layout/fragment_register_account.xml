@@ -3,7 +3,7 @@
     <data>
         <variable
             name="createAccViewModel"
-            type="com.example.facebook.viewmodels.CreateAccountViewModel" />
+            type="com.example.facebook.viewmodels.RegisterAccountViewModel" />
     </data>
     <ScrollView
         android:layout_width="match_parent"
@@ -58,29 +58,29 @@
                     android:id="@+id/user_name_edt"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="@{createAccViewModel.userName}"
+                    android:text="@={createAccViewModel.userName}"
                     android:inputType="text"
                     />
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/phnum_tv"
+                android:id="@+id/confirmPasswordTv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:hint="@string/phone_number_tv"
+                android:hint="@string/confirm_password_tv"
                 android:layout_marginTop="10dp"
                 android:layout_marginHorizontal="20dp"
                 app:endIconMode="custom"
                 app:errorEnabled="true"
                 app:endIconTint="?attr/colorPrimary"
-                app:layout_constraintTop_toBottomOf="@id/username_tv">
+                app:layout_constraintTop_toBottomOf="@id/new_pswd_tv">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/ph_edt"
+                    android:id="@+id/confirmPasswordEdt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:text="@{createAccViewModel.userPhoneNumber}"
+                    android:inputType="text"
+                    android:text="@={createAccViewModel.userConfirmPassword}"
                     />
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
@@ -94,14 +94,14 @@
                 app:endIconMode="custom"
                 app:errorEnabled="true"
                 app:endIconTint="?attr/colorPrimary"
-                app:layout_constraintTop_toBottomOf="@id/phnum_tv">
+                app:layout_constraintTop_toBottomOf="@id/username_tv">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/email_edt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
-                    android:text="@{createAccViewModel.userEmail}"
+                    android:text="@={createAccViewModel.userEmail}"
                     />
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
@@ -122,14 +122,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
-                    android:text="@{createAccViewModel.userPassword}"
+                    android:text="@={createAccViewModel.userPassword}"
                     />
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/dobTextView"
-                app:layout_constraintTop_toBottomOf="@+id/new_pswd_tv"
+                app:layout_constraintTop_toBottomOf="@id/confirmPasswordTv"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:hint="@string/birthday_title"
                 android:layout_marginTop="10dp"
@@ -208,7 +208,7 @@
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:background="#E62B77E8"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginHorizontal="10dp"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>

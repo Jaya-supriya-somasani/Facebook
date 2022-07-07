@@ -11,14 +11,14 @@
         android:label="LoginPageFragment"
         tools:layout="@layout/fragment_login_page">
         <action
-            android:id="@+id/action_loginPageFragment_to_createAccountFragment"
-            app:destination="@id/createAccountFragment" />
-        <action
             android:id="@+id/action_loginPageFragment_to_profilePageFragment2"
             app:destination="@id/profilePageFragment" />
         <action
             android:id="@+id/action_loginPageFragment_to_changePasswordFragment"
             app:destination="@id/changePasswordFragment" />
+        <action
+            android:id="@+id/action_loginPageFragment_to_createAccountFragment"
+            app:destination="@id/registerAccountFragment" />
 
     </fragment>
     <fragment
@@ -36,10 +36,10 @@
             app:destination="@id/profilePageFragment" />
     </fragment>
     <fragment
-        android:id="@+id/createAccountFragment"
-        android:name="com.example.facebook.fragment.CreateAccountFragment"
+        android:id="@+id/registerAccountFragment"
+        android:name="com.example.facebook.fragment.RegisterAccountFragment"
         android:label="CreateAccountFragment"
-        tools:layout="@layout/fragment_create_account">
+        tools:layout="@layout/fragment_register_account">
         <action
             android:id="@+id/action_createAccountFragment_to_profilePageFragment2"
             app:destination="@id/profilePageFragment" />

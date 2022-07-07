@@ -1,8 +1,7 @@
-package com.example.facebook.dataclasses
+package com.example.facebook.api.request
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import kotlinx.android.parcel.Parcelize
 
 @kotlinx.parcelize.Parcelize
 data class RegisterUser(
@@ -19,7 +18,7 @@ data class RegisterUser(
     @SerializedName("confirmPassword")
     val confirmPswd: String,
     @SerializedName("loginStatus")
-    val loginStatus: String,
+    val loginStatus: Boolean,
 ) : Parcelable {
 
 }
