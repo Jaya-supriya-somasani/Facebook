@@ -19,11 +19,18 @@ class RegisterAccountViewModel : BaseViewModel() {
     val userPassword = MutableStateFlow("")
     val userDob = MutableStateFlow("")
     val userGender = MutableStateFlow("")
+    val termsSelectionFlow = MutableStateFlow(false)
     val userConfirmPassword = MutableStateFlow("")
     val loginStatus = MutableStateFlow(false)
-
+    val maleGender=MutableStateFlow(false)
+    val femaleGender=MutableStateFlow(false)
 
     fun signupBtn() {
+        if (maleGender.value){
+            userGender.value= "Male"
+        }else{
+            userGender.value="Female"
+        }
         val registerReq = RegisterUser(
             userName = userName.value,
             mail = userEmail.value,
@@ -41,7 +48,9 @@ class RegisterAccountViewModel : BaseViewModel() {
                 }
             }
         }
+//        userGender.
 
 //        createAccountChannel.trySend(Unit)
     }
+
 }

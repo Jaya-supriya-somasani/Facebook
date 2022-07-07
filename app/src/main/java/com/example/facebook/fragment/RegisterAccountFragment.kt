@@ -8,6 +8,7 @@ import com.example.facebook.util.BaseFragment
 import com.example.facebook.viewmodels.RegisterAccountViewModel
 import com.google.android.material.datepicker.MaterialDatePicker
 import kotlinx.coroutines.flow.collectLatest
+import java.text.SimpleDateFormat
 import java.util.*
 
 class RegisterAccountFragment :
@@ -27,19 +28,32 @@ class RegisterAccountFragment :
                 findNavController().navigate(action)
             }
         }
-//        dataBinding.dobTextView.setOnClickListener{
-//            val datePicker =
-//                MaterialDatePicker.Builder.datePicker()
-//                    .setTitleText("Select date")
-//                    .build()
-//            datePicker.show(requireActivity().supportFragmentManager, "dob")
-//            datePicker.addOnPositiveButtonClickListener {
-//                // Respond to positive button click.
-//                val millis = datePicker.selection
-//                val calendar = Calendar.getInstance()
-//                calendar.timeInMillis = millis?:0
-//                dataBinding.dobEditText.setText(getDateString(calendar))
-//        }
+        dataBinding.dobEditText.setOnClickListener {
+            val datePicker =
+                MaterialDatePicker.Builder.datePicker()
+                    .setTitleText("Select date")
+                    .build()
+            datePicker.show(requireActivity().supportFragmentManager, "dob")
+            datePicker.addOnPositiveButtonClickListener {
+                // Respond to positive button click.
+                val millis = datePicker.selection
+                val calendar = Calendar.getInstance()
+                calendar.timeInMillis = millis ?: 0
+                dataBinding.dobEditText.setText(getDateString(calendar))
+            }
 
+        }
+
+        viewLifecycleOwner.lifecycleScope.launchWhenResumed {
+            viewModel.createAccountEvent.collectLatest {
+                val action=RegisterAccountFragmentDirections.actionCreateAccountFragmentToProfilePageFragment2()
+                findNavController().navigate(action)
+            }
+        }
+//        dataBinding.radiobtns.checkedRadioButtonId
     }
+        private fun getDateString(calendar: Calendar): String {
+            val format = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+            return format.format(calendar.time)
+        }
 }
