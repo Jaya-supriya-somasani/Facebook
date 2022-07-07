@@ -1,7 +1,4 @@
-package com.example.facebook.dataclasses
-
-import com.google.gson.annotations.SerializedName
-import kotlinx.android.parcel.Parcelize
+package com.example.facebook.api.request
 
 //@Parcelize
 //data class DisplayUserDetails(

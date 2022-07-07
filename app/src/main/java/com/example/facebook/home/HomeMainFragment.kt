@@ -1,17 +1,5 @@
 package com.example.facebook.home
 
-import android.content.Intent
-import android.os.Bundle
-import android.view.*
-import android.widget.Toast
-import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
-import com.example.facebook.activity.CreatePostActivity
-import com.example.facebook.R
-import com.example.facebook.databinding.FragmentHomeMainBinding
-import com.example.facebook.dataclasses.FriendsListResponse
-import com.example.facebook.home.adapter.friendsListAdapter
-
 //class HomeMainFragment : Fragment() {
 //    lateinit var binding: FragmentHomeMainBinding
 //

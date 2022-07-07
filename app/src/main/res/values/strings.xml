@@ -82,4 +82,14 @@
     <string name="phone_number_tv">Phone Number</string>
     <string name="email_tv">Email</string>
     <string name="terms_tv">I agree to the terms and conditions</string>
+    <string name="change_password_tv">Change Password</string>
+    <string name="enter_new_password_tv">Enter new password</string>
+    <string name="re_enter_password_tv">Re-enter password</string>
+    <string name="reset_password_tv">Reset Password</string>
+    <string name="all_tv">All</string>
+    <string name="recent_tv">Recent</string>
+    <string name="search_friends_tv">Search Friends</string>
+    <string name="total_friends_tv">110 Friends</string>
+    <string name="mutual_friends_tv">6 mutual friends</string>
+    <string name="remove_frd">Remove</string>
 </resources>

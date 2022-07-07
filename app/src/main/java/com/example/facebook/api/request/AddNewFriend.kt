@@ -1,11 +1,13 @@
-package com.example.facebook.dataclasses
+package com.example.facebook.api.request
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class LogoutDataClass(
+data class AddNewFriend(
+    @SerializedName("friendId")
+    val friendId:String,
     @SerializedName("userId")
     val userId:String
 ):Parcelable

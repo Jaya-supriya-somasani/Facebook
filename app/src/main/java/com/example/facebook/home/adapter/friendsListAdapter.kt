@@ -3,7 +3,7 @@ package com.example.facebook.home.adapter
 import android.view.ViewGroup
 import com.example.facebook.base.BaseAdapter
 import com.example.facebook.base.BaseHolder
-import com.example.facebook.dataclasses.FriendsListResponse
+import com.example.facebook.api.request.FriendsListResponse
 import com.example.facebook.R
 import com.example.facebook.base.BaseViewHolder
 import com.example.facebook.base.inflate

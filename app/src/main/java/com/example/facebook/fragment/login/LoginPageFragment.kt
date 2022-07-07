@@ -1,16 +1,15 @@
-package com.example.facebook.fragment
+package com.example.facebook.fragment.login
 
+import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.facebook.R
 import com.example.facebook.databinding.FragmentLoginPageBinding
 import com.example.facebook.util.BaseFragment
-import com.example.facebook.viewmodels.LoginPageViewModel
 import kotlinx.coroutines.flow.collectLatest
 
 class LoginPageFragment : BaseFragment<FragmentLoginPageBinding, LoginPageViewModel>() {
 
-    //private val args:LoginPageFragmentArgs by navArgs()
     override fun getViewModel() = LoginPageViewModel::class.java
 
     override fun getResourceId(): Int {
@@ -21,32 +20,31 @@ class LoginPageFragment : BaseFragment<FragmentLoginPageBinding, LoginPageViewMo
         dataBinding.loginVM = viewModel
         viewLifecycleOwner.lifecycleScope.launchWhenResumed {
             viewModel.loginEvent.collectLatest {
-                loginChecking()
+                val action =
+                    LoginPageFragmentDirections.actionLoginPageFragmentToProfilePageFragment2()
+                findNavController().navigate(action)
             }
         }
         viewLifecycleOwner.lifecycleScope.launchWhenResumed {
             viewModel.createAccountEvent.collectLatest {
-                val action= LoginPageFragmentDirections.actionLoginPageFragmentToCreateAccountFragment()
+                val action=
+                    LoginPageFragmentDirections.actionLoginPageFragmentToCreateAccountFragment()
                 findNavController().navigate(action)
             }
         }
-    }
-
-    private fun loginChecking() {
-        if (dataBinding.phEmailEdt.text.toString().isEmpty()) {
-            dataBinding.tilPhnOrEmail.error = "Please Enter Email or Phone Number"
-        } else if (dataBinding.etPassword.text.toString().isEmpty()) {
-            dataBinding.tilPassword.error = "Please Enter Password"
-        } else {
-            dataBinding.tilPhnOrEmail.error = ""
-            dataBinding.tilPassword.error = ""
-            login()
+        viewLifecycleOwner.lifecycleScope.launchWhenResumed {
+            viewModel.forgotPasswordEvent.collectLatest {
+                val action=
+                    LoginPageFragmentDirections.actionLoginPageFragmentToChangePasswordFragment()
+                findNavController().navigate(action)
+            }
         }
 
-    }
+        viewLifecycleOwner.lifecycleScope.launchWhenResumed {
+            viewModel.toastEvent.collectLatest {
+                Toast.makeText(context,it,Toast.LENGTH_SHORT).show()
+            }
+        }
 
-    private fun login() {
-        val action = LoginPageFragmentDirections.actionLoginPageFragmentToProfilePageFragment2()
-       findNavController().navigate(action)
     }
 }

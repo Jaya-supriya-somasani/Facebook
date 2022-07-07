@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.example.facebook.dataclasses.FriendsListResponse" />
+            type="com.example.facebook.api.request.FriendsListResponse" />
     </data>
 
     <androidx.cardview.widget.CardView
