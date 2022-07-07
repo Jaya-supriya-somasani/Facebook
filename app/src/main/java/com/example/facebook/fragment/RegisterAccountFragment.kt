@@ -6,7 +6,9 @@ import com.example.facebook.R
 import com.example.facebook.databinding.FragmentRegisterAccountBinding
 import com.example.facebook.util.BaseFragment
 import com.example.facebook.viewmodels.RegisterAccountViewModel
+import com.google.android.material.datepicker.MaterialDatePicker
 import kotlinx.coroutines.flow.collectLatest
+import java.util.*
 
 class RegisterAccountFragment:BaseFragment<FragmentRegisterAccountBinding,RegisterAccountViewModel>() {
     override fun getViewModel()= RegisterAccountViewModel::class.java
@@ -23,5 +25,19 @@ class RegisterAccountFragment:BaseFragment<FragmentRegisterAccountBinding,Regist
                 findNavController().navigate(action)
             }
         }
+//        dataBinding.dobTextView.setOnClickListener{
+//            val datePicker =
+//                MaterialDatePicker.Builder.datePicker()
+//                    .setTitleText("Select date")
+//                    .build()
+//            datePicker.show(requireActivity().supportFragmentManager, "dob")
+//            datePicker.addOnPositiveButtonClickListener {
+//                // Respond to positive button click.
+//                val millis = datePicker.selection
+//                val calendar = Calendar.getInstance()
+//                calendar.timeInMillis = millis?:0
+//                dataBinding.dobEditText.setText(getDateString(calendar))
+//        }
+
     }
 }
