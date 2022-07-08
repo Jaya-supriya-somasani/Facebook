@@ -32,7 +32,7 @@ class HomeMainFragment : BaseFragment<FragmentHomeMainBinding, HomePageViewModel
     override fun getResourceId(): Int = R.layout.fragment_home_main
 
     override fun initViews() {
-       // initData()
+       initData()
         val data = listOf(
             FriendsListResponse("tarun1", "lanka", ""),
             FriendsListResponse("tarun2", "lanka", ""),

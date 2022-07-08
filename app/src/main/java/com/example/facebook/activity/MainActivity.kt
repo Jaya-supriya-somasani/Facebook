@@ -1,7 +1,6 @@
 package com.example.facebook.activity
 
 import android.content.Intent
-import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.example.facebook.R
@@ -30,12 +29,12 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
         lifecycleScope.launchWhenResumed {
             viewModel.createAccountEvent.collectLatest {
                 //change the binding in activity
-                startActivity(Intent(this@MainActivity, CreateAccountActivity::class.java))
+              //  startActivity(Intent(this@MainActivity, CreateAccountActivity::class.java))
             }
         }
         lifecycleScope.launchWhenResumed {
             viewModel.forgotPasswordEvent.collectLatest {
-                startActivity(Intent(this@MainActivity, ChangePasswordActivity::class.java))
+                startActivity(Intent(this@MainActivity, ForgotPasswordActivity::class.java))
 
             }
         }

@@ -48,7 +48,7 @@ class MainActivityViewModel : BaseViewModel() {
         }
     }
 
-    fun loginValidation() {
+    private fun loginValidation() {
         when {
             userName.value.isEmpty() -> {
                 userNameError.value = "Please Enter Email or Phone Number"

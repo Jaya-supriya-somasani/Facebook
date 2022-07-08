@@ -1,10 +1,8 @@
 package com.example.facebook.api
 
 import com.example.facebook.api.request.*
+import com.example.facebook.api.response.*
 import com.example.facebook.api.response.ChangePasswordRequest
-import com.example.facebook.api.response.LoginRequest
-import com.example.facebook.api.response.LoginResponse
-import com.example.facebook.api.response.RegisterRequest
 import com.example.facebook.util.ApiResponse
 import retrofit2.http.*
 
@@ -22,13 +20,13 @@ interface ApiService {
     @PUT("/api/v1/changePassword/{userId}")
     suspend fun changePassword(
         @Body details: ChangePasswordRequest,
-        @Path("userId", encoded = true) userId: String,
+        @Path("userId", encoded = true) userId: Int,
     ): ApiResponse<ChangePasswordRequest>
 
     @GET("/api/v1/profile/{userId}")
     suspend fun getProfile(
         @Path("userId", encoded = true) userId: String,
-    ): ApiResponse<RegisterRequest>  // change the response into desired data class type
+    ): ApiResponse<GetUserProfile>
 
     @POST("/api/v1/post")
     suspend fun createPost(
@@ -67,6 +65,12 @@ interface ApiService {
     ): ApiResponse<DeletePostDataClass>
 
     @GET("/api/v1/posts")
-    suspend fun getPosts(): ApiResponse<GetPosts>
+    suspend fun getPosts(
+    ): ApiResponse<List<PostsResponsesItem>>
+
+    @GET("/api/v1/profile/{userId}")
+    suspend fun getUserProfile(
+        @Path("userId", encoded = true) userId: String,
+    ): ApiResponse<GetUserProfile>
 
 }

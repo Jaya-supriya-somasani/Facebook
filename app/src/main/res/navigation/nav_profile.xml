@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_profile"
+    app:startDestination="@id/profilePageFragment2">
+
+    <fragment
+        android:id="@+id/profilePageFragment2"
+        android:name="com.example.facebook.fragment.ProfilePageFragment"
+        android:label="ProfilePageFragment"
+        tools:layout="@layout/fragment_profile_page">
+        <action
+            android:id="@+id/action_profilePageFragment2_to_changePasswordFragment2"
+            app:destination="@id/changePasswordFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/changePasswordFragment2"
+        android:name="com.example.facebook.fragment.ChangePasswordFragment"
+        android:label="ChangePasswordFragment"
+        tools:layout="@layout/fragment_change_password"/>
+</navigation>

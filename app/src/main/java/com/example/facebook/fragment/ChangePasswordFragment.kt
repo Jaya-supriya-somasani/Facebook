@@ -1,7 +1,6 @@
 package com.example.facebook.fragment
 
 import android.content.Intent
-import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
@@ -9,60 +8,58 @@ import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.example.facebook.R
 import com.example.facebook.activity.MainActivity
-import com.example.facebook.databinding.ActivityChangePasswordBinding
-import com.example.facebook.util.BaseActivity
+import com.example.facebook.databinding.FragmentChangePasswordBinding
+import com.example.facebook.util.BaseFragment
 import com.example.facebook.viewmodels.ChangePasswordViewModel
 import kotlinx.coroutines.flow.collectLatest
 
+class ChangePasswordFragment :
+    BaseFragment<FragmentChangePasswordBinding, ChangePasswordViewModel>() {
 
-class ChangePasswordActivity :
-    BaseActivity<ActivityChangePasswordBinding, ChangePasswordViewModel>() {
-    override fun setupViews() {
+    override fun getViewModel(): Class<ChangePasswordViewModel> =
+        ChangePasswordViewModel::class.java
+
+    override fun getResourceId(): Int = R.layout.fragment_change_password
+
+    override fun initViews() {
+        setupListeners()
+
         dataBinding.resetBtn.setOnClickListener {
             if (validateEmail() && validatePassword() && validateConfirmPassword()) {
                 viewModel.changePassword(
-                    dataBinding.userEt.text.toString(),
+                    2,
                     dataBinding.passwordEt.text.toString(),
                     dataBinding.reEnterPasswordEt.text.toString()
                 )
-
-            }
-            lifecycleScope.launchWhenResumed {
-                viewModel.statusEvent.collectLatest {
-                    if (it) startActivity(
-                        Intent(
-                            this@ChangePasswordActivity,
-                            MainActivity::class.java
-                        )
-                    )
-                    else {
-                        Toast.makeText(
-                            this@ChangePasswordActivity,
-                            "Unable to change password",
-                            Toast.LENGTH_SHORT
-                        )
-                            .show()
-                    }
-                }
             }
         }
+        lifecycleScope.launchWhenResumed {
+            viewModel.resetPasswordEvent.collectLatest {
+                Intent(
+                    requireContext(),
+                    MainActivity::class.java
+                )
+            }
+        }
+        lifecycleScope.launchWhenResumed {
+            viewModel.toastEvent.collectLatest {
+                Toast.makeText(
+                    requireContext(),
+                    it,
+                    Toast.LENGTH_SHORT
+                )
+                    .show()
+            }
+        }
+
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setupListeners()
-
-    }
 
     private fun setupListeners() {
         dataBinding.userEt.addTextChangedListener(TextFieldValidation(dataBinding.userEt))
         dataBinding.passwordEt.addTextChangedListener(TextFieldValidation(dataBinding.passwordEt))
         dataBinding.reEnterPasswordEt.addTextChangedListener(TextFieldValidation(dataBinding.reEnterPasswordEt))
     }
-
-    override fun getViewModel() = ChangePasswordViewModel::class.java
-
-    override fun getResourceId(): Int = R.layout.activity_change_password
 
 
     private fun validateEmail(): Boolean {
@@ -127,5 +124,4 @@ class ChangePasswordActivity :
             }
         }
     }
-
 }
