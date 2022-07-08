@@ -7,12 +7,17 @@ import com.example.facebook.api.response.LoginResponse
 import com.example.facebook.api.response.RegisterRequest
 import com.example.facebook.util.ApiResponse
 import retrofit2.http.*
+import com.example.facebook.api.request.LoginDataClass
+import com.example.facebook.api.request.RegisterUser
+import com.example.facebook.api.response.*
+import retrofit2.http.*
 
 interface ApiService {
 
-
     @POST("/api/v1/login")
     suspend fun signIn(@Body info: LoginRequest): ApiResponse<LoginResponse>
+    suspend fun performLogin(@Body loginRequest: LoginDataClass): BaseResponse<LoginStatus>
+
 
     @POST("/api/v1/register")
     suspend fun registerUser(
@@ -69,4 +74,8 @@ interface ApiService {
     @GET("/api/v1/posts")
     suspend fun getPosts(): ApiResponse<GetPosts>
 
+    suspend fun registerUser(@Body registerRequest:RegisterUser):RegisterResponse
+
+    @GET("/api/v1/profile/{userId}")
+    suspend fun profileDisplaying(@Path ("userId") userId:Int):ProfilePageResponse
 }

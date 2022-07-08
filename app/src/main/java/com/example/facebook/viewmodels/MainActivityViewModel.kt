@@ -1,10 +1,9 @@
-package com.example.facebook.viewmodels
+package com.example.facebook.fragment.login
 
 import androidx.lifecycle.viewModelScope
 import com.example.facebook.NetworkResult
 import com.example.facebook.api.NetworkService
 import com.example.facebook.api.request.LoginDataClass
-import com.example.facebook.api.response.LoginRequest
 import com.example.facebook.safeApi
 import com.example.facebook.util.BaseViewModel
 import kotlinx.coroutines.channels.Channel
@@ -13,16 +12,17 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
-class MainActivityViewModel : BaseViewModel() {
+class LoginPageViewModel() : BaseViewModel() {
     val userName = MutableStateFlow("")
     val userPassword = MutableStateFlow("")
+
     val userNameError = MutableStateFlow("")
     val userPasswordError = MutableStateFlow("")
 
     private val loginDetailsMutableState = MutableStateFlow<LoginDataClass?>(null)
     val loginDetailsStateFlow: StateFlow<LoginDataClass?> = loginDetailsMutableState
 
-    private val loginEventChannel = Channel<Unit>()
+    private val loginEventChannel = Channel<Pair<String, Int>>()
     val loginEvent = loginEventChannel.receiveAsFlow()
 
     private val createAccountEventChannel = Channel<Unit>()
@@ -49,46 +49,38 @@ class MainActivityViewModel : BaseViewModel() {
     }
 
     fun loginValidation() {
-        when {
-            userName.value.isEmpty() -> {
-                userNameError.value = "Please Enter Email or Phone Number"
-            }
-            userPassword.value.isEmpty() -> {
-                userPasswordError.value = "Please Enter Password"
-            }
-            else -> {
-                userNameError.value = ""
-                userPasswordError.value = ""
-                login()
-            }
+        if (userName.value.isEmpty()) {
+            userNameError.value = "Please Enter Email or Phone Number"
+        } else if (userPassword.value.isEmpty()) {
+            userPasswordError.value = "Please Enter Password"
+        } else {
+            userNameError.value=""
+            userPasswordError.value=""
+            login()
+
         }
     }
 
-    private fun login() {
+    fun login() {
 
-        val loginRequest =
-            LoginRequest(userEmail = userName.value, userPassword = userPassword.value)
+        val loginRequest = LoginDataClass(username = userName.value, password = userPassword.value)
 
         viewModelScope.launch {
-            val result = safeApi { NetworkService.apiService.signIn(loginRequest) }
+            val loginResult = safeApi {  NetworkService.apiService().performLogin(loginRequest) }
 
-            when (result) {
+            when(loginResult) {
                 is NetworkResult.Success -> {
-                    val loginResponse = result.data.body()!!
-                    if (loginResponse.status.equals("success", true)) {
-                        loginEventChannel.trySend(Unit)
-                        toastEventChannel.trySend(loginResponse.message ?: "Success")
-                    } else {
-                        toastEventChannel.trySend(loginResponse.message ?: "Error")
+                    loginResult.data.data?.let {
+                        loginEventChannel.trySend(Pair(loginRequest.username, it.userId))
                     }
                 }
-                is NetworkResult.Error -> {
-                    toastEventChannel.trySend(result.message ?: "Error")
+                is NetworkResult.Failure -> {
+                    toastEventChannel.trySend(loginResult.message?:"")
                 }
+//                is NetworkResult.Exception-> {
+//                    toastEventChannel.trySend(loginResult.message?:"")
+//                }
             }
-
-
         }
     }
 }
-

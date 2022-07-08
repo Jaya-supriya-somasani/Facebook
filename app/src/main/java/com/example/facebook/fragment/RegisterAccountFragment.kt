@@ -1,5 +1,6 @@
 package com.example.facebook.fragment
 
+import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.facebook.R
@@ -48,6 +49,11 @@ class RegisterAccountFragment :
             viewModel.createAccountEvent.collectLatest {
                 val action=RegisterAccountFragmentDirections.actionCreateAccountFragmentToProfilePageFragment2()
                 findNavController().navigate(action)
+            }
+        }
+        viewLifecycleOwner.lifecycleScope.launchWhenResumed {
+            viewModel.toastEvent.collectLatest {
+                Toast.makeText(context,it,Toast.LENGTH_SHORT).show()
             }
         }
 //        dataBinding.radiobtns.checkedRadioButtonId

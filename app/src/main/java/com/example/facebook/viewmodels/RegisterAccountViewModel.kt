@@ -25,6 +25,9 @@ class RegisterAccountViewModel : BaseViewModel() {
     val maleGender=MutableStateFlow(false)
     val femaleGender=MutableStateFlow(false)
 
+    private val toastEventChannel=Channel<String>(Channel.BUFFERED)
+    val toastEvent=toastEventChannel.receiveAsFlow()
+
     fun signupBtn() {
         if (maleGender.value){
             userGender.value= "Male"
@@ -45,6 +48,10 @@ class RegisterAccountViewModel : BaseViewModel() {
             when (registerResult) {
                 is NetworkResult.Success -> {
                     createAccountChannel.trySend(Unit)
+                }
+                is NetworkResult.Failure->{
+                    toastEventChannel.trySend(registerResult.message?:"")
+
                 }
             }
         }
