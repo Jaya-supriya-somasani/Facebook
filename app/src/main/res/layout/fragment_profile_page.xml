@@ -12,276 +12,278 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/profile_background_img"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:src="@drawable/background"
-            app:layout_constraintTop_toTopOf="parent" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/profile_background_img"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:src="@drawable/background"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/user_profile_img"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:background="@color/purple_200"
-            android:src="@drawable/ic_baseline_user"
-            app:layout_constraintBottom_toBottomOf="@id/profile_background_img"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:shapeAppearanceOverlay="@style/roundedImageView"
-            app:strokeColor="@color/white"
-            app:strokeWidth="2dp" />
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/user_profile_img"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:background="@color/purple_200"
+                android:src="@drawable/facebook_icon"
+                app:layout_constraintBottom_toBottomOf="@id/profile_background_img"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:shapeAppearanceOverlay="@style/roundedImageView"
+                app:strokeColor="@color/white"
+                app:strokeWidth="2dp" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/user_name_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="@string/username_tv"
-            android:textColor="@color/black"
-            android:textSize="22dp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/user_profile_img" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/user_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/username_tv"
+                android:textColor="@color/black"
+                android:textSize="22dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/user_profile_img" />
 
-        <Button
-            android:id="@+id/addStoryBtn"
-            style="@style/Widget.MaterialComponents.Button.Icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:backgroundTint="#E62B77E8"
-            android:text="@string/add_to_story_tv"
-            android:textAllCaps="false"
-            app:icon="@drawable/ic_baseline_add"
-            app:layout_constraintEnd_toStartOf="@id/editProfileBtn"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/user_name_tv" />
+            <Button
+                android:id="@+id/addStoryBtn"
+                style="@style/Widget.MaterialComponents.Button.Icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:backgroundTint="#E62B77E8"
+                android:text="@string/add_to_story_tv"
+                android:textAllCaps="false"
+                app:icon="@drawable/ic_baseline_add"
+                app:layout_constraintEnd_toStartOf="@id/editProfileBtn"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/user_name_tv" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/editProfileBtn"
-            style="@style/Widget.MaterialComponents.Button.Icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:backgroundTint="#CBDADDDD"
-            android:text="@string/edit_profile_tv"
-            android:textAllCaps="false"
-            android:textColor="@color/black"
-            app:icon="@drawable/ic_baseline_create"
-            app:iconTint="@color/black"
-            app:layout_constraintEnd_toStartOf="@id/settingsBtn"
-            app:layout_constraintStart_toEndOf="@id/addStoryBtn"
-            app:layout_constraintTop_toBottomOf="@id/user_name_tv" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/editProfileBtn"
+                style="@style/Widget.MaterialComponents.Button.Icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:backgroundTint="#CBDADDDD"
+                android:text="@string/edit_profile_tv"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                app:icon="@drawable/ic_baseline_create"
+                app:iconTint="@color/black"
+                app:layout_constraintEnd_toStartOf="@id/settingsBtn"
+                app:layout_constraintStart_toEndOf="@id/addStoryBtn"
+                app:layout_constraintTop_toBottomOf="@id/user_name_tv" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/settingsBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="10dp"
-            android:backgroundTint="#CBDADDDD"
-            android:gravity="center"
-            android:text="@string/settings_tv"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@id/editProfileBtn"
-            app:layout_constraintTop_toBottomOf="@id/user_name_tv"
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/settingsBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="#CBDADDDD"
+                android:gravity="center"
+                android:text="@string/settings_tv"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/editProfileBtn"
+                app:layout_constraintTop_toBottomOf="@id/user_name_tv"
 
-            />
+                />
 
-        <com.google.android.material.divider.MaterialDivider
-            android:id="@+id/dividerLine"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginTop="10dp"
-            app:dividerColor="#777575"
-            app:layout_constraintTop_toBottomOf="@id/editProfileBtn" />
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/dividerLine"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="10dp"
+                app:dividerColor="#777575"
+                app:layout_constraintTop_toBottomOf="@id/editProfileBtn" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/contact_info_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:text="@string/contact_info_tv"
-            android:textColor="@color/black"
-            android:textSize="19sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/dividerLine" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/contact_info_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/contact_info_tv"
+                android:textColor="@color/black"
+                android:textSize="19sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/dividerLine" />
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/phIcon"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="15dp"
-            android:background="#CBDADDDD"
-            android:src="@drawable/ic_baseline_phone"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/contact_info_tv"
-            app:shapeAppearanceOverlay="@style/roundedImageView" />
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/phIcon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:background="#CBDADDDD"
+                android:src="@drawable/ic_baseline_phone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/contact_info_tv"
+                app:shapeAppearanceOverlay="@style/roundedImageView" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/phnum_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="10dp"
-            android:text="@string/ph_num_tv"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            app:layout_constraintStart_toEndOf="@id/phIcon"
-            app:layout_constraintTop_toBottomOf="@id/contact_info_tv" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/phnum_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/ph_num_tv"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintStart_toEndOf="@id/phIcon"
+                app:layout_constraintTop_toBottomOf="@id/contact_info_tv" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/mobile_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:text="@string/mobile_tv"
-            app:layout_constraintStart_toEndOf="@id/phIcon"
-            app:layout_constraintTop_toBottomOf="@id/phnum_tv" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/mobile_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:text="@string/mobile_tv"
+                app:layout_constraintStart_toEndOf="@id/phIcon"
+                app:layout_constraintTop_toBottomOf="@id/phnum_tv" />
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/email_icon"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="20dp"
-            android:background="#CBDADDDD"
-            android:src="@drawable/ic_baseline_mail"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/phIcon"
-            app:shapeAppearanceOverlay="@style/roundedImageView" />
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/email_icon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="20dp"
+                android:background="#CBDADDDD"
+                android:src="@drawable/ic_baseline_mail"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/phIcon"
+                app:shapeAppearanceOverlay="@style/roundedImageView" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/user_email_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="20dp"
-            android:text="@string/sampler_gmail_tv"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            app:layout_constraintStart_toEndOf="@id/phIcon"
-            app:layout_constraintTop_toBottomOf="@id/mobile_tv" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/user_email_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/sampler_gmail_tv"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintStart_toEndOf="@id/phIcon"
+                app:layout_constraintTop_toBottomOf="@id/mobile_tv" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/mail_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:text="@string/mail_tv"
-            app:layout_constraintStart_toEndOf="@id/phIcon"
-            app:layout_constraintTop_toBottomOf="@id/user_email_tv" />
-        <com.google.android.material.divider.MaterialDivider
-            android:id="@+id/contactInfoDivider"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginTop="10dp"
-            app:dividerColor="#777575"
-            app:layout_constraintTop_toBottomOf="@id/mail_tv" />
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/basic_info_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:text="@string/basic_info_tv"
-            android:textColor="@color/black"
-            android:textSize="19sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/contactInfoDivider" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/mail_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:text="@string/mail_tv"
+                app:layout_constraintStart_toEndOf="@id/phIcon"
+                app:layout_constraintTop_toBottomOf="@id/user_email_tv" />
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/person_icon"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="15dp"
-            android:background="#CBDADDDD"
-            android:src="@drawable/ic_baseline_user"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/basic_info_tv"
-            app:shapeAppearanceOverlay="@style/roundedImageView" />
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/contactInfoDivider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="10dp"
+                app:dividerColor="#777575"
+                app:layout_constraintTop_toBottomOf="@id/mail_tv" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/gender_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="10dp"
-            android:text="@string/female_tv"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            app:layout_constraintStart_toEndOf="@id/person_icon"
-            app:layout_constraintTop_toBottomOf="@id/basic_info_tv" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/basic_info_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/basic_info_tv"
+                android:textColor="@color/black"
+                android:textSize="19sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/contactInfoDivider" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/gender_tv_desc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:text="@string/gender"
-            app:layout_constraintStart_toEndOf="@id/person_icon"
-            app:layout_constraintTop_toBottomOf="@id/gender_tv" />
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/person_icon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:background="#CBDADDDD"
+                android:src="@drawable/ic_baseline_user"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/basic_info_tv"
+                app:shapeAppearanceOverlay="@style/roundedImageView" />
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/bday_icon"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="20dp"
-            android:background="#CBDADDDD"
-            android:src="@drawable/ic_baseline_birthday"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/person_icon"
-            app:shapeAppearanceOverlay="@style/roundedImageView" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/gender_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/female_tv"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintStart_toEndOf="@id/person_icon"
+                app:layout_constraintTop_toBottomOf="@id/basic_info_tv" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/user_dob_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="20dp"
-            android:text="@string/dob_tv"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            app:layout_constraintStart_toEndOf="@id/bday_icon"
-            app:layout_constraintTop_toBottomOf="@id/gender_tv_desc" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/gender_tv_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:text="@string/gender"
+                app:layout_constraintStart_toEndOf="@id/person_icon"
+                app:layout_constraintTop_toBottomOf="@id/gender_tv" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/dob_desc_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:text="@string/birthday_tv"
-            app:layout_constraintStart_toEndOf="@id/phIcon"
-            app:layout_constraintTop_toBottomOf="@id/user_dob_tv" />
-        <com.google.android.material.divider.MaterialDivider
-            android:id="@+id/basicInfoDivider"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginTop="10dp"
-            app:dividerColor="#777575"
-            app:layout_constraintTop_toBottomOf="@id/mail_tv" />
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/bday_icon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="20dp"
+                android:background="#CBDADDDD"
+                android:src="@drawable/ic_baseline_birthday"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/person_icon"
+                app:shapeAppearanceOverlay="@style/roundedImageView" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/user_dob_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/dob_tv"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintStart_toEndOf="@id/bday_icon"
+                app:layout_constraintTop_toBottomOf="@id/gender_tv_desc" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/dob_desc_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:text="@string/birthday_tv"
+                app:layout_constraintStart_toEndOf="@id/phIcon"
+                app:layout_constraintTop_toBottomOf="@id/user_dob_tv" />
+
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/basicInfoDivider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="10dp"
+                app:dividerColor="#777575"
+                app:layout_constraintTop_toBottomOf="@id/mail_tv" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>

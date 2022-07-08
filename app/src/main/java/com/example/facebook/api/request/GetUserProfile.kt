@@ -5,19 +5,17 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class RegisterUser(
+data class GetUserProfile(
     @SerializedName("userName")
     val userName: String,
+    @SerializedName("userId")
+    val userId: String,
     @SerializedName("dateOfBirth")
     val userDob: String,
     @SerializedName("gender")
     val gender: String,
     @SerializedName("mail")
     val mail: String,
-    @SerializedName("userPassword")
-    val userPassword: String,
-    @SerializedName("confirmPassword")
-    val confirmPswd: String,
     @SerializedName("loginStatus")
     val loginStatus: Boolean,
 ) : Parcelable

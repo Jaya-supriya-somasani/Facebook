@@ -33,7 +33,7 @@ class RegisterAccountViewModel : BaseViewModel() {
             confirmPswd = userConfirmPassword.value, loginStatus = loginStatus.value
         )
         viewModelScope.launch {
-            val registerResult = safeApi { NetworkService.apiService().registerUser(registerReq) }
+            val registerResult = safeApi { NetworkService.apiService.registerUser(registerReq) }
 
             when (registerResult) {
                 is NetworkResult.Success -> {

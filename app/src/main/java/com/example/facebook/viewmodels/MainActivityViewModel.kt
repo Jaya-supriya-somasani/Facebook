@@ -1,10 +1,10 @@
-package com.example.facebook.fragment.login
+package com.example.facebook.viewmodels
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.example.facebook.NetworkResult
 import com.example.facebook.api.NetworkService
 import com.example.facebook.api.request.LoginDataClass
+import com.example.facebook.api.response.LoginRequest
 import com.example.facebook.safeApi
 import com.example.facebook.util.BaseViewModel
 import kotlinx.coroutines.channels.Channel
@@ -13,10 +13,9 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
-class LoginPageViewModel : BaseViewModel() {
+class MainActivityViewModel : BaseViewModel() {
     val userName = MutableStateFlow("")
     val userPassword = MutableStateFlow("")
-
     val userNameError = MutableStateFlow("")
     val userPasswordError = MutableStateFlow("")
 
@@ -50,33 +49,46 @@ class LoginPageViewModel : BaseViewModel() {
     }
 
     fun loginValidation() {
-        if (userName.value.isEmpty()) {
-            userNameError.value = "Please Enter Email or Phone Number"
-        } else if (userPassword.value.isEmpty()) {
-            userPasswordError.value = "Please Enter Password"
-        } else {
-            userNameError.value=""
-            userPasswordError.value=""
-            login()
-
-        }
-    }
-
-    fun login() {
-
-        val loginRequest = LoginDataClass(username = userName.value, password = userPassword.value)
-
-        viewModelScope.launch {
-            val loginResult = safeApi {  NetworkService.apiService().performLogin(loginRequest) }
-
-            when(loginResult) {
-                is NetworkResult.Success -> {
-                    loginEventChannel.trySend(Unit)
-                }
-                is NetworkResult.Error -> {
-                    toastEventChannel.trySend(loginResult.message?:"")
-                }
+        when {
+            userName.value.isEmpty() -> {
+                userNameError.value = "Please Enter Email or Phone Number"
+            }
+            userPassword.value.isEmpty() -> {
+                userPasswordError.value = "Please Enter Password"
+            }
+            else -> {
+                userNameError.value = ""
+                userPasswordError.value = ""
+                login()
             }
         }
     }
+
+    private fun login() {
+
+        val loginRequest =
+            LoginRequest(userEmail = userName.value, userPassword = userPassword.value)
+
+        viewModelScope.launch {
+            val result = safeApi { NetworkService.apiService.signIn(loginRequest) }
+
+            when (result) {
+                is NetworkResult.Success -> {
+                    val loginResponse = result.data.body()!!
+                    if (loginResponse.status.equals("success", true)) {
+                        loginEventChannel.trySend(Unit)
+                        toastEventChannel.trySend(loginResponse.message ?: "Success")
+                    } else {
+                        toastEventChannel.trySend(loginResponse.message ?: "Error")
+                    }
+                }
+                is NetworkResult.Error -> {
+                    toastEventChannel.trySend(result.message ?: "Error")
+                }
+            }
+
+
+        }
+    }
 }
+

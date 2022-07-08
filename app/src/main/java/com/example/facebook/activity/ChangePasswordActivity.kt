@@ -1,4 +1,4 @@
-package com.example.facebook.fragment
+package com.example.facebook.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,12 +8,10 @@ import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.example.facebook.R
-import com.example.facebook.activity.MainActivity
 import com.example.facebook.databinding.ActivityChangePasswordBinding
 import com.example.facebook.util.BaseActivity
 import com.example.facebook.viewmodels.ChangePasswordViewModel
 import kotlinx.coroutines.flow.collectLatest
-
 
 class ChangePasswordActivity :
     BaseActivity<ActivityChangePasswordBinding, ChangePasswordViewModel>() {

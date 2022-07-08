@@ -8,6 +8,4 @@ import kotlinx.parcelize.Parcelize
 data class RemoveFriendDataClass(
     @SerializedName("friendId")
     val friendId:String,
-    @SerializedName("userId")
-    val userId:String
 ):Parcelable

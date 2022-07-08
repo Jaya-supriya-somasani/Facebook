@@ -7,5 +7,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class LikesCount(
     @SerializedName("postId")
-    val postId:String
+    val postId:String,
+    @SerializedName("count")
+    val count:String,
 ):Parcelable

@@ -26,6 +26,7 @@ abstract class BaseFragment<Binding: ViewDataBinding,VM:ViewModel>:Fragment() {
         return dataBinding.root
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         dataBinding.lifecycleOwner=viewLifecycleOwner

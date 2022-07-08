@@ -9,5 +9,5 @@ data class CreatePost(
     @SerializedName("userId")
     val userId:String,
     @SerializedName("postData")
-    val postData:String
+    val postDesc:String
 ):Parcelable

@@ -10,18 +10,20 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import kotlinx.coroutines.flow.collectLatest
 import java.util.*
 
-class RegisterAccountFragment:BaseFragment<FragmentRegisterAccountBinding,RegisterAccountViewModel>() {
-    override fun getViewModel()= RegisterAccountViewModel::class.java
+class RegisterAccountFragment :
+    BaseFragment<FragmentRegisterAccountBinding, RegisterAccountViewModel>() {
+    override fun getViewModel() = RegisterAccountViewModel::class.java
 
     override fun getResourceId(): Int {
         return R.layout.fragment_register_account
     }
 
     override fun initViews() {
-        dataBinding.createAccViewModel=viewModel
+        dataBinding.createAccViewModel = viewModel
         viewLifecycleOwner.lifecycleScope.launchWhenResumed {
             viewModel.createAccountEvent.collectLatest {
-                val action= RegisterAccountFragmentDirections.actionCreateAccountFragmentToProfilePageFragment2()
+                val action =
+                    RegisterAccountFragmentDirections.actionCreateAccountFragmentToProfilePageFragment2()
                 findNavController().navigate(action)
             }
         }

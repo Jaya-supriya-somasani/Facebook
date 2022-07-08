@@ -5,7 +5,9 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-class DeletePostDataClass(
-    @SerializedName("postid")
-    val postId:String
-):Parcelable
+data class DeletePostDataClass(
+    @SerializedName("postId")
+    val postId: String,
+    @SerializedName("friendId")
+    val friendId: String,
+) : Parcelable

@@ -1,15 +1,15 @@
-package com.example.facebook.home.adapter
+package com.example.facebook.adapter
 
 import android.view.ViewGroup
-import com.example.facebook.base.BaseAdapter
-import com.example.facebook.base.BaseHolder
-import com.example.facebook.api.request.FriendsListResponse
+import com.example.facebook.util.BaseAdapter
+import com.example.facebook.util.BaseHolder
 import com.example.facebook.R
-import com.example.facebook.base.BaseViewHolder
-import com.example.facebook.base.inflate
+import com.example.facebook.api.request.FriendsListResponse
+import com.example.facebook.util.BaseViewHolder
+import com.example.facebook.util.inflate
 import com.example.facebook.databinding.ItemFriendsListBinding
 
-class friendsListAdapter(
+class FriendsListAdapter(
     private val onAddFriendButtonClicked: (FriendsListResponse) -> Unit,
     private val onRemoveButtonClicked: (FriendsListResponse) -> Unit
 ) : BaseAdapter<FriendsListResponse>() {

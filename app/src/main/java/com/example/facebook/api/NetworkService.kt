@@ -26,9 +26,6 @@ class NetworkService {
             builder.build()
         }
 
-        private val apiService = retrofit.create(ApiService::class.java)
-
-        fun apiService() = apiService
+        val apiService = retrofit.create(ApiService::class.java)
     }
-
 }
