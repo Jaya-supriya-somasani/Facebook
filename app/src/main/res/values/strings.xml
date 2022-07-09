@@ -75,7 +75,8 @@
     <string name="post">Post</string>
     <string name="see_all">See all</string>
     <string name="title_activity_splash_screen">SplashScreen</string>
-    <string name="previous">Previous</string><string name="hello_first_fragment">Hello first fragment</string>
+    <string name="previous">Previous</string>
+    <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="sign_up_desc_tv">It\'s quick and easy</string>
     <string name="new_password_tv">New Password</string>
@@ -93,4 +94,5 @@
     <string name="mutual_friends_tv">6 mutual friends</string>
     <string name="remove_frd">Remove</string>
     <string name="confirm_password_tv">Confirm Password</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

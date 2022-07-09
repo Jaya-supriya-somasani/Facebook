@@ -21,10 +21,7 @@ class PostAdapter : BaseAdapter<PostsResponsesItem>() {
         override fun onBind(item: PostsResponsesItem) {
             binding.tvUserName.text = item.userId
             binding.tvPostDescription.text = item.postDesc
-            binding.ivLike.text = "23"
-            binding.tvLikeCount.text = "2k"
-            binding.tvCommentsCount.text = "45 comments"
-            binding.tvShareCount.text = "12 shares"
+            binding.ivLike.text = item.likesCount
             binding.ivLike.isChecked = item.likeStatus
         }
 

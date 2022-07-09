@@ -120,38 +120,38 @@
                 android:id="@+id/tvLikeCount"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:text="1k"
                 android:textColor="@color/dark_gray"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="@id/ivLikeImage"
                 app:layout_constraintEnd_toStartOf="@id/ivComments"
                 app:layout_constraintStart_toEndOf="@id/ivLikeImage"
-                app:layout_constraintTop_toTopOf="@id/ivLikeImage"
-                tools:text="1k" />
+                app:layout_constraintTop_toTopOf="@id/ivLikeImage" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvCommentsCount"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:text="37 comments"
                 android:textColor="@color/dark_gray"
-                android:textSize="1sp"
+                android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="@id/ivLikeImage"
                 app:layout_constraintEnd_toStartOf="@id/tvShareCount"
                 app:layout_constraintStart_toEndOf="@id/guideline"
-                app:layout_constraintTop_toTopOf="@id/ivLikeImage"
-                tools:text="37 comments" />
+                app:layout_constraintTop_toTopOf="@id/ivLikeImage" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvShareCount"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
+                android:text="12 shares"
                 android:textColor="@color/dark_gray"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="@id/ivLikeImage"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tvCommentsCount"
-                app:layout_constraintTop_toTopOf="@id/ivLikeImage"
-                tools:text="5 shares" />
+                app:layout_constraintTop_toTopOf="@id/ivLikeImage" />
 
 
             <androidx.appcompat.widget.AppCompatCheckBox

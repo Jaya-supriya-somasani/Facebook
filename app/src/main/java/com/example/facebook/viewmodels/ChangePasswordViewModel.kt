@@ -1,12 +1,11 @@
 package com.example.facebook.viewmodels
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
-import com.example.facebook.api.response.ChangePasswordRequest
+import com.example.facebook.NetworkResult
 import com.example.facebook.api.NetworkService
+import com.example.facebook.api.response.ChangePasswordRequest
+import com.example.facebook.safeApi
 import com.example.facebook.util.BaseViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
@@ -14,28 +13,38 @@ import kotlinx.coroutines.launch
 class ChangePasswordViewModel : BaseViewModel() {
     private val resetPasswordChannel = Channel<Unit>()
     val resetPasswordEvent = resetPasswordChannel.receiveAsFlow()
-    private val status = Channel<Boolean>()
-    val statusEvent = status.receiveAsFlow()
-    fun resetPasswordBtn() {
+    private val toastEventChannel = Channel<String>()
+    val toastEvent = toastEventChannel.receiveAsFlow()
+//    fun resetPasswordBtn() {
+//        viewModelScope.launch {
+//            resetPasswordChannel.send(Unit)
+//        }
+//    }
+
+    fun changePassword(userId: Int, newPassword: String, confirmPassword: String) {
         viewModelScope.launch {
-            resetPasswordChannel.send(Unit)
-        }
-    }
+            val result = safeApi {
+                NetworkService.apiService.changePassword(
+                    ChangePasswordRequest(
+                        newPassword,
+                        confirmPassword
+                    ), userId = userId
+                )
+            }
 
-    fun changePassword(userId: String, newpassword: String, conformPassword: String) {
-        CoroutineScope(Dispatchers.IO).launch {
-            val response = NetworkService.apiService.changePassword(
-                ChangePasswordRequest(
-                    newpassword,
-                    conformPassword
-                ), userId = userId
-            )
-            Log.e("TAG", "changePassword: ${response.message()}")
-            if (response.isSuccessful) {
-                status.send(true)
-            } else {
-                status.send(false)
-
+            when (result) {
+                is NetworkResult.Success -> {
+                    val loginResponse = result.data.body()!!
+                    if (loginResponse.status.equals("success", true)) {
+                        resetPasswordChannel.trySend(Unit)
+                        toastEventChannel.trySend(loginResponse.message ?: "Success")
+                    } else {
+                        toastEventChannel.trySend(loginResponse.message ?: "Error")
+                    }
+                }
+                is NetworkResult.Error -> {
+                    toastEventChannel.trySend(result.message ?: "Error")
+                }
             }
 
 

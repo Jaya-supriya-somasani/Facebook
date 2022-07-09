@@ -1,9 +1,11 @@
 package com.example.facebook.fragment
 
-import androidx.appcompat.app.ActionBar
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.example.facebook.R
 import com.example.facebook.util.BaseFragment
 import com.example.facebook.viewmodels.ProfilePageViewModel
+import kotlinx.coroutines.flow.collectLatest
 
 class ProfilePageFragment :
     BaseFragment<com.example.facebook.databinding.FragmentProfilePageBinding, ProfilePageViewModel>() {
@@ -14,7 +16,15 @@ class ProfilePageFragment :
     }
 
     override fun initViews() {
-        dataBinding.profileVM = viewModel
-
+        dataBinding.changePasswordBtn.setOnClickListener {
+            val action =
+                ProfilePageFragmentDirections.actionProfilePageFragment2ToChangePasswordFragment2()
+            findNavController().navigate(action)
+        }
+        lifecycleScope.launchWhenResumed {
+            viewModel.userDetailsStateFlow.collectLatest {
+                dataBinding.data = it
+            }
+        }
     }
 }
