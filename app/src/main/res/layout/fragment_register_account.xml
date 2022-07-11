@@ -56,10 +56,10 @@
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="10dp"
                 android:hint="@string/user_name_tv"
-                app:errorMessage="@{createAccViewModel.userNameError}"
                 app:endIconMode="custom"
                 app:endIconTint="?attr/colorPrimary"
                 app:errorEnabled="true"
+                app:errorMessage="@{createAccViewModel.userNameError}"
                 app:layout_constraintTop_toBottomOf="@+id/dividerLine_start">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -100,10 +100,10 @@
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="10dp"
                 android:hint="@string/email_tv"
-                app:errorMessage="@{createAccViewModel.userEmailError}"
                 app:endIconMode="custom"
                 app:endIconTint="?attr/colorPrimary"
                 app:errorEnabled="true"
+                app:errorMessage="@{createAccViewModel.userEmailError}"
                 app:layout_constraintTop_toBottomOf="@id/username_tv">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -144,22 +144,20 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:focusable="true"
                 android:hint="@string/birthday_title"
                 app:endIconDrawable="@drawable/ic_baseline_birthday"
                 app:endIconMode="custom"
                 app:endIconTint="?attr/colorPrimary"
                 app:errorEnabled="true"
                 app:errorMessage="@{createAccViewModel.userDobError}"
-
                 app:layout_constraintTop_toBottomOf="@id/confirmPasswordTv">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/dobEditText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:inputType="date"
                     android:text="@={createAccViewModel.userDob}" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -221,7 +219,7 @@
                 app:layout_constraintTop_toBottomOf="@id/radiobtns" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/next_btn"
+                android:id="@+id/signBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
@@ -232,6 +230,21 @@
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 app:layout_constraintTop_toBottomOf="@id/terms_tv" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/loginBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginTop="20dp"
+                android:background="#E62B77E8"
+                android:text="@string/login"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                app:layout_constraintTop_toBottomOf="@id/signBtn" />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </layout>

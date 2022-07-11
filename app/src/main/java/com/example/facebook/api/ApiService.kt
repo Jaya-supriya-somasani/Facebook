@@ -46,11 +46,11 @@ interface ApiService {
     ): ApiResponse<AddNewFriend>
 
 
-    @PUT("/api/v1/postLikes/{userId}/{postId}/{loginStatus}")
+    @PUT("/api/v1/postLikes/{userId}/{postId}/{likeStatus}")
     suspend fun updateLike(
         @Path("userId", encoded = true) userId: String,
         @Path("postId", encoded = true) postId: String,
-        @Path("loginStatus", encoded = true) loginStatus: String,
+        @Path("likeStatus", encoded = true) likeStatus: Boolean,
     ): ApiResponse<UpdateLikes>
 
 
@@ -77,5 +77,5 @@ interface ApiService {
 //    suspend fun registerUser(@Body registerRequest:RegisterUser):RegisterResponse
 
     @GET("/api/v1/profile/{userId}")
-    suspend fun profileDisplaying(@Path ("userId") userId:Int):ProfilePageResponse
+    suspend fun profileDisplaying(@Path("userId") userId: Int): ProfilePageResponse
 }

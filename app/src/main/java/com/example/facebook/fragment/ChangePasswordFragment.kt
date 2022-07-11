@@ -7,7 +7,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.example.facebook.R
-import com.example.facebook.activity.MainActivity
 import com.example.facebook.databinding.FragmentChangePasswordBinding
 import com.example.facebook.util.BaseFragment
 import com.example.facebook.viewmodels.ChangePasswordViewModel
@@ -35,10 +34,10 @@ class ChangePasswordFragment :
         }
         lifecycleScope.launchWhenResumed {
             viewModel.resetPasswordEvent.collectLatest {
-                Intent(
-                    requireContext(),
-                    MainActivity::class.java
-                )
+//                Intent(
+//                    requireContext(),
+//                    MainActivity::class.java
+//                )
             }
         }
         lifecycleScope.launchWhenResumed {

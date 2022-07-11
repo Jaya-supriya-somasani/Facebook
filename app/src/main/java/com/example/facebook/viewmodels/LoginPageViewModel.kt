@@ -1,4 +1,5 @@
-package com.example.facebook.fragment.login
+package com.example.facebook.viewmodels
+
 import androidx.lifecycle.viewModelScope
 import com.example.facebook.NetworkResult
 import com.example.facebook.api.NetworkService
@@ -53,8 +54,8 @@ class LoginPageViewModel : BaseViewModel() {
         } else if (userPassword.value.isEmpty()) {
             userPasswordError.value = "Please Enter Password"
         } else {
-            userNameError.value=""
-            userPasswordError.value=""
+            userNameError.value = ""
+            userPasswordError.value = ""
             login()
 
         }
@@ -65,16 +66,16 @@ class LoginPageViewModel : BaseViewModel() {
         val loginRequest = LoginDataClass(username = userName.value, password = userPassword.value)
 
         viewModelScope.launch {
-            val loginResult = safeApi {  NetworkService.apiService.performLogin(loginRequest) }
+            val loginResult = safeApi { NetworkService.apiService.performLogin(loginRequest) }
 
-            when(loginResult) {
+            when (loginResult) {
                 is NetworkResult.Success -> {
                     loginResult.data.data?.let {
                         loginEventChannel.trySend(Pair(loginRequest.username, it.userId))
                     }
                 }
                 is NetworkResult.Failure -> {
-                    toastEventChannel.trySend(loginResult.message?:"")
+                    toastEventChannel.trySend(loginResult.message ?: "")
                 }
 //                is NetworkResult.Exception-> {
 //                    toastEventChannel.trySend(loginResult.message?:"")

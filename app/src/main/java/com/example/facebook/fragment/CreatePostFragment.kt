@@ -1,14 +1,15 @@
 package com.example.facebook.fragment
 
+import android.app.ProgressDialog
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.facebook.R
 import com.example.facebook.databinding.FragmentCreatePostBinding
 import com.example.facebook.util.BaseFragment
-import com.example.facebook.util.showProgressDialogue
 import com.example.facebook.viewmodels.CreatePostViewModel
 import kotlinx.coroutines.flow.collectLatest
+import java.util.*
 
 class CreatePostFragment : BaseFragment<FragmentCreatePostBinding, CreatePostViewModel>() {
 
@@ -18,11 +19,11 @@ class CreatePostFragment : BaseFragment<FragmentCreatePostBinding, CreatePostVie
 
     override fun initViews() {
 
-        dataBinding.close.setOnClickListener {
+        dataBinding.closeBtn.setOnClickListener {
             findNavController().popBackStack()
         }
-        dataBinding.post.setOnClickListener {
-            showProgressDialogue(requireContext(), "Uploading")
+        dataBinding.postBtn.setOnClickListener {
+            showProgressDialogue()
             viewModel.uploadPost(userId = "2", dataBinding.description.text.toString())
         }
 
@@ -42,5 +43,17 @@ class CreatePostFragment : BaseFragment<FragmentCreatePostBinding, CreatePostVie
         }
     }
 
-
+    fun showProgressDialogue() {
+        val pd = ProgressDialog(requireContext()).apply {
+            setMessage("Uploading")
+        }
+        pd.show()
+        val timer = Timer()
+        timer.schedule(object : TimerTask() {
+            override fun run() {
+                pd.dismiss()
+                timer.cancel()
+            }
+        }, 500)
+    }
 }

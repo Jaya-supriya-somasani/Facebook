@@ -1,11 +1,12 @@
 package com.example.facebook.fragment
 
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
+import androidx.navigation.Navigation
 import com.example.facebook.R
 import com.example.facebook.util.BaseFragment
 import com.example.facebook.viewmodels.ProfilePageViewModel
 import kotlinx.coroutines.flow.collectLatest
+
 
 class ProfilePageFragment :
     BaseFragment<com.example.facebook.databinding.FragmentProfilePageBinding, ProfilePageViewModel>() {
@@ -19,7 +20,7 @@ class ProfilePageFragment :
         dataBinding.changePasswordBtn.setOnClickListener {
             val action =
                 ProfilePageFragmentDirections.actionProfilePageFragment2ToChangePasswordFragment2()
-            findNavController().navigate(action)
+            view?.let { it1 -> Navigation.findNavController(it1) }?.navigate(action)
         }
         lifecycleScope.launchWhenResumed {
             viewModel.userDetailsStateFlow.collectLatest {

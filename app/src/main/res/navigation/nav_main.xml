@@ -8,15 +8,18 @@
 
     <fragment
         android:id="@+id/homeMainFragment"
-        android:name="com.example.facebook.fragment.HomeMainFragment"
+        android:name="com.example.facebook.fragment.MainScreenPageFragment"
         android:label="HomeMainFragment"
-        tools:layout="@layout/fragment_home_main">
+        tools:layout="@layout/fragment_main_screen_page">
         <action
             android:id="@+id/action_homeMainFragment_to_profilePageFragment"
             app:destination="@id/profilePageFragment" />
         <action
             android:id="@+id/action_homeMainFragment_to_createPostFragment2"
             app:destination="@id/createPostFragment2" />
+        <action
+            android:id="@+id/action_homeMainFragment_to_friendsPageFragment"
+            app:destination="@id/friendsPageFragment" />
 
     </fragment>
     <fragment
@@ -28,6 +31,13 @@
         android:id="@+id/createPostFragment2"
         android:name="com.example.facebook.fragment.CreatePostFragment"
         android:label="CreatePostFragment"
-        tools:layout="@layout/fragment_create_post" />
+        tools:layout="@layout/fragment_create_post" >
+    </fragment>
+    <fragment
+        android:id="@+id/friendsPageFragment"
+        tools:layout="@layout/fragment_user_friends"
+        android:name="com.example.facebook.fragment.FriendsPageFragment"
+        android:label="FriendsPageFragment" />
 
 </navigation>
+

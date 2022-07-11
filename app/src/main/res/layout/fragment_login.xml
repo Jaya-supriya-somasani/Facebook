@@ -6,7 +6,7 @@
 
         <variable
             name="loginVM"
-            type="com.example.facebook.fragment.login.LoginPageViewModel" />
+            type="com.example.facebook.viewmodels.LoginPageViewModel" />
     </data>
 
     <ScrollView

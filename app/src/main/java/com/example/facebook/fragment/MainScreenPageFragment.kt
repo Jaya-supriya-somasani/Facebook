@@ -8,15 +8,15 @@ import com.example.facebook.adapter.FriendsListAdapter
 import com.example.facebook.adapter.PostAdapter
 import com.example.facebook.api.request.FriendsListResponse
 import com.example.facebook.api.response.PostsResponsesItem
-import com.example.facebook.databinding.FragmentHomeMainBinding
+import com.example.facebook.databinding.FragmentMainScreenPageBinding
 import com.example.facebook.util.BaseFragment
-import com.example.facebook.viewmodels.HomePageViewModel
+import com.example.facebook.viewmodels.HomeMainViewModel
 import kotlinx.coroutines.flow.collectLatest
 
-class HomeMainFragment : BaseFragment<FragmentHomeMainBinding, HomePageViewModel>() {
+class MainScreenPageFragment : BaseFragment<FragmentMainScreenPageBinding, HomeMainViewModel>() {
 
-    val friendsListAdapter = FriendsListAdapter(::onAddClicked, ::onRemoveClicked)
-    val postAdapter = PostAdapter()
+    private val friendsListAdapter = FriendsListAdapter(::onAddClicked, ::onRemoveClicked)
+    private val postAdapter = PostAdapter(::onDeleteClicked, ::onPostLiked)
 
     private fun onRemoveClicked(item: FriendsListResponse) {
         Toast.makeText(requireContext(), "clicked on remove button", Toast.LENGTH_SHORT).show()
@@ -27,28 +27,31 @@ class HomeMainFragment : BaseFragment<FragmentHomeMainBinding, HomePageViewModel
 
     }
 
-    override fun getViewModel(): Class<HomePageViewModel> = HomePageViewModel::class.java
+    private fun onPostLiked(item: PostsResponsesItem) {
+        viewModel.onLikeClicked(item)
+    }
 
-    override fun getResourceId(): Int = R.layout.fragment_home_main
+    private fun onDeleteClicked(item: PostsResponsesItem) {
+        viewModel.onDeleteClicked(item)
+    }
+
+    override fun getViewModel(): Class<HomeMainViewModel> = HomeMainViewModel::class.java
+
+    override fun getResourceId(): Int = R.layout.fragment_main_screen_page
 
     override fun initViews() {
-       initData()
+        initData()
         val data = listOf(
             FriendsListResponse("tarun1", "lanka", ""),
             FriendsListResponse("tarun2", "lanka", ""),
             FriendsListResponse("tarun3", "lanka", "")
         )
-//        val postData = listOf(
-//            PostsResponsesItem("ram", "1", "austrlia"),
-//            PostsResponsesItem("athira", "2", "kerala"),
-//            PostsResponsesItem("lovely", "3", "chennai"),
-//        )
         dataBinding.recyclerViewFriends.adapter = friendsListAdapter
         dataBinding.recyclerViewPosts.adapter = postAdapter
         friendsListAdapter.submitList(data)
-//        postAdapter.submitList(postData)
         dataBinding.layoutCreatePost.searchView.setOnClickListener {
-            val action = HomeMainFragmentDirections.actionHomeMainFragmentToCreatePostFragment2()
+            val action =
+                MainScreenPageFragmentDirections.actionHomeMainFragmentToCreatePostFragment2()
             findNavController().navigate(action)
         }
     }

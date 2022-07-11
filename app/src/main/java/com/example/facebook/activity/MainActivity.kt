@@ -1,48 +1,53 @@
 package com.example.facebook.activity
 
-import android.content.Intent
-import android.widget.Toast
-import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.setupWithNavController
 import com.example.facebook.R
-import com.example.facebook.databinding.FragmentLoginPageBinding
-import com.example.facebook.fragment.login.LoginPageViewModel
+import com.example.facebook.databinding.ActivityMainBinding
+import com.example.facebook.fragment.MainScreenPageFragmentDirections
 import com.example.facebook.util.BaseActivity
-import kotlinx.coroutines.flow.collectLatest
+import com.example.facebook.viewmodels.HomeActivityViewModel
 
+class MainActivity : BaseActivity<ActivityMainBinding, HomeActivityViewModel>() {
+    private val navHostFragment: NavHostFragment
+        get() = supportFragmentManager.findFragmentById(R.id.fragmentContainerViewHome) as NavHostFragment
 
-class MainActivity : BaseActivity<FragmentLoginPageBinding, LoginPageViewModel>() {
-
-    override fun getViewModel() = LoginPageViewModel::class.java
-
-    override fun getResourceId(): Int {
-        return R.layout.fragment_login_page
-    }
-
+    private val navController: NavController
+        get() = navHostFragment.navController
 
     override fun setupViews() {
-        dataBinding.loginVM = viewModel
-        lifecycleScope.launchWhenResumed {
-            viewModel.loginEvent.collectLatest {
-                startActivity(Intent(this@MainActivity, HomeActivity::class.java))
-            }
-        }
-        lifecycleScope.launchWhenResumed {
-            viewModel.createAccountEvent.collectLatest {
-                //change the binding in activity
-                startActivity(Intent(this@MainActivity, RegisterAccounActivity::class.java))
-            }
-        }
-        lifecycleScope.launchWhenResumed {
-            viewModel.forgotPasswordEvent.collectLatest {
-                startActivity(Intent(this@MainActivity, ForgotPasswordActivity::class.java))
+        dataBinding.bottomNavigation.setupWithNavController(navController)
+        dataBinding.bottomNavigation.setOnItemSelectedListener { item ->
+            NavigationUI.onNavDestinationSelected(item, navController)
+            navController.navigateUp()
+            when (item.itemId) {
+                R.id.friends_nav_btn -> {
+                    val action =
+                        MainScreenPageFragmentDirections.actionHomeMainFragmentToFriendsPageFragment()
+                    navController.navigate(action)
+                }
+                R.id.profile_nav_btn -> {
+                    val action =
+                        MainScreenPageFragmentDirections.actionHomeMainFragmentToProfilePageFragment()
+                    navController.navigate(action)
+                }
+                R.id.create_post_nav_btn -> {
+                    val action =
+                        MainScreenPageFragmentDirections.actionHomeMainFragmentToCreatePostFragment2()
+                    navController.navigate(action)
 
+                }
             }
+            true
         }
 
-        lifecycleScope.launchWhenResumed {
-            viewModel.toastEvent.collectLatest {
-                Toast.makeText(this@MainActivity, it, Toast.LENGTH_SHORT).show()
-            }
-        }
     }
+
+    override fun getViewModel() = HomeActivityViewModel::class.java
+
+
+    override fun getResourceId(): Int = R.layout.activity_main
+
 }

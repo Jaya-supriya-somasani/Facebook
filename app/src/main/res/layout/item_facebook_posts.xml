@@ -11,7 +11,7 @@
             android:id="@+id/dividerStoriesAndReels"
             android:layout_width="match_parent"
             android:layout_height="8dp"
-            android:layout_marginVertical="10dp"
+            android:layout_margin="10dp"
             android:background="@color/dark_gray" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -56,7 +56,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
-                android:src="@drawable/ic_close"
+                android:src="@drawable/ic_delete"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -112,7 +112,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="20dp"
-                app:layout_constraintStart_toStartOf="@id/ivPostImage"
+                app:layout_constraintStart_toStartOf="@id/ivUserImage"
                 app:layout_constraintTop_toBottomOf="@id/ivPostImage"
                 app:srcCompat="@drawable/ic_thumbs_up" />
 
@@ -174,6 +174,7 @@
                 android:buttonTint="@color/black"
                 android:enabled="false"
                 android:paddingVertical="10dp"
+                android:text="@string/like"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="@id/ivLike"
@@ -200,7 +201,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:paddingVertical="10dp"
-                android:text="Comment"
+                android:text="@string/comment"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="@id/ivComments"
@@ -225,7 +226,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="30dp"
                 android:paddingVertical="10dp"
-                android:text="Share"
+                android:text="@string/share"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="@id/ivShare"
