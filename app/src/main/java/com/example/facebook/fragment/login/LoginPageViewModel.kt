@@ -1,5 +1,4 @@
 package com.example.facebook.fragment.login
-
 import androidx.lifecycle.viewModelScope
 import com.example.facebook.NetworkResult
 import com.example.facebook.api.NetworkService
@@ -12,7 +11,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
-class LoginPageViewModel() : BaseViewModel() {
+class LoginPageViewModel : BaseViewModel() {
     val userName = MutableStateFlow("")
     val userPassword = MutableStateFlow("")
 
@@ -66,7 +65,7 @@ class LoginPageViewModel() : BaseViewModel() {
         val loginRequest = LoginDataClass(username = userName.value, password = userPassword.value)
 
         viewModelScope.launch {
-            val loginResult = safeApi {  NetworkService.apiService().performLogin(loginRequest) }
+            val loginResult = safeApi {  NetworkService.apiService.performLogin(loginRequest) }
 
             when(loginResult) {
                 is NetworkResult.Success -> {

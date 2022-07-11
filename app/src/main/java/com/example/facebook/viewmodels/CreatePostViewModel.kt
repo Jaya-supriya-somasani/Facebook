@@ -1,15 +1,11 @@
 package com.example.facebook.viewmodels
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.example.facebook.NetworkResult
-import com.example.facebook.api.response.ChangePasswordRequest
 import com.example.facebook.api.NetworkService
 import com.example.facebook.api.request.CreatePost
 import com.example.facebook.safeApi
 import com.example.facebook.util.BaseViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
@@ -37,7 +33,7 @@ class CreatePostViewModel : BaseViewModel() {
                         toastEventChannel.trySend(loginResponse.message ?: "Error")
                     }
                 }
-                is NetworkResult.Error -> {
+                is NetworkResult.Failure -> {
                     toastEventChannel.trySend(result.message ?: "Error")
                 }
             }

@@ -25,8 +25,33 @@ class RegisterAccountViewModel : BaseViewModel() {
     val maleGender=MutableStateFlow(false)
     val femaleGender=MutableStateFlow(false)
 
+    val userNameError=MutableStateFlow("")
+    val userEmailError=MutableStateFlow("")
+    val userPasswordError=MutableStateFlow("")
+    val userDobError=MutableStateFlow("")
+    val userGenderError=MutableStateFlow("")
+    val userConfirmPasswordError=MutableStateFlow("")
+
     private val toastEventChannel=Channel<String>(Channel.BUFFERED)
     val toastEvent=toastEventChannel.receiveAsFlow()
+
+
+//    fun passwordValidation(){
+//        if (userConfirmPassword.value.equals(userPassword.value)){
+//            userNameError.value=""
+//            userPasswordError.value=""
+//            userEmailError.value=""
+//            userConfirmPasswordError.value=""
+//            userDobError.value=""
+//            userGenderError.value=""
+//        }
+//        else if (userConfirmPassword.value!=userPassword.value){
+//            userConfirmPasswordError.value="Please Re-enter Password"
+//        }
+//        else{
+//            signupBtn()
+//        }
+//    }
 
     fun signupBtn() {
         if (maleGender.value){

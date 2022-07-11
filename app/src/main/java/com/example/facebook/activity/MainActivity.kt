@@ -4,18 +4,18 @@ import android.content.Intent
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.example.facebook.R
-import com.example.facebook.databinding.ActivityMainBinding
+import com.example.facebook.databinding.FragmentLoginPageBinding
+import com.example.facebook.fragment.login.LoginPageViewModel
 import com.example.facebook.util.BaseActivity
-import com.example.facebook.viewmodels.MainActivityViewModel
 import kotlinx.coroutines.flow.collectLatest
 
 
-class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() {
+class MainActivity : BaseActivity<FragmentLoginPageBinding, LoginPageViewModel>() {
 
-    override fun getViewModel() = MainActivityViewModel::class.java
+    override fun getViewModel() = LoginPageViewModel::class.java
 
     override fun getResourceId(): Int {
-        return R.layout.activity_main
+        return R.layout.fragment_login_page
     }
 
 
@@ -29,7 +29,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
         lifecycleScope.launchWhenResumed {
             viewModel.createAccountEvent.collectLatest {
                 //change the binding in activity
-              //  startActivity(Intent(this@MainActivity, CreateAccountActivity::class.java))
+                startActivity(Intent(this@MainActivity, RegisterAccounActivity::class.java))
             }
         }
         lifecycleScope.launchWhenResumed {

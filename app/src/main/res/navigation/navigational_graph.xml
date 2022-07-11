@@ -37,9 +37,9 @@
     </fragment>
     <fragment
         android:id="@+id/registerAccountFragment"
-        android:name="com.example.facebook.fragment.RegisterAccountFragment"
+        android:name="com.example.facebook.activity.RegisterAccounActivity"
         android:label="CreateAccountFragment"
-        tools:layout="@layout/fragment_register_account">
+        tools:layout="@layout/activity_register_account">
         <action
             android:id="@+id/action_createAccountFragment_to_profilePageFragment2"
             app:destination="@id/profilePageFragment" />

@@ -42,7 +42,7 @@ class ChangePasswordViewModel : BaseViewModel() {
                         toastEventChannel.trySend(loginResponse.message ?: "Error")
                     }
                 }
-                is NetworkResult.Error -> {
+                is NetworkResult.Failure -> {
                     toastEventChannel.trySend(result.message ?: "Error")
                 }
             }

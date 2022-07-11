@@ -32,13 +32,13 @@ class LoginStatus {
     var loginStatus: Boolean = false
 }
 
-class BaseResponse<T> {
-    @SerializedName("status")
-    var status: String = ""
-    @SerializedName("message")
-    var message: String = ""
-    @SerializedName("data")
-    var data: T? = null
-    @SerializedName("errorCode")
-    var errorCode: Int? = null
-}
+//class BaseResponse<T> {
+//    @SerializedName("status")
+//    var status: String = ""
+//    @SerializedName("message")
+//    var message: String = ""
+//    @SerializedName("data")
+//    var data: T? = null
+//    @SerializedName("errorCode")
+//    var errorCode: Int? = null
+//}

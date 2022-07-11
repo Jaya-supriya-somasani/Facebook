@@ -56,6 +56,7 @@
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="10dp"
                 android:hint="@string/user_name_tv"
+                app:errorMessage="@{createAccViewModel.userNameError}"
                 app:endIconMode="custom"
                 app:endIconTint="?attr/colorPrimary"
                 app:errorEnabled="true"
@@ -80,6 +81,7 @@
                 app:endIconMode="custom"
                 app:endIconTint="?attr/colorPrimary"
                 app:errorEnabled="true"
+                app:errorMessage="@{createAccViewModel.userConfirmPasswordError}"
                 app:layout_constraintTop_toBottomOf="@id/new_pswd_tv">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -98,6 +100,7 @@
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="10dp"
                 android:hint="@string/email_tv"
+                app:errorMessage="@{createAccViewModel.userEmailError}"
                 app:endIconMode="custom"
                 app:endIconTint="?attr/colorPrimary"
                 app:errorEnabled="true"
@@ -122,6 +125,8 @@
                 app:endIconMode="custom"
                 app:endIconTint="?attr/colorPrimary"
                 app:errorEnabled="true"
+                app:errorMessage="@{createAccViewModel.userPasswordError}"
+
                 app:layout_constraintTop_toBottomOf="@id/email_tv">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -144,6 +149,8 @@
                 app:endIconMode="custom"
                 app:endIconTint="?attr/colorPrimary"
                 app:errorEnabled="true"
+                app:errorMessage="@{createAccViewModel.userDobError}"
+
                 app:layout_constraintTop_toBottomOf="@id/confirmPasswordTv">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -174,6 +181,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="5dp"
                 android:orientation="horizontal"
+                app:errorEnabled="true"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/gender_tv">
 

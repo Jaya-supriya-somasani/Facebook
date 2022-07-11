@@ -1,12 +1,7 @@
 package com.example.facebook.activity
 
-import android.app.Activity
-import android.util.Log
 import android.widget.Toast
 import androidx.navigation.NavController
-import androidx.navigation.NavDirections
-import androidx.navigation.fragment.DialogFragmentNavigator
-import androidx.navigation.fragment.FragmentNavigator
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.facebook.R

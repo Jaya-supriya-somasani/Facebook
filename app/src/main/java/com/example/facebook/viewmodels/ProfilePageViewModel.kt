@@ -6,7 +6,6 @@ import com.example.facebook.api.NetworkService
 import com.example.facebook.api.request.GetUserProfile
 import com.example.facebook.util.BaseViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
