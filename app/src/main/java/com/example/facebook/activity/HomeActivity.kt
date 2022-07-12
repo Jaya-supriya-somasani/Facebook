@@ -5,7 +5,7 @@ import com.example.facebook.databinding.ActivityHomeBinding
 import com.example.facebook.util.BaseActivity
 import com.example.facebook.viewmodels.HomeActivityViewModel
 
-class HomeActivity: BaseActivity<ActivityHomeBinding, HomeActivityViewModel>() {
+class HomeActivity : BaseActivity<ActivityHomeBinding, HomeActivityViewModel>() {
     override fun setupViews() {
     }
 

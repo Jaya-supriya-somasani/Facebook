@@ -15,11 +15,6 @@ class ChangePasswordViewModel : BaseViewModel() {
     val resetPasswordEvent = resetPasswordChannel.receiveAsFlow()
     private val toastEventChannel = Channel<String>()
     val toastEvent = toastEventChannel.receiveAsFlow()
-//    fun resetPasswordBtn() {
-//        viewModelScope.launch {
-//            resetPasswordChannel.send(Unit)
-//        }
-//    }
 
     fun changePassword(userId: Int, newPassword: String, confirmPassword: String) {
         viewModelScope.launch {

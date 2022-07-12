@@ -225,7 +225,6 @@
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="20dp"
                 android:background="#E62B77E8"
-                android:onClick="@{()->createAccViewModel.signupBtn()}"
                 android:text="@string/sign_up_tv"
                 android:textAllCaps="false"
                 android:textColor="@color/white"

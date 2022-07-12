@@ -4,6 +4,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.facebook.NetworkResult
 import com.example.facebook.api.NetworkService
 import com.example.facebook.api.request.LoginDataClass
+import com.example.facebook.api.response.LoginStatus
 import com.example.facebook.safeApi
 import com.example.facebook.util.BaseViewModel
 import kotlinx.coroutines.channels.Channel
@@ -22,7 +23,7 @@ class LoginPageViewModel : BaseViewModel() {
     private val loginDetailsMutableState = MutableStateFlow<LoginDataClass?>(null)
     val loginDetailsStateFlow: StateFlow<LoginDataClass?> = loginDetailsMutableState
 
-    private val loginEventChannel = Channel<Pair<String, Int>>()
+    private val loginEventChannel = Channel<LoginStatus>()
     val loginEvent = loginEventChannel.receiveAsFlow()
 
     private val createAccountEventChannel = Channel<Unit>()
@@ -49,15 +50,19 @@ class LoginPageViewModel : BaseViewModel() {
     }
 
     fun loginValidation() {
-        if (userName.value.isEmpty()) {
-            userNameError.value = "Please Enter Email or Phone Number"
-        } else if (userPassword.value.isEmpty()) {
-            userPasswordError.value = "Please Enter Password"
-        } else {
-            userNameError.value = ""
-            userPasswordError.value = ""
-            login()
+        when {
+            userName.value.isEmpty() -> {
+                userNameError.value = "Please Enter Email or Phone Number"
+            }
+            userPassword.value.isEmpty() -> {
+                userPasswordError.value = "Please Enter Password"
+            }
+            else -> {
+                userNameError.value = ""
+                userPasswordError.value = ""
+                login()
 
+            }
         }
     }
 
@@ -66,12 +71,12 @@ class LoginPageViewModel : BaseViewModel() {
         val loginRequest = LoginDataClass(username = userName.value, password = userPassword.value)
 
         viewModelScope.launch {
-            val loginResult = safeApi { NetworkService.apiService.performLogin(loginRequest) }
 
-            when (loginResult) {
+            when (val loginResult =
+                safeApi { NetworkService.apiService.performLogin(loginRequest) }) {
                 is NetworkResult.Success -> {
                     loginResult.data.data?.let {
-                        loginEventChannel.trySend(Pair(loginRequest.username, it.userId))
+                        loginEventChannel.trySend(it)
                     }
                 }
                 is NetworkResult.Failure -> {

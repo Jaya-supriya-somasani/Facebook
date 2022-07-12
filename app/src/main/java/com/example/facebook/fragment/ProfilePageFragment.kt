@@ -3,6 +3,7 @@ package com.example.facebook.fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import com.example.facebook.R
+import com.example.facebook.datastore.AppDataStore
 import com.example.facebook.util.BaseFragment
 import com.example.facebook.viewmodels.ProfilePageViewModel
 import kotlinx.coroutines.flow.collectLatest
@@ -17,6 +18,12 @@ class ProfilePageFragment :
     }
 
     override fun initViews() {
+        val appDataStore = AppDataStore(requireContext())
+        lifecycleScope.launchWhenResumed {
+            appDataStore.userIdFlow.collectLatest {
+                viewModel.getProfileData(it)
+            }
+        }
         dataBinding.changePasswordBtn.setOnClickListener {
             val action =
                 ProfilePageFragmentDirections.actionProfilePageFragment2ToChangePasswordFragment2()

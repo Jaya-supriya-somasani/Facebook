@@ -13,12 +13,12 @@ class ProfilePageViewModel : BaseViewModel() {
     private val userDetailsMutableState = MutableStateFlow<GetUserProfile?>(null)
     var userDetailsStateFlow: StateFlow<GetUserProfile?> = userDetailsMutableState
 
-    private val profileDetailsStateFlow=MutableStateFlow<ProfilePage?>(null)
+    private val profileDetailsStateFlow = MutableStateFlow<ProfilePage?>(null)
 
 
-    init {
+    fun getProfileData(userId:String) {
         viewModelScope.launch {
-            val result = NetworkService.apiService.getUserProfile("2")
+            val result = NetworkService.apiService.getUserProfile(userId)
             userDetailsMutableState.value = result.body()!!.data!!
         }
     }

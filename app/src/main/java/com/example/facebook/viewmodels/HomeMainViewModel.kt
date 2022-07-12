@@ -11,6 +11,7 @@ import kotlinx.coroutines.launch
 class HomeMainViewModel : BaseViewModel() {
     private val postDetailsMutableState = MutableStateFlow<List<PostsResponsesItem>>(emptyList())
     var postDetailsStateFlow: StateFlow<List<PostsResponsesItem>> = postDetailsMutableState
+    val userId = MutableStateFlow<String>("")
 
     init {
         viewModelScope.launch {
@@ -22,13 +23,13 @@ class HomeMainViewModel : BaseViewModel() {
     fun onLikeClicked(item: PostsResponsesItem) {
         val likeStatus = !item.likeStatus
         viewModelScope.launch {
-            NetworkService.apiService.updateLike("2", "1", likeStatus)
+            NetworkService.apiService.updateLike(userId.value, item.postId, likeStatus)
         }
     }
 
     fun onDeleteClicked(item: PostsResponsesItem) {
         viewModelScope.launch {
-            NetworkService.apiService.deletePost("2", "1")
+            NetworkService.apiService.deletePost(userId.value, item.postId)
         }
     }
 }

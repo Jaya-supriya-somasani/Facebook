@@ -6,9 +6,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.facebook.R
 import com.example.facebook.databinding.FragmentCreatePostBinding
+import com.example.facebook.datastore.AppDataStore
 import com.example.facebook.util.BaseFragment
 import com.example.facebook.viewmodels.CreatePostViewModel
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import java.util.*
 
 class CreatePostFragment : BaseFragment<FragmentCreatePostBinding, CreatePostViewModel>() {
@@ -18,14 +20,19 @@ class CreatePostFragment : BaseFragment<FragmentCreatePostBinding, CreatePostVie
     override fun getResourceId(): Int = R.layout.fragment_create_post
 
     override fun initViews() {
-
+        val appDataStore = AppDataStore(requireContext())
+        dataBinding.postBtn.setOnClickListener {
+            lifecycleScope.launch {
+                appDataStore.userIdFlow.collectLatest {
+                    showProgressDialogue()
+                    viewModel.uploadPost(it, dataBinding.description.text.toString())
+                }
+            }
+        }
         dataBinding.closeBtn.setOnClickListener {
             findNavController().popBackStack()
         }
-        dataBinding.postBtn.setOnClickListener {
-            showProgressDialogue()
-            viewModel.uploadPost(userId = "2", dataBinding.description.text.toString())
-        }
+
 
         lifecycleScope.launchWhenResumed {
             viewModel.statusEvent.collectLatest {

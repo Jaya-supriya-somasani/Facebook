@@ -3,43 +3,43 @@ package com.example.facebook.datastore
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import com.example.facebook.api.response.LoginStatus
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-object AppDataStore {
+class AppDataStore(val context: Context) {
 
-    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "facebookDatastore")
 
-    suspend fun saveUserName(context: Context, userName: String) {
+    companion object {
+        private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "USER_DATASTORE")
+        val USER_ID = stringPreferencesKey("userId")
+        val USER_NAME = stringPreferencesKey("̈userName")
+        val IS_LOGGED = booleanPreferencesKey("isLogged")
+
+    }
+
+    // Store user data
+    suspend fun saveToDataStore(data: LoginStatus) {
         context.dataStore.edit {
-            it[stringPreferencesKey(USER_NAME)] = userName
+            it[USER_NAME] = data.userName
+            it[USER_ID] = data.userId
+            it[IS_LOGGED] = data.loginStatus
+
         }
     }
 
-    suspend fun getUserName(context: Context): Flow<String?> {
-        return context.dataStore.data.map {
-            it[stringPreferencesKey(USER_NAME)]
-        }
+    // Create  flow to get value from datastore
+    val userNameFlow: Flow<String> = context.dataStore.data.map {
+        it[USER_NAME] ?: ""
     }
-
-    suspend fun saveUserId(context: Context, userId: Int) {
-        context.dataStore.edit {
-            it[intPreferencesKey(USER_ID)] = userId
-        }
+    val userIdFlow: Flow<String> = context.dataStore.data.map {
+        it[USER_ID] ?: ""
     }
-
-    suspend fun getUserId(context: Context): Flow<Int?> {
-        return context.dataStore.data.map {
-            it[intPreferencesKey(USER_ID)]
-        }
+    val userLoggedStatusFlow: Flow<Boolean> = context.dataStore.data.map {
+        it[IS_LOGGED] ?: false
     }
-
-    //    companion object {
-    const val USER_NAME = "user_name"
-    const val USER_ID = "user_id"
-//    }
 }

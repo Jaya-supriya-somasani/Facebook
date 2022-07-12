@@ -22,42 +22,39 @@ class RegisterAccountViewModel : BaseViewModel() {
     val termsSelectionFlow = MutableStateFlow(false)
     val userConfirmPassword = MutableStateFlow("")
     val loginStatus = MutableStateFlow(false)
-    val maleGender=MutableStateFlow(false)
-    val femaleGender=MutableStateFlow(false)
+    val maleGender = MutableStateFlow(false)
+    val femaleGender = MutableStateFlow(false)
+    val userNameError = MutableStateFlow("")
+    val userEmailError = MutableStateFlow("")
+    val userPasswordError = MutableStateFlow("")
+    val userDobError = MutableStateFlow("")
+    val userGenderError = MutableStateFlow("")
+    val userConfirmPasswordError = MutableStateFlow("")
 
-    val userNameError=MutableStateFlow("")
-    val userEmailError=MutableStateFlow("")
-    val userPasswordError=MutableStateFlow("")
-    val userDobError=MutableStateFlow("")
-    val userGenderError=MutableStateFlow("")
-    val userConfirmPasswordError=MutableStateFlow("")
-
-    private val toastEventChannel=Channel<String>(Channel.BUFFERED)
-    val toastEvent=toastEventChannel.receiveAsFlow()
+    private val toastEventChannel = Channel<String>(Channel.BUFFERED)
+    val toastEvent = toastEventChannel.receiveAsFlow()
 
 
-//    fun passwordValidation(){
-//        if (userConfirmPassword.value.equals(userPassword.value)){
-//            userNameError.value=""
-//            userPasswordError.value=""
-//            userEmailError.value=""
-//            userConfirmPasswordError.value=""
-//            userDobError.value=""
-//            userGenderError.value=""
-//        }
-//        else if (userConfirmPassword.value!=userPassword.value){
-//            userConfirmPasswordError.value="Please Re-enter Password"
-//        }
-//        else{
-//            signupBtn()
-//        }
-//    }
+    fun passwordValidation() {
+        if (userConfirmPassword.value.equals(userPassword.value)) {
+            userNameError.value = ""
+            userPasswordError.value = ""
+            userEmailError.value = ""
+            userConfirmPasswordError.value = ""
+            userDobError.value = ""
+            userGenderError.value = ""
+        } else if (userConfirmPassword.value != userPassword.value) {
+            userConfirmPasswordError.value = "Password didn't match"
+        }
+        signupBtn()
 
-    fun signupBtn() {
-        if (maleGender.value){
-            userGender.value= "Male"
-        }else{
-            userGender.value="Female"
+    }
+
+    private fun signupBtn() {
+        if (maleGender.value) {
+            userGender.value = "Male"
+        } else {
+            userGender.value = "Female"
         }
         val registerReq = RegisterUser(
             userName = userName.value,
@@ -65,18 +62,23 @@ class RegisterAccountViewModel : BaseViewModel() {
             userPassword = userPassword.value,
             userDob = userDob.value,
             gender = userGender.value,
-            confirmPswd = userConfirmPassword.value, loginStatus = loginStatus.value
+            confirmPswd = userConfirmPassword.value,
+            loginStatus = loginStatus.value
         )
         viewModelScope.launch {
-            val registerResult = safeApi { NetworkService.apiService.registerUser(registerReq) }
 
-            when (registerResult) {
+            when (val registerResult =
+                safeApi { NetworkService.apiService.registerUser(registerReq) }) {
                 is NetworkResult.Success -> {
                     createAccountChannel.trySend(Unit)
+                    toastEventChannel.trySend(registerResult.data.message() ?: "")
                 }
-                is NetworkResult.Failure->{
-                    toastEventChannel.trySend(registerResult.message?:"")
+                is NetworkResult.Failure -> {
+                    toastEventChannel.trySend(registerResult.message ?: "")
 
+                }
+                else -> {
+                    toastEventChannel.trySend("skipped")
                 }
             }
         }

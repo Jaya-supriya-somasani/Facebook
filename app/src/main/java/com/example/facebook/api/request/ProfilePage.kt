@@ -7,5 +7,5 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class ProfilePage(
     @SerializedName("userId")
-    val userId:Int=0
-):Parcelable
+    val userId: Int = 0
+) : Parcelable

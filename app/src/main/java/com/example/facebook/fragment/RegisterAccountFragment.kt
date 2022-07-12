@@ -1,5 +1,6 @@
 package com.example.facebook.fragment
 
+import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -11,6 +12,8 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import kotlinx.coroutines.flow.collectLatest
 import java.text.SimpleDateFormat
 import java.util.*
+import android.widget.RadioButton
+
 
 class RegisterAccountActivity :
     BaseFragment<FragmentRegisterAccountBinding, RegisterAccountViewModel>() {
@@ -22,7 +25,9 @@ class RegisterAccountActivity :
 
     override fun initViews() {
         registrationValidation()
-
+        dataBinding.signBtn.setOnClickListener {
+            registrationValidation()
+        }
         dataBinding.createAccViewModel = viewModel
         lifecycleScope.launchWhenResumed {
             viewModel.createAccountEvent.collectLatest {
@@ -52,24 +57,23 @@ class RegisterAccountActivity :
                 Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
             }
         }
-//        dataBinding.radiobtns.checkedRadioButtonId
     }
 
     private fun getDateString(calendar: Calendar): String {
-        val format = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+        val format = SimpleDateFormat("yyyy/MM/dd", Locale.getDefault())
         return format.format(calendar.time)
     }
 
     private fun registrationValidation() {
-        if (dataBinding.userNameEdt.text?.isEmpty() == true) {
+        if (dataBinding.userNameEdt.text.toString().isEmpty()) {
             dataBinding.usernameTv.error = "Please Enter User Name"
-        } else if (dataBinding.emailEdt.text?.isEmpty() == true) {
+        } else if (dataBinding.emailEdt.text.toString().isEmpty()) {
             dataBinding.emailTv.error = "Please Enter user Email"
-        } else if (dataBinding.newPswdEdt.text?.isEmpty() == true) {
+        } else if (dataBinding.newPswdEdt.text.toString().isEmpty()) {
             dataBinding.newPswdTv.error = "Please Enter Password"
-        } else if (dataBinding.confirmPasswordEdt.text?.isEmpty() == true) {
+        } else if (dataBinding.confirmPasswordEdt.text.toString().isEmpty()) {
             dataBinding.confirmPasswordTv.error = "Please Enter confirm password"
-        } else if (dataBinding.dobEditText.text?.isEmpty() == true) {
+        } else if (dataBinding.dobEditText.text.toString().isEmpty()) {
             dataBinding.dobTextView.error = "Please Enter Date of Birth"
         } else {
             passwordValidation()
@@ -77,7 +81,7 @@ class RegisterAccountActivity :
     }
 
     private fun passwordValidation() {
-
+        viewModel.passwordValidation()
     }
 
 }

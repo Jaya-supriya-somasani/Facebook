@@ -6,6 +6,7 @@ import android.text.TextWatcher
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.example.facebook.R
 import com.example.facebook.databinding.FragmentChangePasswordBinding
 import com.example.facebook.util.BaseFragment
@@ -23,7 +24,7 @@ class ChangePasswordFragment :
     override fun initViews() {
         setupListeners()
 
-        dataBinding.resetBtn.setOnClickListener {
+        dataBinding.changePasswordBtn.setOnClickListener {
             if (validateEmail() && validatePassword() && validateConfirmPassword()) {
                 viewModel.changePassword(
                     2,
@@ -34,10 +35,7 @@ class ChangePasswordFragment :
         }
         lifecycleScope.launchWhenResumed {
             viewModel.resetPasswordEvent.collectLatest {
-//                Intent(
-//                    requireContext(),
-//                    MainActivity::class.java
-//                )
+                findNavController().popBackStack()
             }
         }
         lifecycleScope.launchWhenResumed {

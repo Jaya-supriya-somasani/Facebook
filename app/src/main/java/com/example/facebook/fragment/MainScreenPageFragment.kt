@@ -9,6 +9,7 @@ import com.example.facebook.adapter.PostAdapter
 import com.example.facebook.api.request.FriendsListResponse
 import com.example.facebook.api.response.PostsResponsesItem
 import com.example.facebook.databinding.FragmentMainScreenPageBinding
+import com.example.facebook.datastore.AppDataStore
 import com.example.facebook.util.BaseFragment
 import com.example.facebook.viewmodels.HomeMainViewModel
 import kotlinx.coroutines.flow.collectLatest
@@ -41,6 +42,12 @@ class MainScreenPageFragment : BaseFragment<FragmentMainScreenPageBinding, HomeM
 
     override fun initViews() {
         initData()
+        val appDataStore = AppDataStore(requireContext())
+        lifecycleScope.launchWhenResumed {
+            appDataStore.userIdFlow.collectLatest {
+                viewModel.userId.value = it
+            }
+        }
         val data = listOf(
             FriendsListResponse("tarun1", "lanka", ""),
             FriendsListResponse("tarun2", "lanka", ""),
@@ -57,6 +64,7 @@ class MainScreenPageFragment : BaseFragment<FragmentMainScreenPageBinding, HomeM
     }
 
     private fun initData() {
+        // viewModel.getData()
         lifecycleScope.launchWhenResumed {
             viewModel.postDetailsStateFlow.collectLatest {
                 postAdapter.submitList(it)
