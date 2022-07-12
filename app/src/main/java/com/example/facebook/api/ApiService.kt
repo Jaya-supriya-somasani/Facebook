@@ -29,6 +29,11 @@ interface ApiService {
         @Path("userId", encoded = true) userId: String,
     ): ApiResponse<GetUserProfile>
 
+    @GET("/api/v1/userFriends/{userId}")
+    suspend fun displayFriends(
+        @Path("userId") userId: Int,
+    ): ApiResponse<List<DisplayFriendsResponse>>
+
     @POST("/api/v1/post")
     suspend fun createPost(
         @Body postInfo: CreatePost

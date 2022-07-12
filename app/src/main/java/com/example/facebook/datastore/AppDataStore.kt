@@ -1,15 +1,15 @@
 package com.example.facebook.datastore
 
 import android.content.Context
+import android.util.Log
 import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.booleanPreferencesKey
-import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.preferencesDataStore
 import com.example.facebook.api.response.LoginStatus
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
+import java.io.IOException
 
 class AppDataStore(val context: Context) {
 
@@ -33,13 +33,41 @@ class AppDataStore(val context: Context) {
     }
 
     // Create  flow to get value from datastore
-    val userNameFlow: Flow<String> = context.dataStore.data.map {
+    val userNameFlow: Flow<String> = context.dataStore.data
+        .catch { exception->
+            if (exception is IOException){
+                Log.d("DataStoreRepository", exception.message.toString())
+                emit(emptyPreferences())
+            }else{
+                throw exception
+            }
+
+        }
+        .map {
         it[USER_NAME] ?: ""
     }
-    val userIdFlow: Flow<String> = context.dataStore.data.map {
+    val userIdFlow: Flow<String> = context.dataStore.data
+        .catch { exception->
+            if (exception is IOException){
+                Log.d("IOException",exception.message.toString())
+                emit(emptyPreferences())
+            }else{
+                throw exception
+            }
+        }
+        .map {
         it[USER_ID] ?: ""
     }
-    val userLoggedStatusFlow: Flow<Boolean> = context.dataStore.data.map {
+    val userLoggedStatusFlow: Flow<Boolean> = context.dataStore.data
+        .catch { exception->
+            if (exception is IOException){
+                Log.d("IOException",exception.message.toString())
+                emit(emptyPreferences())
+            }else{
+                throw exception
+            }
+        }
+        .map {
         it[IS_LOGGED] ?: false
     }
 }

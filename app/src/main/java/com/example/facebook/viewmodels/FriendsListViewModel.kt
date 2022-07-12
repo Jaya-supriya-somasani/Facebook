@@ -1,16 +1,8 @@
 package com.example.facebook.viewmodels
 
-import androidx.lifecycle.viewModelScope
-import com.example.facebook.NetworkResult
-import com.example.facebook.api.NetworkService
-import com.example.facebook.api.request.AllFriendsListResponse
-import com.example.facebook.api.request.GetUserProfile
-import com.example.facebook.safeApi
 import com.example.facebook.util.BaseViewModel
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
-import kotlinx.coroutines.launch
 
 class FriendsListViewModel : BaseViewModel() {
     private val friendsListStateFlow = MutableStateFlow<List<AllFriendsListResponse>>(emptyList())
