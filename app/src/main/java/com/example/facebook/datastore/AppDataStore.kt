@@ -47,15 +47,15 @@ class AppDataStore(val context: Context) {
         it[USER_NAME] ?: ""
     }
     val userIdFlow: Flow<String> = context.dataStore.data
-        .catch { exception->
-            if (exception is IOException){
-                Log.d("IOException",exception.message.toString())
-                emit(emptyPreferences())
-            }else{
-                throw exception
-            }
-        }
-        .map {
+//        .catch { exception->
+//            if (exception is IOException){
+//                Log.d("IOException",exception.message.toString())
+//                emit(emptyPreferences())
+//            }else{
+//                throw exception
+//            }
+//        }
+       .map {
         it[USER_ID] ?: ""
     }
     val userLoggedStatusFlow: Flow<Boolean> = context.dataStore.data

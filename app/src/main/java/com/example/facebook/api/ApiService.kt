@@ -31,8 +31,8 @@ interface ApiService {
 
     @GET("/api/v1/userFriends/{userId}")
     suspend fun displayFriends(
-        @Path("userId") userId: Int,
-    ): ApiResponse<List<DisplayFriendsResponse>>
+        @Path("userId",encoded = true) userId: String,
+    ): BaseResponse<List<DisplayFriendsResponse>>
 
     @POST("/api/v1/post")
     suspend fun createPost(
@@ -82,7 +82,7 @@ interface ApiService {
     @GET("/api/v1/userFriends/{userId}")
     suspend fun getFriendsList(
         @Path("userId", encoded = true) userId: String,
-    ): ApiResponse<List<AllFriendsListResponse>>
+    ): BaseResponse<List<AllFriendsListResponse>>
 
 
     @GET("/api/v1/suggestFriends/{userId}")

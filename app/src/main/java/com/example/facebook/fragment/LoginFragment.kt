@@ -1,7 +1,6 @@
 package com.example.facebook.fragment
 
 import android.content.Intent
-import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -10,8 +9,8 @@ import com.example.facebook.activity.MainActivity
 import com.example.facebook.api.response.LoginStatus
 import com.example.facebook.databinding.FragmentLoginBinding
 import com.example.facebook.datastore.AppDataStore
-import com.example.facebook.viewmodels.LoginPageViewModel
 import com.example.facebook.util.BaseFragment
+import com.example.facebook.viewmodels.LoginPageViewModel
 import kotlinx.coroutines.flow.collectLatest
 
 
