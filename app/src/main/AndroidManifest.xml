@@ -20,7 +20,9 @@
         <activity
             android:name=".activity.HomeActivity"
             android:exported="true"
-            android:theme="@style/Theme.Facebook.NoActionBar">
+            android:theme="@style/Theme.Facebook">
+
+            <nav-graph android:value="@navigation/nav_home" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,7 +34,9 @@
         <activity
             android:name=".activity.MainActivity"
             android:exported="false"
-            android:theme="@style/Theme.Facebook.NoActionBar" />
+            android:theme="@style/Theme.Facebook">
+            <nav-graph android:value="@navigation/nav_main" />
+        </activity>
 
 
     </application>

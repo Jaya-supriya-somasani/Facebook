@@ -66,6 +66,7 @@
     <string name="friends_tv">Friends</string>
     <string name="profile_tv">Profile</string>
     <string name="create_post_tv">Create Post</string>
+    <string name="log_out">LOG OUT</string>
     <string name="messenger">MESSENGER</string>
     <string name="search">SEARCH</string>
     <string name="people_may_know">People you may know</string>
@@ -98,4 +99,5 @@
     <string name="like">Like</string>
     <string name="comment">Comment</string>
     <string name="share">Share</string>
+    <string name="no_data_available">No Friends Data Available</string>
 </resources>

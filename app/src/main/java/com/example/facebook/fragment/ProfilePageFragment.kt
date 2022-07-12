@@ -1,7 +1,11 @@
 package com.example.facebook.fragment
 
+import android.net.Uri
+import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.example.facebook.R
 import com.example.facebook.datastore.AppDataStore
 import com.example.facebook.util.BaseFragment
@@ -25,13 +29,16 @@ class ProfilePageFragment :
             }
         }
         dataBinding.changePasswordBtn.setOnClickListener {
-            val action =
-                ProfilePageFragmentDirections.actionProfilePageFragment2ToChangePasswordFragment2()
-            view?.let { it1 -> Navigation.findNavController(it1) }?.navigate(action)
+            findNavController().navigate(deepLink = Uri.parse("app://my_facebook/change_password"))
         }
         lifecycleScope.launchWhenResumed {
-            viewModel.userDetailsStateFlow.collectLatest {
+            viewModel.profileData.collectLatest {
                 dataBinding.data = it
+            }
+        }
+        lifecycleScope.launchWhenResumed {
+            viewModel.toastEvent.collectLatest {
+                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
             }
         }
     }

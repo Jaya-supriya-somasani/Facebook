@@ -17,4 +17,9 @@
         android:id="@+id/create_post_nav_btn"
         android:icon="@drawable/ic_baseline_add"
         android:title="@string/create_post_tv"/>
+
+    <item
+        android:id="@+id/logOutBtn"
+        android:icon="@drawable/ic_logout"
+        android:title="@string/log_out"/>
 </menu>

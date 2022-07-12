@@ -9,19 +9,16 @@
 
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fitsSystemWindows="true">
+        style="@style/match_match">
 
         <androidx.core.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/match_wrap"
+            android:fitsSystemWindows="true"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             app:layout_constraintBottom_toBottomOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                style="@style/match_match"
                 android:fitsSystemWindows="true">
 
                 <com.google.android.material.appbar.MaterialToolbar
@@ -35,9 +32,8 @@
 
                 <include
                     android:id="@+id/layoutCreatePost"
+                    style="@style/match_wrap"
                     layout="@layout/layout_create_post"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/toolbar" />
@@ -53,8 +49,7 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvPeopleKnow"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    style="@style/wrap_wrap"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
                     android:text="@string/people_may_know"
@@ -65,8 +60,7 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivMore"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    style="@style/wrap_wrap"
                     android:layout_marginEnd="10dp"
                     android:src="@drawable/ic_more_horizontal"
                     app:layout_constraintBottom_toBottomOf="@id/tvPeopleKnow"
@@ -76,8 +70,7 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerViewFriends"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    style="@style/zero_wrap"
                     android:layout_margin="10dp"
                     android:orientation="horizontal"
                     android:padding="20dp"
@@ -91,11 +84,11 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerViewPosts"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/match_wrap"
                     android:layout_marginVertical="20dp"
                     android:orientation="vertical"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/recyclerViewFriends"
                     tools:itemCount="4"
                     tools:listitem="@layout/item_facebook_posts" />

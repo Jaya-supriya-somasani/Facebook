@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -8,18 +9,13 @@
             type="com.example.facebook.viewmodels.RegisterAccountViewModel" />
     </data>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <ScrollView style="@style/match_wrap">
 
-        <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <androidx.constraintlayout.widget.ConstraintLayout style="@style/match_wrap">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/sign_up_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/wrap_wrap"
                 android:layout_marginTop="20dp"
                 android:text="@string/sign_up_tv"
                 android:textColor="@color/black"
@@ -31,8 +27,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/sign_up_desc_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/wrap_wrap"
                 android:text="@string/sign_up_desc_tv"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -50,9 +45,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/username_tv"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/text_input_layout"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="10dp"
                 android:hint="@string/user_name_tv"
@@ -60,21 +53,19 @@
                 app:endIconTint="?attr/colorPrimary"
                 app:errorEnabled="true"
                 app:errorMessage="@{createAccViewModel.userNameError}"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/dividerLine_start">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/user_name_edt"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    style="@style/match_match"
                     android:inputType="text"
                     android:text="@={createAccViewModel.userName}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/confirmPasswordTv"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/text_input_layout"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="10dp"
                 android:hint="@string/confirm_password_tv"
@@ -82,21 +73,19 @@
                 app:endIconTint="?attr/colorPrimary"
                 app:errorEnabled="true"
                 app:errorMessage="@{createAccViewModel.userConfirmPasswordError}"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/new_pswd_tv">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/confirmPasswordEdt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/match_match"
                     android:inputType="text"
                     android:text="@={createAccViewModel.userConfirmPassword}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/email_tv"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/text_input_layout"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="10dp"
                 android:hint="@string/email_tv"
@@ -104,21 +93,19 @@
                 app:endIconTint="?attr/colorPrimary"
                 app:errorEnabled="true"
                 app:errorMessage="@{createAccViewModel.userEmailError}"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/username_tv">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/email_edt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/match_match"
                     android:inputType="textEmailAddress"
                     android:text="@={createAccViewModel.userEmail}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/new_pswd_tv"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/text_input_layout"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="10dp"
                 android:hint="@string/new_password_tv"
@@ -126,22 +113,19 @@
                 app:endIconTint="?attr/colorPrimary"
                 app:errorEnabled="true"
                 app:errorMessage="@{createAccViewModel.userPasswordError}"
-
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/email_tv">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/new_pswd_edt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/match_match"
                     android:inputType="text"
                     android:text="@={createAccViewModel.userPassword}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/dobTextView"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/text_input_layout"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="10dp"
                 android:clickable="true"
@@ -152,19 +136,18 @@
                 app:endIconTint="?attr/colorPrimary"
                 app:errorEnabled="true"
                 app:errorMessage="@{createAccViewModel.userDobError}"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/confirmPasswordTv">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/dobEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    style="@style/match_match"
                     android:text="@={createAccViewModel.userDob}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/gender_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/wrap_wrap"
                 android:layout_marginStart="20dp"
                 android:text="@string/gender"
                 android:textColor="@color/black"
@@ -174,8 +157,7 @@
 
             <RadioGroup
                 android:id="@+id/radiobtns"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/wrap_wrap"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="5dp"
                 android:orientation="horizontal"
@@ -185,23 +167,20 @@
 
                 <RadioButton
                     android:id="@+id/maleRadioBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    style="@style/wrap_wrap"
                     android:checked="@={createAccViewModel.maleGender}"
                     android:text="@string/male_tv" />
 
                 <RadioButton
                     android:id="@+id/femaleRadioBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    style="@style/wrap_wrap"
                     android:checked="@={createAccViewModel.femaleGender}"
                     android:text="@string/female_tv" />
             </RadioGroup>
 
             <CheckBox
                 android:id="@+id/check_box_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/wrap_wrap"
                 android:layout_marginStart="10dp"
                 android:checked="@={createAccViewModel.termsSelectionFlow}"
                 app:layout_constraintStart_toStartOf="parent"
@@ -209,8 +188,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/terms_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/wrap_wrap"
                 android:layout_marginTop="12dp"
                 android:text="@string/terms_tv"
                 android:textColor="@color/black"
@@ -220,27 +198,27 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/signBtn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/match_wrap"
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="20dp"
                 android:background="#E62B77E8"
                 android:text="@string/sign_up_tv"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/terms_tv" />
 
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/loginBtn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/match_wrap"
                 android:layout_margin="10dp"
                 android:layout_marginTop="20dp"
                 android:background="#E62B77E8"
                 android:text="@string/login"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/signBtn" />
 
 

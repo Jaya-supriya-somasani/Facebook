@@ -20,8 +20,7 @@ class LoginPageViewModel : BaseViewModel() {
     val userNameError = MutableStateFlow("")
     val userPasswordError = MutableStateFlow("")
 
-    private val loginDetailsMutableState = MutableStateFlow<LoginDataClass?>(null)
-    val loginDetailsStateFlow: StateFlow<LoginDataClass?> = loginDetailsMutableState
+
 
     private val loginEventChannel = Channel<LoginStatus>()
     val loginEvent = loginEventChannel.receiveAsFlow()

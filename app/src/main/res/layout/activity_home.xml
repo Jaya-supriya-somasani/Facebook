@@ -7,18 +7,17 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        style="@style/match_match"
         android:fitsSystemWindows="true">
 
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragmentContainerViewMain"
             android:name="androidx.navigation.fragment.NavHostFragment"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
+            style="@style/match_zero"
             app:defaultNavHost="true"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:navGraph="@navigation/nav_home" />
 

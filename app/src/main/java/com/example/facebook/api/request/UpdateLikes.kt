@@ -10,8 +10,3 @@ data class UpdateLikes(
     val postId:String
 ):Parcelable
 
-
-data class UserStoredData(
-    val postId:String,
-    val userId:String
-)

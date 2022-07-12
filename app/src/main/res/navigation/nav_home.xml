@@ -5,7 +5,6 @@
     android:id="@+id/nav_entrance.xml"
     app:startDestination="@id/splashScreenFragment">
 
-
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.facebook.fragment.LoginFragment"
@@ -17,7 +16,10 @@
         <action
             android:id="@+id/action_loginFragment_to_registerAccountActivity"
             app:destination="@id/registerAccountActivity" />
+
+        <deepLink app:uri="app://my_facebook/login" />
     </fragment>
+
     <fragment
         android:id="@+id/forgotPasswordFragment"
         android:name="com.example.facebook.fragment.ForgotPasswordFragment"

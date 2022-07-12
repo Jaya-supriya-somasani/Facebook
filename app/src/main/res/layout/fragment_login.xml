@@ -9,25 +9,19 @@
             type="com.example.facebook.viewmodels.LoginPageViewModel" />
     </data>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <ScrollView style="@style/match_wrap">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <androidx.constraintlayout.widget.ConstraintLayout style="@style/match_wrap">
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guidelineCenter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/wrap_wrap"
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent="0.5" />
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/login_wallpaper"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/match_wrap"
                 android:src="@drawable/fb_login_wall"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -35,9 +29,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilPhnOrEmail"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/text_input_layout"
                 android:layout_marginHorizontal="30dp"
                 android:hint="@string/mobile_number_or_email"
                 android:textSize="15sp"
@@ -48,17 +40,14 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/ph_email_edt"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    style="@style/match_match"
                     android:inputType="text"
                     android:text="@={loginVM.userName}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilPassword"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/text_input_layout"
                 android:layout_marginHorizontal="30dp"
                 android:layout_marginTop="10dp"
                 android:hint="@string/password"
@@ -70,16 +59,14 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etPassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    style="@style/match_match"
                     android:inputType="text"
                     android:text="@={loginVM.userPassword}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/login_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/match_wrap"
                 android:layout_marginHorizontal="30dp"
                 android:layout_marginTop="10dp"
                 android:backgroundTint="#E62B77E8"
@@ -96,9 +83,7 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/forgot_pswd_tv"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/button_layout"
                 android:layout_marginStart="0dp"
                 android:onClick="@{()->loginVM.forgotPasswordClicked()}"
                 android:text="@string/forgot_passwprd"
@@ -122,10 +107,9 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/or_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/or"
+                style="@style/wrap_wrap"
                 android:paddingHorizontal="15dp"
+                android:text="@string/or"
                 app:layout_constraintEnd_toStartOf="@id/dividerLine_end"
                 app:layout_constraintStart_toEndOf="@id/dividerLine_start"
                 app:layout_constraintTop_toBottomOf="@id/forgot_pswd_tv" />
@@ -143,8 +127,7 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/create_account_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/wrap_wrap"
                 android:layout_marginTop="10dp"
                 android:backgroundTint="#ED0B8E46"
                 android:onClick="@{()->loginVM.createAccBtnClicked()}"
@@ -160,8 +143,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/english_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/wrap_wrap"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:text="@string/english_tv"
@@ -172,8 +154,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/more_languages_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/wrap_wrap"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="15dp"
                 android:text="@string/more_languages_tv"

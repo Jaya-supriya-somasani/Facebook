@@ -74,7 +74,25 @@ interface ApiService {
         @Path("userId", encoded = true) userId: String,
     ): ApiResponse<GetUserProfile>
 
+    @GET("/api/v1/userFriends/{userId}")
+    suspend fun getFriendsList(
+        @Path("userId", encoded = true) userId: String,
+    ): ApiResponse<List<AllFriendsListResponse>>
+
+
+    @GET("/api/v1/suggestFriends/{userId}")
+    suspend fun getSearchUser(
+        @Path("userId", encoded = true) userId: String,
+    ): ApiResponse<List<AllFriendsListResponse>>
+
 //    suspend fun registerUser(@Body registerRequest:RegisterUser):RegisterResponse
+
+
+    @PUT("/api/v1/logout/{userId}")
+    suspend fun logOutUser(
+        @Path("userId", encoded = true) userId: String,
+    ): ApiResponse<LogoutDataClass>
+
 
     @GET("/api/v1/profile/{userId}")
     suspend fun profileDisplaying(@Path("userId") userId: Int): ProfilePageResponse

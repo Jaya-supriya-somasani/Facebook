@@ -10,13 +10,20 @@
         android:name="com.example.facebook.fragment.ProfilePageFragment"
         android:label="ProfilePageFragment"
         tools:layout="@layout/fragment_profile_page">
-        <action
-            android:id="@+id/action_profilePageFragment2_to_changePasswordFragment2"
-            app:destination="@id/changePasswordFragment2" />
+
+        <deepLink app:uri="app://my_facebook/profile" />
+
     </fragment>
+
     <fragment
-        android:id="@+id/changePasswordFragment2"
+        android:id="@+id/chagnePasswordScreen"
         android:name="com.example.facebook.fragment.ChangePasswordFragment"
-        android:label="ChangePasswordFragment"
-        tools:layout="@layout/fragment_change_password"/>
+        android:label="ChangePassword"
+        tools:layout="@layout/fragment_change_password">
+
+        <deepLink app:uri="app://my_facebook/change_password" />
+
+    </fragment>
+
+
 </navigation>

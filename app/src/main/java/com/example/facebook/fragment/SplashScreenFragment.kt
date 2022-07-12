@@ -18,14 +18,13 @@ class SplashScreenFragment : BaseFragment<FragmentSplashScreenBinding, SplashScr
     override fun getViewModel(): Class<SplashScreenViewModel> = SplashScreenViewModel::class.java
 
     override fun getResourceId(): Int = R.layout.fragment_splash_screen
-
     override fun initViews() {
         val appDataStore = AppDataStore(requireContext())
         lifecycleScope.launchWhenCreated {
             appDataStore.userLoggedStatusFlow.collectLatest {
                 Handler().postDelayed({
                     moveScreen(it)
-                }, 1000)
+                }, 2000)
             }
         }
 

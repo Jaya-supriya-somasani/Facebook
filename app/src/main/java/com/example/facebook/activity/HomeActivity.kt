@@ -6,7 +6,9 @@ import com.example.facebook.util.BaseActivity
 import com.example.facebook.viewmodels.HomeActivityViewModel
 
 class HomeActivity : BaseActivity<ActivityHomeBinding, HomeActivityViewModel>() {
+
     override fun setupViews() {
+
     }
 
     override fun getViewModel(): Class<HomeActivityViewModel> = HomeActivityViewModel::class.java

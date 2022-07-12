@@ -1,25 +1,38 @@
 package com.example.facebook.viewmodels
 
-import com.example.facebook.api.request.ProfilePage
 import androidx.lifecycle.viewModelScope
+import com.example.facebook.NetworkResult
 import com.example.facebook.api.NetworkService
 import com.example.facebook.api.request.GetUserProfile
+import com.example.facebook.safeApi
 import com.example.facebook.util.BaseViewModel
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
 class ProfilePageViewModel : BaseViewModel() {
-    private val userDetailsMutableState = MutableStateFlow<GetUserProfile?>(null)
-    var userDetailsStateFlow: StateFlow<GetUserProfile?> = userDetailsMutableState
 
-    private val profileDetailsStateFlow = MutableStateFlow<ProfilePage?>(null)
-
-
-    fun getProfileData(userId:String) {
+    private val profileDetailsStateFlow = MutableStateFlow<GetUserProfile?>(null)
+    val profileData: MutableStateFlow<GetUserProfile?> = profileDetailsStateFlow
+    private val toastEventChannel = Channel<String>()
+    val toastEvent = toastEventChannel.receiveAsFlow()
+    fun getProfileData(userId: String) {
         viewModelScope.launch {
-            val result = NetworkService.apiService.getUserProfile(userId)
-            userDetailsMutableState.value = result.body()!!.data!!
+            when (val result = safeApi { NetworkService.apiService.getUserProfile(userId) }) {
+                is NetworkResult.Success -> {
+                    profileDetailsStateFlow.value = result.data.body()?.data
+                }
+                is NetworkResult.Failure -> {
+                    toastEventChannel.trySend(result.message ?: "")
+                }
+                is NetworkResult.Exception -> {
+                    toastEventChannel.trySend(result.message ?: "")
+                }
+            }
+
         }
+
     }
 }
+

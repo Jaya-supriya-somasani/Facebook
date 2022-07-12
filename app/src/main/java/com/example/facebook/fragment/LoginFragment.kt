@@ -29,15 +29,12 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginPageViewModel>() {
         dataBinding.loginVM = viewModel
         lifecycleScope.launchWhenResumed {
             viewModel.loginEvent.collectLatest {
-                Log.e("TAG", "initViews: ${it.loginStatus}")
-                appDataStore.saveToDataStore((LoginStatus(it.userName, it.userId, it.loginStatus)))
-                appDataStore.userLoggedStatusFlow.collectLatest {
-                    Log.e("TAG", "initViews: $it")
-                }
+                appDataStore.saveToDataStore((LoginStatus(it.userId, it.userId, it.loginStatus)))
                 activity?.let { move ->
                     val intent = Intent(move, MainActivity::class.java)
                     move.startActivity(intent)
                 }
+
             }
         }
         lifecycleScope.launchWhenResumed {
