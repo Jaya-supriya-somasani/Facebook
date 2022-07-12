@@ -31,7 +31,7 @@ interface ApiService {
 
     @GET("/api/v1/userFriends/{userId}")
     suspend fun displayFriends(
-        @Path("userId",encoded = true) userId: String,
+        @Path("userId", encoded = true) userId: String,
     ): BaseResponse<List<DisplayFriendsResponse>>
 
     @POST("/api/v1/post")
@@ -70,9 +70,10 @@ interface ApiService {
         @Path("postId", encoded = true) postId: String,
     ): ApiResponse<DeletePostDataClass>
 
-    @GET("/api/v1/posts")
+    @GET("/api/v1/posts/{userId}")
     suspend fun getPosts(
-    ): ApiResponse<List<PostsResponsesItem>>
+        @Path("userId", encoded = true) userId: String,
+    ): BaseResponse<List<PostsResponsesItem>>
 
     @GET("/api/v1/profile/{userId}")
     suspend fun getUserProfile(

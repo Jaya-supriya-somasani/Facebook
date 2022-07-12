@@ -70,8 +70,10 @@ class RegisterAccountViewModel : BaseViewModel() {
             when (val registerResult =
                 safeApi { NetworkService.apiService.registerUser(registerReq) }) {
                 is NetworkResult.Success -> {
-                    createAccountChannel.trySend(Unit)
-                    toastEventChannel.trySend(registerResult.data.message() ?: "")
+                    if (registerResult.data.body()?.status?.equals("success") == true) {
+                        createAccountChannel.trySend(Unit)
+                    }
+                    toastEventChannel.trySend(registerResult.data.body()?.message ?: "")
                 }
                 is NetworkResult.Failure -> {
                     toastEventChannel.trySend(registerResult.message ?: "")

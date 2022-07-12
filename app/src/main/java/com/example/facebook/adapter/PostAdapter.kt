@@ -2,13 +2,12 @@ package com.example.facebook.adapter
 
 import android.view.ViewGroup
 import com.example.facebook.R
-import com.example.facebook.api.request.FriendsListResponse
 import com.example.facebook.api.response.PostsResponsesItem
+import com.example.facebook.databinding.ItemFacebookPostsBinding
 import com.example.facebook.util.BaseAdapter
 import com.example.facebook.util.BaseHolder
 import com.example.facebook.util.BaseViewHolder
 import com.example.facebook.util.inflate
-import com.example.facebook.databinding.ItemFacebookPostsBinding
 
 class PostAdapter(
     private val onDeletePostClicked: (PostsResponsesItem) -> Unit,
@@ -34,10 +33,7 @@ class PostAdapter(
         }
 
         override fun onBind(item: PostsResponsesItem) {
-            binding.tvUserName.text = item.userId
-            binding.tvPostDescription.text = item.postDesc
-            binding.ivLike.text = item.likesCount
-            binding.ivLike.isChecked = item.likeStatus
+            binding.item=item
         }
 
     }

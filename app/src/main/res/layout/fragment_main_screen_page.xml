@@ -8,8 +8,7 @@
     </data>
 
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        style="@style/match_match">
+    <androidx.coordinatorlayout.widget.CoordinatorLayout style="@style/match_match">
 
         <androidx.core.widget.NestedScrollView
             style="@style/match_wrap"

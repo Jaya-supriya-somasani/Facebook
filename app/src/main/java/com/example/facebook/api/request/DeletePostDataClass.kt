@@ -10,4 +10,6 @@ data class DeletePostDataClass(
     val postId: String,
     @SerializedName("friendId")
     val friendId: String,
+
+    // add isDeleteEnabled Field
 ) : Parcelable

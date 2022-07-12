@@ -3,9 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.cardview.widget.CardView
-        style="@style/match_wrap"
-        >
+    <data>
+
+        <variable
+            name="item"
+            type="com.example.facebook.api.response.PostsResponsesItem" />
+    </data>
+
+    <androidx.cardview.widget.CardView style="@style/match_wrap">
 
         <View
             android:id="@+id/dividerStoriesAndReels"
@@ -28,7 +33,7 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivUserImage"
-                android:layout_width="80dp"
+                android:layout_width="100dp"
                 android:layout_height="80dp"
                 android:layout_margin="20dp"
                 android:adjustViewBounds="true"
@@ -62,6 +67,7 @@
                 android:layout_margin="3dp"
                 android:layout_marginStart="20dp"
                 android:padding="5dp"
+                android:text="@{item.userName}"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@id/ivUserImage"
@@ -84,6 +90,7 @@
                 style="@style/match_wrap"
                 android:layout_margin="5dp"
                 android:padding="10dp"
+                android:text="@{item.postData}"
                 android:textColor="@color/black"
                 android:textSize="11sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -111,7 +118,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvLikeCount"
                 style="@style/zero_wrap"
-                android:text="1k"
+                android:text="@{item.likesCount}"
                 android:textColor="@color/dark_gray"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="@id/ivLikeImage"
@@ -145,10 +152,12 @@
 
             <androidx.appcompat.widget.AppCompatCheckBox
                 android:id="@+id/ivLike"
-                style="@style/zero_wrap"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
                 android:backgroundTintMode="@color/white"
                 android:button="@drawable/ic_thumbs_up_selectable"
+                android:checked="@{item.likeStatus}"
                 android:paddingVertical="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/tvLikes"

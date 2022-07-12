@@ -1,33 +1,23 @@
 package com.example.facebook.api.response
 
 import android.os.Parcelable
-import com.example.facebook.api.request.LikesCount
 import com.google.gson.annotations.SerializedName
-import kotlinx.android.parcel.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class PostsResponsesItem(
-    @SerializedName("user_id")
+    @SerializedName("userId")
     val userId: String,
-    @SerializedName("post_id")
+    @SerializedName("userName")
+    val userName: String,
+    @SerializedName("postId")
     val postId: String,
     @SerializedName("postData")
-    val postDesc: String,
-    @SerializedName("likesCount")
+    val postData: String,
+    @SerializedName("totalLikes")
     val likesCount: String,
     @SerializedName("likeStatus")
     val likeStatus: Boolean = false
-) : Parcelable {
-}
-
-
-@Parcelize
-data class LoginRequest(
-    @SerializedName("mail")
-    val userEmail: String,
-    @SerializedName("userPassword")
-    val userPassword: String,
 ) : Parcelable
 
 class BaseResponse<T>(

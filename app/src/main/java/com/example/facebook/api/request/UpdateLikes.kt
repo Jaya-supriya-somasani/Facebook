@@ -7,6 +7,12 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class UpdateLikes(
     @SerializedName("postId")
-    val postId:String
-):Parcelable
+    val postId: String,
+    @SerializedName("userId")
+    val userId: String,
+    @SerializedName("likeStatus")
+    val likeStatus: String,
+    @SerializedName("count")
+    val count: String,
 
+) : Parcelable

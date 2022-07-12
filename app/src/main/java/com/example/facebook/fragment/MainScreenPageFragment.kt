@@ -46,6 +46,7 @@ class MainScreenPageFragment : BaseFragment<FragmentMainScreenPageBinding, HomeM
         lifecycleScope.launchWhenResumed {
             appDataStore.userIdFlow.collectLatest {
                 viewModel.userId.value = it
+                viewModel.getPosts()
             }
         }
         val data = listOf(
@@ -68,6 +69,11 @@ class MainScreenPageFragment : BaseFragment<FragmentMainScreenPageBinding, HomeM
         lifecycleScope.launchWhenResumed {
             viewModel.postDetailsStateFlow.collectLatest {
                 postAdapter.submitList(it)
+            }
+        }
+        lifecycleScope.launchWhenResumed {
+            viewModel.toastEvent.collectLatest {
+                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
             }
         }
     }
