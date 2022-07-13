@@ -24,15 +24,6 @@ interface ApiService {
         @Path("userId", encoded = true) userId: Int,
     ): ApiResponse<ChangePasswordRequest>
 
-    @GET("/api/v1/profile/{userId}")
-    suspend fun getProfile(
-        @Path("userId", encoded = true) userId: String,
-    ): ApiResponse<GetUserProfile>
-
-    @GET("/api/v1/userFriends/{userId}")
-    suspend fun displayFriends(
-        @Path("userId", encoded = true) userId: String,
-    ): BaseResponse<List<DisplayFriendsResponse>>
 
     @POST("/api/v1/post")
     suspend fun createPost(
@@ -51,7 +42,7 @@ interface ApiService {
     ): ApiResponse<AddNewFriend>
 
 
-    @PUT("/api/v1/postLikes/{userId}/{postId}/{likeStatus}")
+    @PUT("/api/v1/postLikes/{postId}/{userId}/{likeStatus}")
     suspend fun updateLike(
         @Path("userId", encoded = true) userId: String,
         @Path("postId", encoded = true) postId: String,
@@ -83,15 +74,13 @@ interface ApiService {
     @GET("/api/v1/userFriends/{userId}")
     suspend fun getFriendsList(
         @Path("userId", encoded = true) userId: String,
-    ): BaseResponse<List<AllFriendsListResponse>>
+    ): BaseResponse<List<FriendDetailResponse>>
 
 
     @GET("/api/v1/suggestFriends/{userId}")
-    suspend fun getSearchUser(
+    suspend fun getSuggestUser(
         @Path("userId", encoded = true) userId: String,
-    ): ApiResponse<List<AllFriendsListResponse>>
-
-//    suspend fun registerUser(@Body registerRequest:RegisterUser):RegisterResponse
+    ): BaseResponse<List<SuggestFriendResponse>>
 
 
     @PUT("/api/v1/logout/{userId}")
@@ -99,7 +88,4 @@ interface ApiService {
         @Path("userId", encoded = true) userId: String,
     ): ApiResponse<LogoutDataClass>
 
-
-    @GET("/api/v1/profile/{userId}")
-    suspend fun profileDisplaying(@Path("userId") userId: Int): ProfilePageResponse
 }

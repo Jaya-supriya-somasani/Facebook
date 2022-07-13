@@ -14,19 +14,28 @@ data class AddNewFriend(
 ) : Parcelable
 
 @Parcelize
-data class AllFriendsListResponse(
+data class FriendDetailResponse(
     @SerializedName("friendId")
     val friendId: String,
     @SerializedName("userId")
     val userId: String,
     @SerializedName("userName")
-    val userName: String,
+    var userName: String,
     @SerializedName("mail")
     val mail: String,
     @SerializedName("dateOfBirth")
     val dateOfBirth: String,
     @SerializedName("gender")
     val gender: String,
+) : Parcelable
+
+
+@Parcelize
+data class SuggestFriendResponse(
+    @SerializedName("friendId")
+    val friendId: String,
+    @SerializedName("friendName")
+    val friendName: String
 ) : Parcelable
 
 

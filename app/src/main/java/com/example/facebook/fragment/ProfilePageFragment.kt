@@ -23,7 +23,7 @@ class ProfilePageFragment :
 
     override fun initViews() {
         val appDataStore = AppDataStore(requireContext())
-        lifecycleScope.launchWhenResumed {
+        lifecycleScope.launchWhenCreated {
             appDataStore.userIdFlow.collectLatest {
                 viewModel.getProfileData(it)
             }

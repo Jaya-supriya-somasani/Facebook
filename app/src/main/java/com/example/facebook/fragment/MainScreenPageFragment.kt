@@ -4,9 +4,9 @@ import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.facebook.R
-import com.example.facebook.adapter.FriendsListAdapter
+import com.example.facebook.adapter.SuggestFriendsAdapter
 import com.example.facebook.adapter.PostAdapter
-import com.example.facebook.api.request.FriendsListResponse
+import com.example.facebook.api.request.SuggestFriendResponse
 import com.example.facebook.api.response.PostsResponsesItem
 import com.example.facebook.databinding.FragmentMainScreenPageBinding
 import com.example.facebook.datastore.AppDataStore
@@ -14,17 +14,21 @@ import com.example.facebook.util.BaseFragment
 import com.example.facebook.viewmodels.HomeMainViewModel
 import kotlinx.coroutines.flow.collectLatest
 
+
 class MainScreenPageFragment : BaseFragment<FragmentMainScreenPageBinding, HomeMainViewModel>() {
 
-    private val friendsListAdapter = FriendsListAdapter(::onAddClicked, ::onRemoveClicked)
-    private val postAdapter = PostAdapter(::onDeleteClicked, ::onPostLiked)
+    private val suggestFriendsAdapter = SuggestFriendsAdapter(::onAddClicked, ::onRemoveClicked)
+    private val postAdapter = PostAdapter(
+        onDeletePostClicked = ::onDeleteClicked,
+        onPostLiked = ::onPostLiked
+    )
 
-    private fun onRemoveClicked(item: FriendsListResponse) {
-        Toast.makeText(requireContext(), "clicked on remove button", Toast.LENGTH_SHORT).show()
+    private fun onRemoveClicked(item: SuggestFriendResponse) {
+        //   Toast.makeText(requireContext(), "clicked on remove button", Toast.LENGTH_SHORT).show()
     }
 
-    private fun onAddClicked(item: FriendsListResponse) {
-        Toast.makeText(requireContext(), "clicked on add button", Toast.LENGTH_SHORT).show()
+    private fun onAddClicked(item: SuggestFriendResponse) {
+        viewModel.addFriend(item)
 
     }
 
@@ -37,26 +41,20 @@ class MainScreenPageFragment : BaseFragment<FragmentMainScreenPageBinding, HomeM
     }
 
     override fun getViewModel(): Class<HomeMainViewModel> = HomeMainViewModel::class.java
-
     override fun getResourceId(): Int = R.layout.fragment_main_screen_page
 
     override fun initViews() {
         initData()
         val appDataStore = AppDataStore(requireContext())
-        lifecycleScope.launchWhenResumed {
+        lifecycleScope.launchWhenCreated {
             appDataStore.userIdFlow.collectLatest {
                 viewModel.userId.value = it
                 viewModel.getPosts()
             }
         }
-        val data = listOf(
-            FriendsListResponse("tarun1", "lanka", ""),
-            FriendsListResponse("tarun2", "lanka", ""),
-            FriendsListResponse("tarun3", "lanka", "")
-        )
-        dataBinding.recyclerViewFriends.adapter = friendsListAdapter
+
+        dataBinding.recyclerViewFriends.adapter = suggestFriendsAdapter
         dataBinding.recyclerViewPosts.adapter = postAdapter
-        friendsListAdapter.submitList(data)
         dataBinding.layoutCreatePost.searchView.setOnClickListener {
             val action =
                 MainScreenPageFragmentDirections.actionHomeMainFragmentToCreatePostFragment2()
@@ -64,11 +62,19 @@ class MainScreenPageFragment : BaseFragment<FragmentMainScreenPageBinding, HomeM
         }
     }
 
+
     private fun initData() {
-        // viewModel.getData()
+        lifecycleScope.launchWhenResumed {
+            viewModel.getSuggestFriends()
+        }
         lifecycleScope.launchWhenResumed {
             viewModel.postDetailsStateFlow.collectLatest {
                 postAdapter.submitList(it)
+            }
+        }
+        lifecycleScope.launchWhenResumed {
+            viewModel.suggestFriendsList.collectLatest {
+                suggestFriendsAdapter.submitList(it)
             }
         }
         lifecycleScope.launchWhenResumed {

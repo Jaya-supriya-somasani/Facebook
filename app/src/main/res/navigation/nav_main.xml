@@ -17,12 +17,13 @@
         <action
             android:id="@+id/action_homeMainFragment_to_profilePageFragment"
             app:destination="@id/profilePageFragment" />
-        <action
-            android:id="@+id/action_homeMainFragment_to_createPostFragment2"
-            app:destination="@id/createPostFragment2" />
+
         <action
             android:id="@+id/action_homeMainFragment_to_friendsPageFragment"
             app:destination="@id/friendsPageFragment" />
+        <action
+            android:id="@+id/action_homeMainFragment_to_createPostFragment2"
+            app:destination="@id/createPostFragment2" />
 
     </fragment>
     <fragment

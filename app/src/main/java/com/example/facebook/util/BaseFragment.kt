@@ -10,10 +10,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
-abstract class BaseFragment<Binding: ViewDataBinding,VM:ViewModel>:Fragment() {
-    abstract fun getViewModel():Class<VM>
+abstract class BaseFragment<Binding : ViewDataBinding, VM : ViewModel> : Fragment() {
+    abstract fun getViewModel(): Class<VM>
     lateinit var viewModel: VM
-    abstract fun getResourceId():Int
+    abstract fun getResourceId(): Int
     protected lateinit var dataBinding: Binding
     abstract fun initViews()
 
@@ -22,14 +22,14 @@ abstract class BaseFragment<Binding: ViewDataBinding,VM:ViewModel>:Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        dataBinding= DataBindingUtil.inflate(inflater,getResourceId(),container,false)
+        dataBinding = DataBindingUtil.inflate(inflater, getResourceId(), container, false)
         return dataBinding.root
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        dataBinding.lifecycleOwner=viewLifecycleOwner
+        dataBinding.lifecycleOwner = viewLifecycleOwner
         viewModel = ViewModelProvider(this)[getViewModel()]
         initViews()
     }

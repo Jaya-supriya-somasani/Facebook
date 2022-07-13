@@ -1,6 +1,8 @@
 package com.example.facebook.adapter
 
+import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import com.example.facebook.R
 import com.example.facebook.api.response.PostsResponsesItem
 import com.example.facebook.databinding.ItemFacebookPostsBinding
@@ -33,7 +35,16 @@ class PostAdapter(
         }
 
         override fun onBind(item: PostsResponsesItem) {
-            binding.item=item
+            binding.item = item
+            if (item.likesCount == "0") {
+                binding.tvLikeCount.visibility = View.GONE
+            } else {
+                binding.tvLikeCount.visibility = View.VISIBLE
+                val likesCountText = binding.root.context.resources.getQuantityString(
+                    R.plurals.likes_count, item.likesCount.toInt(), item.likesCount.toInt()
+                )
+                binding.tvLikeCount.text = likesCountText
+            }
         }
 
     }

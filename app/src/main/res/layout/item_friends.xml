@@ -6,55 +6,64 @@
 
         <variable
             name="item"
-            type="com.example.facebook.api.request.AllFriendsListResponse" />
+            type="com.example.facebook.api.request.FriendDetailResponse" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        style="@style/match_match"
-        >
+    <androidx.cardview.widget.CardView
+        style="@style/match_wrap"
+        android:layout_margin="10dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="10dp"
+        app:contentPadding="10dp">
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/user_image"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:src="@drawable/ic_baseline_user"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:shapeAppearanceOverlay="@style/roundedImageView"
-            app:strokeColor="@color/black" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/username_tv"
-            style="@style/wrap_wrap"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            android:text="@{item.userName}"
-            android:textColor="@color/black"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@id/user_image"
-            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout style="@style/match_wrap">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            style="@style/wrap_wrap"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            android:text="@string/mutual_friends_tv"
-            app:layout_constraintStart_toEndOf="@id/user_image"
-            app:layout_constraintTop_toBottomOf="@id/username_tv" />
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/user_image"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/ic_baseline_user"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearanceOverlay="@style/roundedImageView"
+                app:strokeColor="@color/black" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/remove_frd_btn"
-            style="@style/wrap_wrap"
-            android:layout_marginEnd="20dp"
-            android:backgroundTint="#E62B77E8"
-            android:text="@string/remove_frd"
-            app:layout_constraintBottom_toBottomOf="@id/user_image"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/user_image"
-            app:shapeAppearanceOverlay="@style/roundedButton" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/username_tv"
+                style="@style/wrap_wrap"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:text="@{item.userName}"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/user_image"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/wrap_wrap"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:text="@{item.userId}"
+                app:layout_constraintStart_toEndOf="@id/user_image"
+                app:layout_constraintTop_toBottomOf="@id/username_tv" />
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/removeFriendBtn"
+                style="@style/wrap_wrap"
+                android:layout_marginEnd="20dp"
+                android:backgroundTint="#E62B77E8"
+                android:text="@string/remove"
+                app:layout_constraintBottom_toBottomOf="@id/user_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/user_image"
+                app:shapeAppearanceOverlay="@style/roundedButton" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
 </layout>

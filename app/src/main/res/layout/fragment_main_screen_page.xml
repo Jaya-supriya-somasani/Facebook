@@ -5,20 +5,26 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.example.facebook.viewmodels.HomeMainViewModel" />
     </data>
 
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout style="@style/match_match">
 
-        <androidx.core.widget.NestedScrollView
-            style="@style/match_wrap"
-            android:fitsSystemWindows="true"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            app:layout_constraintBottom_toBottomOf="parent">
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefreshLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+            app:onRefreshListener="@{()->viewModel.refreshDataFromServer()}"
+            app:refreshing="@{viewModel.isRefreshingData}">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 style="@style/match_match"
                 android:fitsSystemWindows="true">
+
 
                 <com.google.android.material.appbar.MaterialToolbar
                     android:id="@+id/toolbar"
@@ -92,9 +98,7 @@
                     tools:itemCount="4"
                     tools:listitem="@layout/item_facebook_posts" />
 
-
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.core.widget.NestedScrollView>
-
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

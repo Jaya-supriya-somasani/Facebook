@@ -94,10 +94,15 @@
     <string name="total_friends_tv">110 Friends</string>
     <string name="mutual_friends_tv">6 mutual friends</string>
     <string name="remove_frd">Remove</string>
+    <string name="add">Remove</string>
     <string name="confirm_password_tv">Confirm Password</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="like">Like</string>
     <string name="comment">Comment</string>
     <string name="share">Share</string>
     <string name="no_data_available">No Friends Data Available</string>
+    <plurals name="likes_count">
+        <item quantity="one">%d like</item>
+        <item quantity="other">%d likes</item>
+    </plurals>
 </resources>

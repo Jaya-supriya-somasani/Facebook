@@ -78,7 +78,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvFriends"
-                style="@style/match_match"
+                style="@style/match_wrap"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="10dp"
                 android:visibility="@{!userFriendsVM.friendsList.empty ? View.VISIBLE : View.GONE}"

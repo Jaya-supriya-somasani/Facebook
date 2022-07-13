@@ -17,7 +17,9 @@ data class PostsResponsesItem(
     @SerializedName("totalLikes")
     val likesCount: String,
     @SerializedName("likeStatus")
-    val likeStatus: Boolean = false
+    val likeStatus: Boolean = false,
+    @SerializedName("isCreated")
+    val isCreated: Boolean
 ) : Parcelable
 
 class BaseResponse<T>(
