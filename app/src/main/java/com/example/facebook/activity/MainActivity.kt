@@ -2,8 +2,8 @@ package com.example.facebook.activity
 
 import android.content.Intent
 import android.net.Uri
-import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -14,11 +14,10 @@ import com.example.facebook.databinding.ActivityMainBinding
 import com.example.facebook.datastore.AppDataStore
 import com.example.facebook.fragment.MainScreenPageFragmentDirections
 import com.example.facebook.util.BaseActivity
-import com.example.facebook.util.findNavController
 import com.example.facebook.viewmodels.HomeActivityViewModel
 import kotlinx.coroutines.flow.collectLatest
 
-class MainActivity : BaseActivity<ActivityMainBinding, HomeActivityViewModel>() {
+class MainActivity : BaseActivity<ActivityMainBinding, HomeActivityViewModel>()  {
     private val navHostFragment: NavHostFragment
         get() = supportFragmentManager.findFragmentById(R.id.fragmentContainerViewHome) as NavHostFragment
 
@@ -49,11 +48,24 @@ class MainActivity : BaseActivity<ActivityMainBinding, HomeActivityViewModel>() 
 
                 }
                 R.id.logOutBtn -> {
-                    lifecycleScope.launchWhenResumed {
-                        appDataStore.userIdFlow.collectLatest {
-                            viewModel.logout(it)
+                    val builder= AlertDialog.Builder(this)
+                    builder.setMessage("Are you sure ?").setTitle("Warning")
+                        .setNegativeButton("Cancel"
+                        ) { dialog, which ->
+
                         }
-                    }
+                        .setPositiveButton("Ok"
+                        ) { dialog, which ->
+                            lifecycleScope.launchWhenResumed {
+                                appDataStore.userIdFlow.collectLatest {
+                                    viewModel.logout(it)
+                                }
+                            }
+                        }
+
+                    val dialog=builder.create()
+                    dialog.show()
+
                 }
             }
             true
@@ -65,24 +77,19 @@ class MainActivity : BaseActivity<ActivityMainBinding, HomeActivityViewModel>() 
         }
         lifecycleScope.launchWhenResumed {
             viewModel.loginScreenEvent.collectLatest {
-//                val intent = Intent(this@MainActivity, HomeActivity::class.java)
-//                intent.putExtra("screen", "Login")
-//                startActivity(intent)
-//                finish()
+
                 val intent = Intent(Intent.ACTION_VIEW).apply {
                     data = Uri.parse("app://my_facebook/login")
                 }
                 startActivity(intent)
                 finish()
             }
+            }
         }
 
 
+        override fun getViewModel() = HomeActivityViewModel::class.java
+
+
+        override fun getResourceId(): Int = R.layout.activity_main
     }
-
-    override fun getViewModel() = HomeActivityViewModel::class.java
-
-
-    override fun getResourceId(): Int = R.layout.activity_main
-
-}

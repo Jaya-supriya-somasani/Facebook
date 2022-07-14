@@ -4,8 +4,8 @@ import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.facebook.R
-import com.example.facebook.adapter.SuggestFriendsAdapter
 import com.example.facebook.adapter.PostAdapter
+import com.example.facebook.adapter.SuggestFriendsAdapter
 import com.example.facebook.api.request.SuggestFriendResponse
 import com.example.facebook.api.response.PostsResponsesItem
 import com.example.facebook.databinding.FragmentMainScreenPageBinding
@@ -70,6 +70,7 @@ class MainScreenPageFragment : BaseFragment<FragmentMainScreenPageBinding, HomeM
         lifecycleScope.launchWhenResumed {
             viewModel.postDetailsStateFlow.collectLatest {
                 postAdapter.submitList(it)
+//                postAdapter.postDetailsNotify(it)
             }
         }
         lifecycleScope.launchWhenResumed {

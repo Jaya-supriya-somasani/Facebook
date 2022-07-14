@@ -1,6 +1,5 @@
 package com.example.facebook.fragment
 
-import android.content.Intent
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View

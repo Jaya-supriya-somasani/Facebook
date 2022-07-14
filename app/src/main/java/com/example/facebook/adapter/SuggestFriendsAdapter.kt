@@ -1,15 +1,13 @@
 package com.example.facebook.adapter
 
 import android.view.ViewGroup
+import com.example.facebook.R
+import com.example.facebook.api.request.SuggestFriendResponse
+import com.example.facebook.databinding.ItemFriendsListBinding
 import com.example.facebook.util.BaseAdapter
 import com.example.facebook.util.BaseHolder
-import com.example.facebook.R
-import com.example.facebook.api.request.FriendDetailResponse
-import com.example.facebook.api.request.FriendsListResponse
-import com.example.facebook.api.request.SuggestFriendResponse
 import com.example.facebook.util.BaseViewHolder
 import com.example.facebook.util.inflate
-import com.example.facebook.databinding.ItemFriendsListBinding
 
 class SuggestFriendsAdapter(
     private val onAddFriendButtonClicked: (SuggestFriendResponse) -> Unit,

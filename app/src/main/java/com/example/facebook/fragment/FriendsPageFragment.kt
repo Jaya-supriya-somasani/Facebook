@@ -1,11 +1,6 @@
 package com.example.facebook.fragment
 
 import android.annotation.SuppressLint
-import android.text.Editable
-import android.text.TextWatcher
-import android.view.KeyEvent
-import android.view.View
-import android.widget.TextView
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.facebook.R
@@ -68,7 +63,7 @@ class FriendsPageFragment : BaseFragment<FragmentUserFriendsBinding, FriendsList
     }
 
     private fun onRemoveFriendClicked(item: FriendDetailResponse) {
-        viewModel.removeFriend(item)
+        viewModel.removeFriend(item,userId)
     }
 
 //

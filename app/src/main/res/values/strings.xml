@@ -101,6 +101,17 @@
     <string name="comment">Comment</string>
     <string name="share">Share</string>
     <string name="no_data_available">No Friends Data Available</string>
+    <string name="post_tv">POST</string>
+    <string name="shares_tv">12 shares</string>
+    <string name="comments_tv">37 comments</string>
+    <string name="education_tv">Studying at narayana</string>
+
+    <string name="logout_tv">Logout</string>
+    <string name="cancel_tv">Cancel</string>
+    <string name="warning_tv">Warning</string>
+    <string name="confirmation_tv">Are you sure ?</string>
+    <string name="time_tv">09:30</string>
+    <string name="post_desc_tv">Description...</string>
     <plurals name="likes_count">
         <item quantity="one">%d like</item>
         <item quantity="other">%d likes</item>

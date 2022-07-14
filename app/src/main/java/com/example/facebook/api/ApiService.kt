@@ -24,6 +24,24 @@ interface ApiService {
         @Path("userId", encoded = true) userId: Int,
     ): ApiResponse<ChangePasswordRequest>
 
+//    @GET("/api/v1/profile/{userId}")
+//    suspend fun getProfile(
+//        @Path("userId", encoded = true) userId: String,
+//    ): ApiResponse<GetUserProfile>
+//
+//    @GET("/api/v1/userFriends/{userId}")
+//    suspend fun displayFriends(
+//        @Path("userId",encoded = true) userId: String,
+//    ): BaseResponse<List<DisplayFriendsResponse>>
+//    @GET("/api/v1/profile/{userId}")
+//    suspend fun getProfile(
+//        @Path("userId", encoded = true) userId: String,
+//    ): ApiResponse<GetUserProfile>
+
+//    @GET("/api/v1/userFriends/{userId}")
+//    suspend fun displayFriends(
+//        @Path("userId", encoded = true) userId: String,
+//    ): BaseResponse<List<DisplayFriendsResponse>>
 
     @POST("/api/v1/post")
     suspend fun createPost(
@@ -34,7 +52,7 @@ interface ApiService {
     suspend fun deleteFriend(
         @Path("friendId", encoded = true) friendId: String,
         @Path("userId", encoded = true) userId: String,
-    ): ApiResponse<RemoveFriendDataClass>
+    ): ApiResponse<RemoveFriendRes>
 
     @POST("/api/v1/friend")
     suspend fun addFriend(
@@ -88,4 +106,7 @@ interface ApiService {
         @Path("userId", encoded = true) userId: String,
     ): ApiResponse<LogoutDataClass>
 
+
+    @GET("/api/v1/profile/{userId}")
+    suspend fun profileDisplaying(@Path("userId") userId: Int): ProfilePageResponse
 }

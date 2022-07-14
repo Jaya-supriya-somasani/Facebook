@@ -1,6 +1,5 @@
 package com.example.facebook.viewmodels
 
-import android.widget.Toast
 import androidx.lifecycle.viewModelScope
 import com.example.facebook.NetworkResult
 import com.example.facebook.api.NetworkService
@@ -24,6 +23,7 @@ class HomeActivityViewModel : BaseViewModel() {
                 when (val result = safeApi { NetworkService.apiService.logOutUser(userId) }) {
                     is NetworkResult.Success -> {
                         toastEventChannel.trySend(result.data.body()?.message ?: "")
+
                         loginScreenEventChannel.trySend(result.data.body()?.data!!.loginStatus)
                     }
                     is NetworkResult.Failure -> {

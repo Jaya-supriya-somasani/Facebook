@@ -7,6 +7,9 @@
 
     </data>
 
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
     <androidx.constraintlayout.widget.ConstraintLayout
         style="@style/match_match"
         android:orientation="vertical"
@@ -39,7 +42,7 @@
             android:id="@+id/description"
             style="@style/match_wrap"
             android:layout_margin="10dp"
-            android:hint="Description..."
+            android:hint="@string/post_desc_tv"
             android:maxLines="5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -49,7 +52,7 @@
             android:id="@+id/postBtn"
             style="@style/zero_wrap"
             android:layout_marginTop="30dp"
-            android:text="POST"
+            android:text="@string/post_tv"
             android:textColor="@color/white"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="@id/description"
@@ -58,4 +61,5 @@
             app:shapeAppearanceOverlay="@style/roundedButton" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
 </layout>

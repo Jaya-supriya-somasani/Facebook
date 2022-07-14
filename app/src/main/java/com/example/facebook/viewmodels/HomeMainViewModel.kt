@@ -49,6 +49,7 @@ class HomeMainViewModel : BaseViewModel() {
                 )
             }) {
                 is NetworkResult.Success -> {
+
                     toastEventChannel.trySend(result.data.body()?.message ?: "")
                 }
                 is NetworkResult.Exception -> {
@@ -115,11 +116,11 @@ class HomeMainViewModel : BaseViewModel() {
     }
 
     fun refreshDataFromServer() {
-        isRefreshingData.value = !isRefreshingData.value
+//        isRefreshingData.value = !isRefreshingData.value
         viewModelScope.launch {
             getPosts()
             getSuggestFriends()
-            isRefreshingData.value = !isRefreshingData.value
+//            isRefreshingData.value = !isRefreshingData.value
         }
 
 

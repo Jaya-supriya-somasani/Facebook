@@ -1,8 +1,6 @@
 package com.example.facebook.adapter
 
-import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import com.example.facebook.R
 import com.example.facebook.api.response.PostsResponsesItem
 import com.example.facebook.databinding.ItemFacebookPostsBinding
@@ -15,6 +13,15 @@ class PostAdapter(
     private val onDeletePostClicked: (PostsResponsesItem) -> Unit,
     private val onPostLiked: (PostsResponsesItem) -> Unit,
 ) : BaseAdapter<PostsResponsesItem>() {
+
+//    private val postsResponse= arrayListOf<PostsResponsesItem>()
+//
+//    fun postDetailsNotify(dataInfo:List<PostsResponsesItem>){
+//        this.postsResponse.clear()
+//        this.postsResponse.addAll(dataInfo)
+//        notifyDataSetChanged()
+//    }
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -36,15 +43,15 @@ class PostAdapter(
 
         override fun onBind(item: PostsResponsesItem) {
             binding.item = item
-            if (item.likesCount == "0") {
-                binding.tvLikeCount.visibility = View.GONE
-            } else {
-                binding.tvLikeCount.visibility = View.VISIBLE
-                val likesCountText = binding.root.context.resources.getQuantityString(
-                    R.plurals.likes_count, item.likesCount.toInt(), item.likesCount.toInt()
-                )
-                binding.tvLikeCount.text = likesCountText
-            }
+//            if (item.likesCount == "0") {
+//                binding.tvLikeCount.visibility = View.GONE
+//            } else {
+//                binding.tvLikeCount.visibility = View.VISIBLE
+//                val likesCountText = binding.root.context.resources.getQuantityString(
+//                    R.plurals.likes_count, item.likesCount.toInt(), item.likesCount.toInt()
+//                )
+//                binding.tvLikeCount.text = likesCountText
+          //  }
         }
 
     }

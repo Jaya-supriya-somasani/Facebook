@@ -38,10 +38,10 @@ class FriendsListViewModel : BaseViewModel() {
     }
 
 
-    fun removeFriend(item: FriendDetailResponse) {
+    fun removeFriend(item: FriendDetailResponse,userId: String) {
         viewModelScope.launch {
             when (val result =
-                safeApi { NetworkService.apiService.deleteFriend(item.friendId, item.userId) }) {
+                safeApi { NetworkService.apiService.deleteFriend(item.friendId,userId) }) {
                 is NetworkResult.Success -> {
                     toastEventChannel.trySend(result.data.message() ?: "")
                 }
