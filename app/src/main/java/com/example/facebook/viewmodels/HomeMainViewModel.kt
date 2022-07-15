@@ -1,5 +1,5 @@
 package com.example.facebook.viewmodels
-
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.example.facebook.NetworkResult
 import com.example.facebook.api.NetworkService
@@ -116,10 +116,13 @@ class HomeMainViewModel : BaseViewModel() {
     }
 
     fun refreshDataFromServer() {
-//        isRefreshingData.value = !isRefreshingData.value
+        isRefreshingData.value =true
+        Log.d("TAG", "refreshDataFromServer before: ${isRefreshingData.value}")
         viewModelScope.launch {
             getPosts()
             getSuggestFriends()
+            isRefreshingData.value=false
+            Log.d("TAG", "refreshDataFromServer after: ${isRefreshingData.value}")
 //            isRefreshingData.value = !isRefreshingData.value
         }
 

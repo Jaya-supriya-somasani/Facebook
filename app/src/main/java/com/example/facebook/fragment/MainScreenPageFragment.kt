@@ -44,6 +44,7 @@ class MainScreenPageFragment : BaseFragment<FragmentMainScreenPageBinding, HomeM
     override fun getResourceId(): Int = R.layout.fragment_main_screen_page
 
     override fun initViews() {
+        dataBinding.viewModel = viewModel
         initData()
         val appDataStore = AppDataStore(requireContext())
         lifecycleScope.launchWhenCreated {

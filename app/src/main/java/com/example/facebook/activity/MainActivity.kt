@@ -25,6 +25,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, HomeActivityViewModel>() 
         get() = navHostFragment.navController
 
     override fun setupViews() {
+
         val appDataStore = AppDataStore(this)
         dataBinding.bottomNavigation.setupWithNavController(navController)
         dataBinding.bottomNavigation.setOnItemSelectedListener { item ->

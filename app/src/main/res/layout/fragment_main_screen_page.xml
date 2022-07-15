@@ -11,26 +11,23 @@
     </data>
 
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true"
-        android:fitsSystemWindows="true">
+    <androidx.coordinatorlayout.widget.CoordinatorLayout style="@style/match_wrap">
 
-        <androidx.coordinatorlayout.widget.CoordinatorLayout style="@style/match_wrap">
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefreshLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:onRefreshListener="@{()->viewModel.refreshDataFromServer()}"
+            app:refreshing="@{viewModel.isRefreshingData}">
 
-            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-                android:id="@+id/swipeRefreshLayout"
+            <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-                app:onRefreshListener="@{()->viewModel.refreshDataFromServer()}"
-                app:refreshing="@{viewModel.isRefreshingData}">
+                android:fillViewport="true">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     style="@style/match_match"
                     android:fitsSystemWindows="true">
-
 
                     <com.google.android.material.appbar.MaterialToolbar
                         android:id="@+id/toolbar"
@@ -105,7 +102,7 @@
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
-    </ScrollView>
+            </androidx.core.widget.NestedScrollView>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
