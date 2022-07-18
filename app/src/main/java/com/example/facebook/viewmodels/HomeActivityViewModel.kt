@@ -19,24 +19,21 @@ class HomeActivityViewModel : BaseViewModel() {
 
     fun logout(userId: String) {
         viewModelScope.launch {
-            viewModelScope.launch {
-                when (val result = safeApi { NetworkService.apiService.logOutUser(userId) }) {
-                    is NetworkResult.Success -> {
-                        toastEventChannel.trySend(result.data.body()?.message ?: "")
+            when (val result = safeApi { NetworkService.apiService.logOutUser(userId) }) {
+                is NetworkResult.Success -> {
+                    toastEventChannel.trySend(result.data.body()?.message ?: "")
 
-                        loginScreenEventChannel.trySend(result.data.body()?.data!!.loginStatus)
-                    }
-                    is NetworkResult.Failure -> {
-                        toastEventChannel.trySend(result.message ?: "")
-                    }
-                    is NetworkResult.Exception -> {
-                        toastEventChannel.trySend(result.message ?: "")
+                    if(!result.data.body()?.data!!.loginStatus) {
+                        loginScreenEventChannel.trySend(false)
                     }
                 }
-
+                is NetworkResult.Failure -> {
+                    toastEventChannel.trySend(result.message ?: "")
+                }
+                is NetworkResult.Exception -> {
+                    toastEventChannel.trySend(result.message ?: "")
+                }
             }
-
-
         }
     }
 

@@ -1,7 +1,6 @@
 package com.example.facebook.fragment
 
 import android.content.Intent
-import android.os.Handler
 import android.util.Log
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -20,11 +19,15 @@ class SplashScreenFragment : BaseFragment<FragmentSplashScreenBinding, SplashScr
     override fun getResourceId(): Int = R.layout.fragment_splash_screen
     override fun initViews() {
         val appDataStore = AppDataStore(requireContext())
-        lifecycleScope.launchWhenCreated {
+        lifecycleScope.launchWhenResumed {
             appDataStore.userLoggedStatusFlow.collectLatest {
-                Handler().postDelayed({
-                    moveScreen(it)
-                }, 2000)
+                Log.d("Splash", "initViews: $it")
+                viewModel.moveToNextScreen(it)
+            }
+        }
+        lifecycleScope.launchWhenResumed {
+            viewModel.navigateToNextScreenEvent.collectLatest {
+                moveScreen(it)
             }
         }
 
@@ -32,14 +35,17 @@ class SplashScreenFragment : BaseFragment<FragmentSplashScreenBinding, SplashScr
 
     private fun moveScreen(status: Boolean) {
         if (status) {
+            Log.d("Splash", "Home Screen")
             activity?.let { move ->
                 val intent = Intent(move, MainActivity::class.java)
                 move.startActivity(intent)
             }
         } else {
+            Log.d("Splash", "Login Screen")
             val action =
                 SplashScreenFragmentDirections.actionSplashScreenFragmentToLoginFragment()
-            findNavController().navigate(action)
+            findNavController()
+                .navigate(action)
         }
     }
 }

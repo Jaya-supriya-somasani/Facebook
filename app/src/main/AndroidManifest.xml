@@ -20,6 +20,7 @@
         <activity
             android:name=".activity.HomeActivity"
             android:exported="true"
+            android:launchMode="singleTop"
             android:theme="@style/Theme.Facebook">
 
             <nav-graph android:value="@navigation/nav_home" />
@@ -30,14 +31,12 @@
             </intent-filter>
         </activity>
 
-
         <activity
             android:name=".activity.MainActivity"
             android:exported="false"
             android:theme="@style/Theme.Facebook">
             <nav-graph android:value="@navigation/nav_main" />
         </activity>
-
 
     </application>
 

@@ -9,7 +9,6 @@ import com.example.facebook.safeApi
 import com.example.facebook.util.BaseViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
@@ -75,6 +74,7 @@ class LoginPageViewModel : BaseViewModel() {
                 safeApi { NetworkService.apiService.performLogin(loginRequest) }) {
                 is NetworkResult.Success -> {
                     loginResult.data.data?.let {
+                        it.userName = userName.value
                         loginEventChannel.trySend(it)
                     }
                 }

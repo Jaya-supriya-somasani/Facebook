@@ -2,11 +2,11 @@ package com.example.facebook.fragment
 
 import android.content.Intent
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.facebook.R
 import com.example.facebook.activity.MainActivity
-import com.example.facebook.api.response.LoginStatus
 import com.example.facebook.databinding.FragmentLoginBinding
 import com.example.facebook.datastore.AppDataStore
 import com.example.facebook.util.BaseFragment
@@ -24,16 +24,22 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginPageViewModel>() {
 
 
     override fun initViews() {
-        val appDataStore = AppDataStore(requireContext())
         dataBinding.loginVM = viewModel
+        val appDataStore = AppDataStore(requireContext())
         lifecycleScope.launchWhenResumed {
-            viewModel.loginEvent.collectLatest {
-                appDataStore.saveToDataStore((LoginStatus(it.userId, it.userId, it.loginStatus)))
-                activity?.let { move ->
-                    val intent = Intent(move, MainActivity::class.java)
-                    move.startActivity(intent)
-                }
+            appDataStore.setLaunchImmediate(false)
+        }
+        lifecycleScope.launchWhenResumed {
+            viewModel.loginEvent.collectLatest { loginStatus ->
+                activity?.let { fragmentActivity ->
+                    appDataStore.saveUserId(loginStatus.userId)
+                    appDataStore.saveUserName(loginStatus.userName!!)
+                    appDataStore.setLoginStatus(true)
 
+                    val intent = Intent(fragmentActivity, MainActivity::class.java)
+                    fragmentActivity.startActivity(intent)
+                    fragmentActivity.finish()
+                }
             }
         }
         lifecycleScope.launchWhenResumed {
@@ -53,6 +59,15 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginPageViewModel>() {
             viewModel.toastEvent.collectLatest {
                 Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
             }
+        }
+
+//        val userId=arguments?.let {
+//            it.getSerializable("userId") as userId
+//
+//        }
+
+        requireActivity().onBackPressedDispatcher.addCallback(this) {
+            requireActivity().finish()
         }
     }
 }
