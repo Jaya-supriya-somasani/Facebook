@@ -3,7 +3,6 @@ package com.example.facebook.fragment
 import android.content.Intent
 import android.util.Log
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import com.example.facebook.R
 import com.example.facebook.activity.MainActivity
 import com.example.facebook.databinding.FragmentSplashScreenBinding
@@ -42,10 +41,10 @@ class SplashScreenFragment : BaseFragment<FragmentSplashScreenBinding, SplashScr
             }
         } else {
             Log.d("Splash", "Login Screen")
-            val action =
-                SplashScreenFragmentDirections.actionSplashScreenFragmentToLoginFragment()
-            findNavController()
-                .navigate(action)
+//            val action =
+//                SplashScreenFragmentDirections.actionSplashScreenFragmentToLoginFragment()
+//            findNavController()
+//                .navigate(action)
         }
     }
 }
