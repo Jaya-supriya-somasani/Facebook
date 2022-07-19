@@ -34,7 +34,6 @@ class SplashScreenFragment : BaseFragment<FragmentSplashScreenBinding, SplashScr
 
     private fun moveScreen(status: Boolean) {
         if (status) {
-            Log.d("Splash", "Home Screen")
             activity?.let { move ->
                 val intent = Intent(move, MainActivity::class.java)
                 move.startActivity(intent)

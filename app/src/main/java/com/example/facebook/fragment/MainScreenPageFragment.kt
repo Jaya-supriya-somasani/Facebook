@@ -50,7 +50,6 @@ class MainScreenPageFragment : BaseFragment<FragmentMainScreenPageBinding, HomeM
         lifecycleScope.launchWhenCreated {
             appDataStore.userIdFlow.collectLatest {
                 viewModel.userId.value = it
-                viewModel.getPosts()
             }
         }
 
@@ -67,6 +66,9 @@ class MainScreenPageFragment : BaseFragment<FragmentMainScreenPageBinding, HomeM
     private fun initData() {
         lifecycleScope.launchWhenResumed {
             viewModel.getSuggestFriends()
+        }
+        lifecycleScope.launchWhenResumed {
+            viewModel.getPosts()
         }
         lifecycleScope.launchWhenResumed {
             viewModel.postDetailsStateFlow.collectLatest {
