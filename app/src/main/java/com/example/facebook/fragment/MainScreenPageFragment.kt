@@ -5,7 +5,7 @@ import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.facebook.R
-import com.example.facebook.adapter.PostAdapter
+import com.example.facebook.adapter.DiffAdapter
 import com.example.facebook.adapter.SuggestFriendsAdapter
 import com.example.facebook.api.request.SuggestFriendResponse
 import com.example.facebook.api.response.PostsResponsesItem
@@ -20,10 +20,19 @@ class MainScreenPageFragment : BaseFragment<FragmentMainScreenPageBinding, HomeM
 
     private val suggestFriendsAdapter = SuggestFriendsAdapter(::onAddClicked, ::onRemoveClicked)
 
-    private val postAdapter = PostAdapter(
-        onDeletePostClicked = ::onDeleteClicked,
-        onPostLiked = ::onPostLiked
-    )
+//    private val postAdapter = PostAdapter(
+//        onDeletePostClicked = ::onDeleteClicked,
+//        onPostLiked = ::onPostLiked
+//    )
+
+    private val diffUtilAdapter =
+        DiffAdapter(
+            onDeletePostClicked = ::onDeleteClicked,
+            onPostLiked = ::onPostLiked
+        )
+
+
+
 
     private fun onRemoveClicked(item: SuggestFriendResponse) {
         //   Toast.makeText(requireContext(), "clicked on remove button", Toast.LENGTH_SHORT).show()
@@ -50,7 +59,6 @@ class MainScreenPageFragment : BaseFragment<FragmentMainScreenPageBinding, HomeM
         initData()
 
 
-
         val appDataStore = AppDataStore(requireContext())
         lifecycleScope.launchWhenCreated {
             appDataStore.userIdFlow.collectLatest {
@@ -59,11 +67,10 @@ class MainScreenPageFragment : BaseFragment<FragmentMainScreenPageBinding, HomeM
         }
 
         dataBinding.recyclerViewFriends.adapter = suggestFriendsAdapter
+//
+//        dataBinding.recyclerViewPosts.adapter = postAdapter
 
-        dataBinding.recyclerViewPosts.adapter = postAdapter
-
-
-
+        dataBinding.recyclerViewPosts.adapter = diffUtilAdapter
 
         dataBinding.layoutCreatePost.searchView.setOnClickListener {
             val action =
@@ -83,8 +90,9 @@ class MainScreenPageFragment : BaseFragment<FragmentMainScreenPageBinding, HomeM
         lifecycleScope.launchWhenResumed {
             viewModel.postDetailsStateFlow.collect {
 
-                postAdapter.submitList(it)
+//                postAdapter.submitList(it)
 
+                diffUtilAdapter.setData(it)
 
                 Log.d("List", "initData: $it")
 //                postAdapter.postDetailsNotify(it)

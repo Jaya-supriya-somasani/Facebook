@@ -1,11 +1,13 @@
 package com.example.facebook.adapter
 
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import com.example.facebook.R
 import com.example.facebook.api.response.PostsResponsesItem
 import com.example.facebook.databinding.ItemFacebookPostsBinding
-import com.example.facebook.util.*
+import com.example.facebook.util.BaseAdapter
+import com.example.facebook.util.BaseHolder
+import com.example.facebook.util.BaseViewHolder
+import com.example.facebook.util.inflate
 
 class PostAdapter(
     private val onDeletePostClicked: (PostsResponsesItem) -> Unit,
@@ -27,12 +29,7 @@ class PostAdapter(
         viewType: Int
     ): BaseHolder<PostsResponsesItem> = PostViewHolder(parent.inflate(R.layout.item_facebook_posts))
 
-    fun updatingData(newPostData:ArrayList<PostsResponsesItem>){
-        val diffUtil= DiffUtilKtx(postsResponseOld,newPostData)
-        val diffResult= DiffUtil.calculateDiff(diffUtil)
-        postsResponseOld= newPostData
-        diffResult.dispatchUpdatesTo(this@PostAdapter)
-    }
+
 
     private inner class PostViewHolder(binding: ItemFacebookPostsBinding) :
         BaseViewHolder<ItemFacebookPostsBinding, PostsResponsesItem>(binding) {
