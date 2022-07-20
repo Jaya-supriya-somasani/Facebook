@@ -1,4 +1,5 @@
 package com.example.facebook.viewmodels
+
 import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.example.facebook.NetworkResult
@@ -10,13 +11,19 @@ import com.example.facebook.safeApi
 import com.example.facebook.util.BaseViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
 class HomeMainViewModel : BaseViewModel() {
     private val postDetailsMutableState = MutableStateFlow<List<PostsResponsesItem>>(emptyList())
-    var postDetailsStateFlow: StateFlow<List<PostsResponsesItem>> = postDetailsMutableState
+    private val isLikePostChanged = MutableStateFlow(false)
+
+    var postDetailsStateFlow =
+        combine(postDetailsMutableState, isLikePostChanged) { list, isLikeChanged ->
+            list
+        }
+
     val userId = MutableStateFlow("")
     private val toastEventChannel = Channel<String>()
     val toastEvent = toastEventChannel.receiveAsFlow()
@@ -49,12 +56,20 @@ class HomeMainViewModel : BaseViewModel() {
                 )
             }) {
                 is NetworkResult.Success -> {
+                    Log.d("TAG", "onLikeClicked: before ${item.likesCount}")
 
+                    if (likeStatus) {
+                        item.likesCount = ((item.likesCount?.toInt()?:0) + 1).toString()
+                    } else {
+                        item.likesCount = ((item.likesCount?.toInt()?:0) - 1).toString()
+                    }
+                    item.likeStatus = likeStatus
+                    Log.d("TAG", "onLikeClicked: after ${item.likesCount}")
+                    isLikePostChanged.value = !isLikePostChanged.value
                     toastEventChannel.trySend(result.data.body()?.message ?: "")
                 }
                 is NetworkResult.Exception -> {
                     toastEventChannel.trySend(result.message ?: "")
-
                 }
             }
         }
@@ -116,12 +131,12 @@ class HomeMainViewModel : BaseViewModel() {
     }
 
     fun refreshDataFromServer() {
-        isRefreshingData.value =true
+        isRefreshingData.value = true
         Log.d("TAG", "refreshDataFromServer before: ${isRefreshingData.value}")
         viewModelScope.launch {
             getPosts()
             getSuggestFriends()
-            isRefreshingData.value=false
+            isRefreshingData.value = false
             Log.d("TAG", "refreshDataFromServer after: ${isRefreshingData.value}")
 //            isRefreshingData.value = !isRefreshingData.value
         }

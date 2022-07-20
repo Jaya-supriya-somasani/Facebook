@@ -1,5 +1,6 @@
 package com.example.facebook.fragment
 
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -18,6 +19,7 @@ import kotlinx.coroutines.flow.collectLatest
 class MainScreenPageFragment : BaseFragment<FragmentMainScreenPageBinding, HomeMainViewModel>() {
 
     private val suggestFriendsAdapter = SuggestFriendsAdapter(::onAddClicked, ::onRemoveClicked)
+
     private val postAdapter = PostAdapter(
         onDeletePostClicked = ::onDeleteClicked,
         onPostLiked = ::onPostLiked
@@ -46,6 +48,9 @@ class MainScreenPageFragment : BaseFragment<FragmentMainScreenPageBinding, HomeM
     override fun initViews() {
         dataBinding.viewModel = viewModel
         initData()
+
+
+
         val appDataStore = AppDataStore(requireContext())
         lifecycleScope.launchWhenCreated {
             appDataStore.userIdFlow.collectLatest {
@@ -54,7 +59,12 @@ class MainScreenPageFragment : BaseFragment<FragmentMainScreenPageBinding, HomeM
         }
 
         dataBinding.recyclerViewFriends.adapter = suggestFriendsAdapter
+
         dataBinding.recyclerViewPosts.adapter = postAdapter
+
+
+
+
         dataBinding.layoutCreatePost.searchView.setOnClickListener {
             val action =
                 MainScreenPageFragmentDirections.actionHomeMainFragmentToCreatePostFragment2()
@@ -71,8 +81,12 @@ class MainScreenPageFragment : BaseFragment<FragmentMainScreenPageBinding, HomeM
             viewModel.getPosts()
         }
         lifecycleScope.launchWhenResumed {
-            viewModel.postDetailsStateFlow.collectLatest {
+            viewModel.postDetailsStateFlow.collect {
+
                 postAdapter.submitList(it)
+
+
+                Log.d("List", "initData: $it")
 //                postAdapter.postDetailsNotify(it)
             }
         }

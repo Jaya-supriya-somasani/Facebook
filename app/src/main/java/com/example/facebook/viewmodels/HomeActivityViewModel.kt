@@ -40,7 +40,6 @@ class HomeActivityViewModel : BaseViewModel() {
         CoroutineScope(Dispatchers.IO).launch {
             if (!isLaunchImmediate)
                 delay(1000)
-
             navigateToNextScreenChannel.trySend(isLoginScreen)
         }
     }

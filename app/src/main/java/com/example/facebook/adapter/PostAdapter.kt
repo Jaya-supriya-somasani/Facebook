@@ -1,20 +1,20 @@
 package com.example.facebook.adapter
 
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import com.example.facebook.R
 import com.example.facebook.api.response.PostsResponsesItem
 import com.example.facebook.databinding.ItemFacebookPostsBinding
-import com.example.facebook.util.BaseAdapter
-import com.example.facebook.util.BaseHolder
-import com.example.facebook.util.BaseViewHolder
-import com.example.facebook.util.inflate
+import com.example.facebook.util.*
 
 class PostAdapter(
     private val onDeletePostClicked: (PostsResponsesItem) -> Unit,
     private val onPostLiked: (PostsResponsesItem) -> Unit,
 ) : BaseAdapter<PostsResponsesItem>() {
 
-//    private val postsResponse= arrayListOf<PostsResponsesItem>()
+
+    // for diffutils
+    private var postsResponseOld= arrayListOf<PostsResponsesItem>()
 //
 //    fun postDetailsNotify(dataInfo:List<PostsResponsesItem>){
 //        this.postsResponse.clear()
@@ -26,6 +26,13 @@ class PostAdapter(
         parent: ViewGroup,
         viewType: Int
     ): BaseHolder<PostsResponsesItem> = PostViewHolder(parent.inflate(R.layout.item_facebook_posts))
+
+    fun updatingData(newPostData:ArrayList<PostsResponsesItem>){
+        val diffUtil= DiffUtilKtx(postsResponseOld,newPostData)
+        val diffResult= DiffUtil.calculateDiff(diffUtil)
+        postsResponseOld= newPostData
+        diffResult.dispatchUpdatesTo(this@PostAdapter)
+    }
 
     private inner class PostViewHolder(binding: ItemFacebookPostsBinding) :
         BaseViewHolder<ItemFacebookPostsBinding, PostsResponsesItem>(binding) {
@@ -40,6 +47,12 @@ class PostAdapter(
                 onPostLiked(getItem(layoutPosition))
             }
         }
+
+
+
+
+
+
 
         override fun onBind(item: PostsResponsesItem) {
             binding.item = item

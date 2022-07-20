@@ -16,18 +16,27 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-        <activity
-            android:name=".activity.HomeActivity"
+
+        <activity android:name=".activity.SplashScreenActivity"
             android:exported="true"
             android:launchMode="singleTop"
             android:theme="@style/Theme.App.Starting">
-
-            <nav-graph android:value="@navigation/nav_home" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+
+        <activity
+            android:name=".activity.HomeActivity"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.Facebook">
+
+            <nav-graph android:value="@navigation/nav_home" />
+
         </activity>
 
         <activity
