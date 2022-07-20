@@ -3,10 +3,10 @@ package com.example.facebook.adapter
 import android.view.ViewGroup
 import com.example.facebook.R
 import com.example.facebook.api.request.FriendDetailResponse
+import com.example.facebook.base.BaseAdapter
+import com.example.facebook.base.BaseHolder
+import com.example.facebook.base.BaseViewHolder
 import com.example.facebook.databinding.ItemFriendsBinding
-import com.example.facebook.util.BaseAdapter
-import com.example.facebook.util.BaseHolder
-import com.example.facebook.util.BaseViewHolder
 import com.example.facebook.util.inflate
 
 class AddFriendsListAdapter(

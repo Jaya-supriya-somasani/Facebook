@@ -3,16 +3,16 @@ package com.example.facebook.adapter
 import android.view.ViewGroup
 import com.example.facebook.R
 import com.example.facebook.api.request.SuggestFriendResponse
+import com.example.facebook.base.BaseHolder
+import com.example.facebook.base.BaseListAdapter
+import com.example.facebook.base.BaseViewHolder
 import com.example.facebook.databinding.ItemFriendsListBinding
-import com.example.facebook.util.BaseAdapter
-import com.example.facebook.util.BaseHolder
-import com.example.facebook.util.BaseViewHolder
 import com.example.facebook.util.inflate
 
 class SuggestFriendsAdapter(
     private val onAddFriendButtonClicked: (SuggestFriendResponse) -> Unit,
     private val onRemoveButtonClicked: (SuggestFriendResponse) -> Unit
-) : BaseAdapter<SuggestFriendResponse>() {
+) : BaseListAdapter<SuggestFriendResponse>(SuggestFriendResponse.DiffUtils()) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int

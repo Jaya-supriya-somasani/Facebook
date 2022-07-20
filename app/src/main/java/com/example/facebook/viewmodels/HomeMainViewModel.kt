@@ -11,20 +11,17 @@ import com.example.facebook.safeApi
 import com.example.facebook.util.BaseViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
 class HomeMainViewModel : BaseViewModel() {
-    private val postDetailsMutableState = MutableStateFlow<List<PostsResponsesItem>>(emptyList())
-    private val isLikePostChanged = MutableStateFlow(false)
-
-    var postDetailsStateFlow =
-        combine(postDetailsMutableState, isLikePostChanged) { list, isLikeChanged ->
-            list
-        }
+    val postDetailsMutableState = MutableStateFlow<List<PostsResponsesItem>>(emptyList())
+    private val likePostChangeChanel = Channel<Int>()
+    val likePostChangeEvent = likePostChangeChanel.receiveAsFlow()
 
     val userId = MutableStateFlow("")
+
     private val toastEventChannel = Channel<String>()
     val toastEvent = toastEventChannel.receiveAsFlow()
     private val suggestFriendsListStateFlow =
@@ -32,6 +29,9 @@ class HomeMainViewModel : BaseViewModel() {
     val suggestFriendsList: MutableStateFlow<List<SuggestFriendResponse>> =
         suggestFriendsListStateFlow
     val isRefreshingData = MutableStateFlow(false)
+    val userPostFlow = userId.map {
+        getPosts()
+    }
 
     suspend fun getPosts() {
         when (val result = safeApi { NetworkService.apiService.getPosts(userId.value) }) {
@@ -45,37 +45,39 @@ class HomeMainViewModel : BaseViewModel() {
     }
 
 
-    fun onLikeClicked(item: PostsResponsesItem) {
+    fun onLikeClicked(item: PostsResponsesItem, position: Int) {
         val likeStatus = !item.likeStatus
         viewModelScope.launch {
-            when (val result = safeApi {
+            val result = safeApi {
                 NetworkService.apiService.updateLike(
                     userId.value,
                     item.postId,
                     likeStatus
                 )
-            }) {
+            }
+
+            when (result) {
                 is NetworkResult.Success -> {
                     Log.d("TAG", "onLikeClicked: before ${item.likesCount}")
 
-                    if (likeStatus) {
-                        item.likesCount = ((item.likesCount?.toInt()?:0) + 1).toString()
-                    } else {
-                        item.likesCount = ((item.likesCount?.toInt()?:0) - 1).toString()
-                    }
-                    item.likeStatus = likeStatus
+                    val likeResponse = result.data.data!!
+                    item.likesCount = likeResponse.count
+                    item.likeStatus = likeResponse.likeStatus.toBoolean()
                     Log.d("TAG", "onLikeClicked: after ${item.likesCount}")
-                    isLikePostChanged.value = !isLikePostChanged.value
-                    toastEventChannel.trySend(result.data.body()?.message ?: "")
+                    likePostChangeChanel.trySend(position)
+                    toastEventChannel.trySend(result.data.message ?: "")
                 }
                 is NetworkResult.Exception -> {
                     toastEventChannel.trySend(result.message ?: "")
+                }
+                else -> {
+                    //toastEventChannel.trySend(result.message ?: "")
                 }
             }
         }
     }
 
-    fun onDeleteClicked(item: PostsResponsesItem) {
+    fun onDeleteClicked(item: PostsResponsesItem, position: Int) {
         viewModelScope.launch {
             when (val result = safeApi {
                 NetworkService.apiService.deletePost(userId.value, item.postId)
@@ -104,6 +106,8 @@ class HomeMainViewModel : BaseViewModel() {
             }
         }
     }
+
+//    fun removeSugges
 
     fun addFriend(item: SuggestFriendResponse) {
         viewModelScope.launch {

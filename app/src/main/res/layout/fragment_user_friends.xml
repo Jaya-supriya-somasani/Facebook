@@ -67,7 +67,7 @@
                 style="@style/wrap_wrap"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="20dp"
-                android:text="@{userFriendsVM.totalFriendsList+`Friends`}"
+                android:text="@{userFriendsVM.totalFriendsList+` Friends`}"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold"

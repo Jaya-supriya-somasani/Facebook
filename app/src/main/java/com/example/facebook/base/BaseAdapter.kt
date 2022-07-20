@@ -1,11 +1,5 @@
 package com.example.facebook.base
 
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.annotation.LayoutRes
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 
 abstract class BaseAdapter<Item> : RecyclerView.Adapter<BaseHolder<Item>>() {
@@ -47,22 +41,4 @@ abstract class BaseAdapter<Item> : RecyclerView.Adapter<BaseHolder<Item>>() {
         return listItems.size
     }
 
-}
-
-abstract class BaseHolder<Item>(view: View) : RecyclerView.ViewHolder(view) {
-
-    abstract fun onBind(item: Item)
-
-
-}
-
-abstract class BaseViewHolder<Binding : ViewDataBinding, Item>(val binding: Binding) :
-    BaseHolder<Item>(binding.root)
-
-
-fun <T : ViewDataBinding> ViewGroup.inflate(
-    @LayoutRes layoutRes: Int,
-    attachToParent: Boolean = false
-): T {
-    return DataBindingUtil.inflate(LayoutInflater.from(context), layoutRes, this, attachToParent)
 }

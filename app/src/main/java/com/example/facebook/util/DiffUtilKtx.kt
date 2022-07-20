@@ -16,15 +16,12 @@ class DiffUtilKtx(
     }
 
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return prevPostData[oldItemPosition].likeStatus==newPostData[newItemPosition].likeStatus
+        return prevPostData[oldItemPosition].likeStatus == newPostData[newItemPosition].likeStatus
     }
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-       return when{
-           prevPostData[oldItemPosition].postData!=newPostData[newItemPosition].postData ->{false}
-           prevPostData[oldItemPosition].likeStatus!=newPostData[newItemPosition].likeStatus->{false}
-           prevPostData[oldItemPosition].likesCount!=newPostData[newItemPosition].likesCount->{false}
-           else -> {true}
-       }
+        return (prevPostData[oldItemPosition].likesCount == newPostData[newItemPosition].likesCount) &&
+                (prevPostData[oldItemPosition].likeStatus == newPostData[newItemPosition].likeStatus)
     }
+
 }

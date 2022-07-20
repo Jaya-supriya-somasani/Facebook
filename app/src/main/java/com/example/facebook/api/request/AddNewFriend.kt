@@ -1,9 +1,9 @@
 package com.example.facebook.api.request
 
 import android.os.Parcelable
+import androidx.recyclerview.widget.DiffUtil
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
-import java.util.*
 
 @Parcelize
 data class AddNewFriend(
@@ -27,7 +27,18 @@ data class FriendDetailResponse(
     val dateOfBirth: String,
     @SerializedName("gender")
     val gender: String,
-) : Parcelable
+) : Parcelable{
+    class DiffUtils : DiffUtil.ItemCallback<FriendDetailResponse>() {
+        override fun areItemsTheSame(oldItem: FriendDetailResponse, newItem: FriendDetailResponse) =
+            oldItem.userName.equals(newItem.userName, true) &&
+                    oldItem.userId == newItem.userId &&
+                    oldItem.mail == newItem.mail
+
+
+        override fun areContentsTheSame(oldItem: FriendDetailResponse, newItem: FriendDetailResponse) =
+            oldItem.userId == newItem.userId
+    }
+}
 
 
 @Parcelize
@@ -36,7 +47,15 @@ data class SuggestFriendResponse(
     val friendId: String,
     @SerializedName("friendName")
     val friendName: String
-) : Parcelable
+) : Parcelable{
+    class DiffUtils : DiffUtil.ItemCallback<SuggestFriendResponse>() {
+        override fun areItemsTheSame(oldItem: SuggestFriendResponse, newItem: SuggestFriendResponse) =
+            oldItem.friendName.equals(newItem.friendName, true)
+
+        override fun areContentsTheSame(oldItem: SuggestFriendResponse, newItem: SuggestFriendResponse) =
+            oldItem.friendId == newItem.friendId
+    }
+}
 
 
 

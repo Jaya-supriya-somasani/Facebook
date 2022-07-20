@@ -39,10 +39,10 @@
                 android:layout_height="60dp"
                 android:layout_margin="20dp"
                 android:adjustViewBounds="true"
-                app:shapeAppearanceOverlay="@style/roundedImageView"
                 android:scaleType="centerCrop"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearanceOverlay="@style/roundedImageView"
                 app:srcCompat="@drawable/profile" />
 
 
@@ -154,15 +154,14 @@
                 app:layout_constraintTop_toTopOf="@id/ivLikeImage" />
 
 
-            <androidx.appcompat.widget.AppCompatCheckBox
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivLike"
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
                 android:backgroundTintMode="@color/white"
-                android:button="@drawable/ic_thumbs_up_selectable"
-                android:checked="@{item.likeStatus}"
                 android:paddingVertical="10dp"
+                android:src="@{item.likeStatus? @drawable/ic_thumbs_up: @drawable/ic_thumbs_up_normal}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/tvLikes"
                 app:layout_constraintStart_toStartOf="parent"

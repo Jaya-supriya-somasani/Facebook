@@ -65,7 +65,7 @@ interface ApiService {
         @Path("userId", encoded = true) userId: String,
         @Path("postId", encoded = true) postId: String,
         @Path("likeStatus", encoded = true) likeStatus: Boolean,
-    ): ApiResponse<UpdateLikes>
+    ): BaseResponse<UpdateLikes>
 
 
     @GET("/api/v1/likes/{postId}")

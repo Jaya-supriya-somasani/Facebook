@@ -1,6 +1,5 @@
 package com.example.facebook.fragment
 
-import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -20,22 +19,15 @@ class MainScreenPageFragment : BaseFragment<FragmentMainScreenPageBinding, HomeM
 
     private val suggestFriendsAdapter = SuggestFriendsAdapter(::onAddClicked, ::onRemoveClicked)
 
-//    private val postAdapter = PostAdapter(
-//        onDeletePostClicked = ::onDeleteClicked,
-//        onPostLiked = ::onPostLiked
-//    )
-
-    private val diffUtilAdapter =
-        DiffAdapter(
-            onDeletePostClicked = ::onDeleteClicked,
-            onPostLiked = ::onPostLiked
-        )
-
+    private val postAdapter = DiffAdapter(
+        onDeletePostClicked = ::onDeleteClicked,
+        onPostLiked = ::onPostLiked
+    )
 
 
 
     private fun onRemoveClicked(item: SuggestFriendResponse) {
-        //   Toast.makeText(requireContext(), "clicked on remove button", Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), "clicked on remove button", Toast.LENGTH_SHORT).show()
     }
 
     private fun onAddClicked(item: SuggestFriendResponse) {
@@ -43,12 +35,12 @@ class MainScreenPageFragment : BaseFragment<FragmentMainScreenPageBinding, HomeM
 
     }
 
-    private fun onPostLiked(item: PostsResponsesItem) {
-        viewModel.onLikeClicked(item)
+    private fun onPostLiked(item: PostsResponsesItem, position: Int) {
+        viewModel.onLikeClicked(item, position)
     }
 
-    private fun onDeleteClicked(item: PostsResponsesItem) {
-        viewModel.onDeleteClicked(item)
+    private fun onDeleteClicked(item: PostsResponsesItem, position: Int) {
+        viewModel.onDeleteClicked(item, position)
     }
 
     override fun getViewModel(): Class<HomeMainViewModel> = HomeMainViewModel::class.java
@@ -67,10 +59,7 @@ class MainScreenPageFragment : BaseFragment<FragmentMainScreenPageBinding, HomeM
         }
 
         dataBinding.recyclerViewFriends.adapter = suggestFriendsAdapter
-//
-//        dataBinding.recyclerViewPosts.adapter = postAdapter
-
-        dataBinding.recyclerViewPosts.adapter = diffUtilAdapter
+        dataBinding.recyclerViewPosts.adapter = postAdapter
 
         dataBinding.layoutCreatePost.searchView.setOnClickListener {
             val action =
@@ -85,17 +74,18 @@ class MainScreenPageFragment : BaseFragment<FragmentMainScreenPageBinding, HomeM
             viewModel.getSuggestFriends()
         }
         lifecycleScope.launchWhenResumed {
-            viewModel.getPosts()
+            viewModel.likePostChangeEvent.collectLatest {
+                postAdapter.notifyItemChanged(it)
+            }
         }
         lifecycleScope.launchWhenResumed {
-            viewModel.postDetailsStateFlow.collect {
+            viewModel.userPostFlow.collectLatest {
 
-//                postAdapter.submitList(it)
-
-                diffUtilAdapter.setData(it)
-
-                Log.d("List", "initData: $it")
-//                postAdapter.postDetailsNotify(it)
+            }
+        }
+        lifecycleScope.launchWhenResumed {
+            viewModel.postDetailsMutableState.collectLatest {
+                postAdapter.setData(it)
             }
         }
         lifecycleScope.launchWhenResumed {

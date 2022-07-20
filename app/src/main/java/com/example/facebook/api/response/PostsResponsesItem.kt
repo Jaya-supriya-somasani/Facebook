@@ -1,6 +1,7 @@
 package com.example.facebook.api.response
 
 import android.os.Parcelable
+import androidx.recyclerview.widget.DiffUtil
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
@@ -11,16 +12,27 @@ data class PostsResponsesItem(
     @SerializedName("userName")
     val userName: String,
     @SerializedName("postId")
-    val postId: String,
+    var postId: String,
     @SerializedName("postData")
     val postData: String,
     @SerializedName("totalLikes")
-    var likesCount: String?,
+    var likesCount: String,
     @SerializedName("likeStatus")
     var likeStatus: Boolean = false,
-    @SerializedName("iscreated")
+    @SerializedName("isCreated")
     val isCreated: Boolean
-) : Parcelable
+) : Parcelable {
+    class DiffUtils : DiffUtil.ItemCallback<PostsResponsesItem>() {
+        override fun areItemsTheSame(oldItem: PostsResponsesItem, newItem: PostsResponsesItem) =
+            oldItem.userId.equals(newItem.userId, true) &&
+                    oldItem.likeStatus == newItem.likeStatus &&
+                    oldItem.likesCount == newItem.likesCount
+
+
+        override fun areContentsTheSame(oldItem: PostsResponsesItem, newItem: PostsResponsesItem) =
+            oldItem.postId == newItem.postId
+    }
+}
 
 class BaseResponse<T>(
     @SerializedName("status")

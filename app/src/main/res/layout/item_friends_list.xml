@@ -8,6 +8,9 @@
         <variable
             name="item"
             type="com.example.facebook.api.request.SuggestFriendResponse" />
+        <variable
+            name="homeMainVM"
+            type="com.example.facebook.viewmodels.HomeMainViewModel" />
     </data>
 
     <androidx.cardview.widget.CardView
