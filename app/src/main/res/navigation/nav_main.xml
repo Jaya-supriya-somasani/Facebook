@@ -28,17 +28,17 @@
     </fragment>
     <fragment
         android:id="@+id/profilePageFragment"
-        android:name="com.example.facebook.fragment.ProfilePageFragment"
+        android:name="com.example.facebook.userprofile.ProfilePageFragment"
         android:label="ProfilePageFragment"
         tools:layout="@layout/fragment_profile_page" />
     <fragment
         android:id="@+id/createPostFragment2"
-        android:name="com.example.facebook.fragment.CreatePostFragment"
+        android:name="com.example.facebook.createpost.CreatePostFragment"
         android:label="CreatePostFragment"
         tools:layout="@layout/fragment_create_post" />
     <fragment
         android:id="@+id/friendsPageFragment"
-        android:name="com.example.facebook.fragment.FriendsPageFragment"
+        android:name="com.example.facebook.friendslist.FriendsPageFragment"
         android:label="FriendsPageFragment"
         tools:layout="@layout/fragment_user_friends" />
 

@@ -19,7 +19,7 @@ data class PostsResponsesItem(
     var likesCount: String,
     @SerializedName("likeStatus")
     var likeStatus: Boolean = false,
-    @SerializedName("isCreated")
+    @SerializedName("iscreated")
     val isCreated: Boolean
 ) : Parcelable {
     class DiffUtils : DiffUtil.ItemCallback<PostsResponsesItem>() {

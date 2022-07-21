@@ -6,7 +6,7 @@
 
         <variable
             name="createAccViewModel"
-            type="com.example.facebook.viewmodels.RegisterAccountViewModel" />
+            type="com.example.facebook.register.RegisterAccountViewModel" />
     </data>
 
     <ScrollView style="@style/match_wrap">

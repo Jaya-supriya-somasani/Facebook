@@ -1,4 +1,4 @@
-package com.example.facebook.fragment
+package com.example.facebook.friendslist
 
 import android.annotation.SuppressLint
 import androidx.lifecycle.lifecycleScope
@@ -9,7 +9,6 @@ import com.example.facebook.api.request.FriendDetailResponse
 import com.example.facebook.databinding.FragmentUserFriendsBinding
 import com.example.facebook.datastore.AppDataStore
 import com.example.facebook.util.BaseFragment
-import com.example.facebook.viewmodels.FriendsListViewModel
 import kotlinx.coroutines.flow.collectLatest
 
 
@@ -42,6 +41,11 @@ class FriendsPageFragment : BaseFragment<FragmentUserFriendsBinding, FriendsList
         lifecycleScope.launchWhenResumed {
             viewModel.getFriendsList(userId)
         }
+        lifecycleScope.launchWhenResumed {
+            viewModel.removeFriendsEvent.collectLatest {
+                adapter.notifyItemRemoved(it)
+            }
+        }
         dataBinding.backArrowIcon.setOnClickListener {
             findNavController().popBackStack()
         }
@@ -62,8 +66,8 @@ class FriendsPageFragment : BaseFragment<FragmentUserFriendsBinding, FriendsList
         dataBinding.rvFriends.adapter = adapter
     }
 
-    private fun onRemoveFriendClicked(item: FriendDetailResponse) {
-        viewModel.removeFriend(item,userId)
+    private fun onRemoveFriendClicked(item: FriendDetailResponse,position:Int) {
+        viewModel.removeFriend(item,userId,position)
     }
 
 //

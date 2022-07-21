@@ -1,4 +1,4 @@
-package com.example.facebook.fragment
+package com.example.facebook.login
 
 import android.content.Intent
 import android.widget.Toast
@@ -10,7 +10,6 @@ import com.example.facebook.activity.MainActivity
 import com.example.facebook.databinding.FragmentLoginBinding
 import com.example.facebook.datastore.AppDataStore
 import com.example.facebook.util.BaseFragment
-import com.example.facebook.viewmodels.LoginPageViewModel
 import kotlinx.coroutines.flow.collectLatest
 
 
@@ -33,7 +32,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginPageViewModel>() {
             viewModel.loginEvent.collectLatest { loginStatus ->
                 activity?.let { fragmentActivity ->
                     appDataStore.saveUserId(loginStatus.userId)
-                    appDataStore.saveUserName(loginStatus.userName!!)
+                    appDataStore.saveUserName(loginStatus.userName)
                     appDataStore.setLoginStatus(true)
 
                     val intent = Intent(fragmentActivity, MainActivity::class.java)

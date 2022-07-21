@@ -1,4 +1,4 @@
-package com.example.facebook.viewmodels
+package com.example.facebook.register
 
 import androidx.lifecycle.viewModelScope
 import com.example.facebook.NetworkResult

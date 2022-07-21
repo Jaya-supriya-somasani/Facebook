@@ -6,7 +6,7 @@
 
         <variable
             name="loginVM"
-            type="com.example.facebook.viewmodels.LoginPageViewModel" />
+            type="com.example.facebook.login.LoginPageViewModel" />
     </data>
 
     <ScrollView style="@style/match_wrap">

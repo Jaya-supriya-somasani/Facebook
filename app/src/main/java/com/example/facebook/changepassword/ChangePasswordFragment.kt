@@ -1,4 +1,4 @@
-package com.example.facebook.fragment
+package com.example.facebook.changepassword
 
 import android.text.Editable
 import android.text.TextWatcher
@@ -9,7 +9,6 @@ import androidx.navigation.fragment.findNavController
 import com.example.facebook.R
 import com.example.facebook.databinding.FragmentChangePasswordBinding
 import com.example.facebook.util.BaseFragment
-import com.example.facebook.viewmodels.ChangePasswordViewModel
 import kotlinx.coroutines.flow.collectLatest
 
 class ChangePasswordFragment :

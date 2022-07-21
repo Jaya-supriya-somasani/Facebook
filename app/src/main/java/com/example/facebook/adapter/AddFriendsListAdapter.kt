@@ -10,7 +10,7 @@ import com.example.facebook.databinding.ItemFriendsBinding
 import com.example.facebook.util.inflate
 
 class AddFriendsListAdapter(
-    private val onDeleteFriend: (FriendDetailResponse) -> Unit,
+    private val onDeleteFriend: (FriendDetailResponse,Int) -> Unit,
 ) : BaseAdapter<FriendDetailResponse>() {
 
     override fun onCreateViewHolder(
@@ -24,7 +24,7 @@ class AddFriendsListAdapter(
 
         override fun onBind(item: FriendDetailResponse) {
             binding.item = item
-            binding.removeFriendBtn.setOnClickListener { onDeleteFriend(getItem(adapterPosition)) }
+            binding.removeFriendBtn.setOnClickListener { onDeleteFriend(getItem(adapterPosition),adapterPosition) }
         }
 
     }

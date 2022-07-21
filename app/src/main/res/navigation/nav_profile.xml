@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/profilePageFragment2"
-        android:name="com.example.facebook.fragment.ProfilePageFragment"
+        android:name="com.example.facebook.userprofile.ProfilePageFragment"
         android:label="ProfilePageFragment"
         tools:layout="@layout/fragment_profile_page">
 
@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/chagnePasswordScreen"
-        android:name="com.example.facebook.fragment.ChangePasswordFragment"
+        android:name="com.example.facebook.changepassword.ChangePasswordFragment"
         android:label="ChangePassword"
         tools:layout="@layout/fragment_change_password">
 

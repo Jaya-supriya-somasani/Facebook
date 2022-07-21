@@ -24,11 +24,19 @@ class HomeMainViewModel : BaseViewModel() {
 
     private val toastEventChannel = Channel<String>()
     val toastEvent = toastEventChannel.receiveAsFlow()
+
     private val suggestFriendsListStateFlow =
         MutableStateFlow<List<SuggestFriendResponse>>(emptyList())
-    val suggestFriendsList: MutableStateFlow<List<SuggestFriendResponse>> =
-        suggestFriendsListStateFlow
+
+    private val addFriendChannel=Channel<Int>()
+    val addFriendEvent=addFriendChannel.receiveAsFlow()
+
+    val suggestFriendsList: MutableStateFlow<List<SuggestFriendResponse>> = suggestFriendsListStateFlow
     val isRefreshingData = MutableStateFlow(false)
+
+    private val deletePostChangeChannel = Channel<Int>()
+    val deletePostChangeEvent=deletePostChangeChannel.receiveAsFlow()
+
     val userPostFlow = userId.map {
         getPosts()
     }
@@ -49,11 +57,7 @@ class HomeMainViewModel : BaseViewModel() {
         val likeStatus = !item.likeStatus
         viewModelScope.launch {
             val result = safeApi {
-                NetworkService.apiService.updateLike(
-                    userId.value,
-                    item.postId,
-                    likeStatus
-                )
+                NetworkService.apiService.updateLike( userId.value, item.postId, likeStatus)
             }
 
             when (result) {
@@ -81,8 +85,10 @@ class HomeMainViewModel : BaseViewModel() {
         viewModelScope.launch {
             when (val result = safeApi {
                 NetworkService.apiService.deletePost(userId.value, item.postId)
+
             }) {
                 is NetworkResult.Success -> {
+                    deletePostChangeChannel.trySend(position)
                     toastEventChannel.trySend(result.data.body()?.message ?: "")
                 }
                 is NetworkResult.Exception -> {
@@ -109,19 +115,17 @@ class HomeMainViewModel : BaseViewModel() {
 
 //    fun removeSugges
 
-    fun addFriend(item: SuggestFriendResponse) {
+    fun addFriend(item: SuggestFriendResponse, position: Int) {
         viewModelScope.launch {
             when (val result =
-                safeApi {
-                    NetworkService.apiService.addFriend(
-                        AddNewFriend(
-                            item.friendId,
-                            userId.value
-                        )
-                    )
+                safeApi { NetworkService.apiService.addFriend( AddNewFriend( item.friendId, userId.value ))
                 }) {
                 is NetworkResult.Success -> {
                     toastEventChannel.trySend(result.data.body()?.message ?: "")
+                    val list = suggestFriendsListStateFlow.value as ArrayList
+                    // Removed item after adding the suggested friend
+                    list.removeAt(position)
+                    addFriendChannel.trySend(position)
                 }
                 is NetworkResult.Failure -> {
                     toastEventChannel.trySend(result.message ?: "")

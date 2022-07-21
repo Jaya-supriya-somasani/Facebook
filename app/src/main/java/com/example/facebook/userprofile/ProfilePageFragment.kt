@@ -1,4 +1,4 @@
-package com.example.facebook.fragment
+package com.example.facebook.userprofile
 import android.net.Uri
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
@@ -6,7 +6,6 @@ import androidx.navigation.fragment.findNavController
 import com.example.facebook.R
 import com.example.facebook.datastore.AppDataStore
 import com.example.facebook.util.BaseFragment
-import com.example.facebook.viewmodels.ProfilePageViewModel
 import kotlinx.coroutines.flow.collectLatest
 class ProfilePageFragment :
     BaseFragment<com.example.facebook.databinding.FragmentProfilePageBinding, ProfilePageViewModel>() {

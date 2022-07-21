@@ -1,18 +1,16 @@
 package com.example.facebook.fragment
 
-import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.facebook.R
 import com.example.facebook.databinding.FragmentRegisterAccountBinding
+import com.example.facebook.register.RegisterAccountViewModel
 import com.example.facebook.util.BaseFragment
-import com.example.facebook.viewmodels.RegisterAccountViewModel
 import com.google.android.material.datepicker.MaterialDatePicker
 import kotlinx.coroutines.flow.collectLatest
 import java.text.SimpleDateFormat
 import java.util.*
-import android.widget.RadioButton
 
 
 class RegisterAccountActivity :

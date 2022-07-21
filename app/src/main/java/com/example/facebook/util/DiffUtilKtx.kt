@@ -21,7 +21,8 @@ class DiffUtilKtx(
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
         return (prevPostData[oldItemPosition].likesCount == newPostData[newItemPosition].likesCount) &&
-                (prevPostData[oldItemPosition].likeStatus == newPostData[newItemPosition].likeStatus)
+                (prevPostData[oldItemPosition].likeStatus == newPostData[newItemPosition].likeStatus)&&
+                (prevPostData[oldItemPosition].isCreated == newPostData[newItemPosition].isCreated)
     }
 
 }

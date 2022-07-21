@@ -1,4 +1,4 @@
-package com.example.facebook.fragment
+package com.example.facebook.createpost
 
 import android.app.ProgressDialog
 import android.widget.Toast
@@ -8,7 +8,6 @@ import com.example.facebook.R
 import com.example.facebook.databinding.FragmentCreatePostBinding
 import com.example.facebook.datastore.AppDataStore
 import com.example.facebook.util.BaseFragment
-import com.example.facebook.viewmodels.CreatePostViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import java.util.*

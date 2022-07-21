@@ -10,7 +10,7 @@ import com.example.facebook.databinding.ItemFriendsListBinding
 import com.example.facebook.util.inflate
 
 class SuggestFriendsAdapter(
-    private val onAddFriendButtonClicked: (SuggestFriendResponse) -> Unit,
+    private val onAddFriendButtonClicked: (SuggestFriendResponse,Int) -> Unit,
     private val onRemoveButtonClicked: (SuggestFriendResponse) -> Unit
 ) : BaseListAdapter<SuggestFriendResponse>(SuggestFriendResponse.DiffUtils()) {
     override fun onCreateViewHolder(
@@ -23,7 +23,7 @@ class SuggestFriendsAdapter(
         BaseViewHolder<ItemFriendsListBinding, SuggestFriendResponse>(binding) {
         init {
             binding.btnAddFriend.setOnClickListener {
-                onAddFriendButtonClicked(getItem(layoutPosition))
+                onAddFriendButtonClicked(getItem(layoutPosition),layoutPosition)
             }
             binding.btnRemove.setOnClickListener {
                 onRemoveButtonClicked(getItem(layoutPosition))

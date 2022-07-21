@@ -1,4 +1,4 @@
-package com.example.facebook.viewmodels
+package com.example.facebook.login
 
 import androidx.lifecycle.viewModelScope
 import com.example.facebook.NetworkResult
@@ -85,6 +85,7 @@ class LoginPageViewModel : BaseViewModel() {
 //                    toastEventChannel.trySend(loginResult.message?:"")
 //                }
             }
+
 
 
         }

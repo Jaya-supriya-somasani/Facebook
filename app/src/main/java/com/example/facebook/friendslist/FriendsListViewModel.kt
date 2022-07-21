@@ -1,4 +1,4 @@
-package com.example.facebook.viewmodels
+package com.example.facebook.friendslist
 
 import androidx.lifecycle.viewModelScope
 import com.example.facebook.NetworkResult
@@ -16,6 +16,9 @@ class FriendsListViewModel : BaseViewModel() {
     val friendsList: MutableStateFlow<List<FriendDetailResponse>> = friendsListStateFlow
     private val toastEventChannel = Channel<String>()
     val toastEvent = toastEventChannel.receiveAsFlow()
+    private val removeFriendChannel=Channel<Int>()
+    val removeFriendsEvent=removeFriendChannel.receiveAsFlow()
+
     val totalFriendsList = MutableStateFlow(0)
 
     fun getFriendsList(userId: String) {
@@ -24,6 +27,7 @@ class FriendsListViewModel : BaseViewModel() {
                 is NetworkResult.Success -> {
                     friendsListStateFlow.value = result.data.data!!
                     totalFriendsList.value = friendsListStateFlow.value.size
+
                 }
                 is NetworkResult.Failure -> {
                     toastEventChannel.trySend(result.message ?: "")
@@ -38,12 +42,13 @@ class FriendsListViewModel : BaseViewModel() {
     }
 
 
-    fun removeFriend(item: FriendDetailResponse,userId: String) {
+    fun removeFriend(item: FriendDetailResponse,userId: String, position:Int) {
         viewModelScope.launch {
             when (val result =
                 safeApi { NetworkService.apiService.deleteFriend(item.friendId,userId) }) {
                 is NetworkResult.Success -> {
                     toastEventChannel.trySend(result.data.message() ?: "")
+                    removeFriendChannel.trySend(position)
                 }
                 is NetworkResult.Failure -> {
                     toastEventChannel.trySend(result.message ?: "")

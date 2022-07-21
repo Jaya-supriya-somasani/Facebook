@@ -24,14 +24,12 @@ class MainScreenPageFragment : BaseFragment<FragmentMainScreenPageBinding, HomeM
         onPostLiked = ::onPostLiked
     )
 
-
-
     private fun onRemoveClicked(item: SuggestFriendResponse) {
         Toast.makeText(requireContext(), "clicked on remove button", Toast.LENGTH_SHORT).show()
     }
 
-    private fun onAddClicked(item: SuggestFriendResponse) {
-        viewModel.addFriend(item)
+    private fun onAddClicked(item: SuggestFriendResponse,position: Int) {
+        viewModel.addFriend(item,position)
 
     }
 
@@ -49,15 +47,12 @@ class MainScreenPageFragment : BaseFragment<FragmentMainScreenPageBinding, HomeM
     override fun initViews() {
         dataBinding.viewModel = viewModel
         initData()
-
-
         val appDataStore = AppDataStore(requireContext())
         lifecycleScope.launchWhenCreated {
             appDataStore.userIdFlow.collectLatest {
                 viewModel.userId.value = it
             }
         }
-
         dataBinding.recyclerViewFriends.adapter = suggestFriendsAdapter
         dataBinding.recyclerViewPosts.adapter = postAdapter
 
@@ -81,6 +76,17 @@ class MainScreenPageFragment : BaseFragment<FragmentMainScreenPageBinding, HomeM
         lifecycleScope.launchWhenResumed {
             viewModel.userPostFlow.collectLatest {
 
+            }
+        }
+        lifecycleScope.launchWhenResumed {
+            viewModel.addFriendEvent.collectLatest {
+                // Removed item after adding the suggested friend
+                suggestFriendsAdapter.notifyItemRemoved(it)
+            }
+        }
+        lifecycleScope.launchWhenResumed {
+            viewModel.deletePostChangeEvent.collectLatest {
+                postAdapter.notifyItemRemoved(it)
             }
         }
         lifecycleScope.launchWhenResumed {
