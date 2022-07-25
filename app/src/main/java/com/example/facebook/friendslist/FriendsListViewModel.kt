@@ -1,5 +1,6 @@
 package com.example.facebook.friendslist
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.example.facebook.NetworkResult
 import com.example.facebook.api.NetworkService
@@ -16,10 +17,11 @@ class FriendsListViewModel : BaseViewModel() {
     val friendsList: MutableStateFlow<List<FriendDetailResponse>> = friendsListStateFlow
     private val toastEventChannel = Channel<String>()
     val toastEvent = toastEventChannel.receiveAsFlow()
-    private val removeFriendChannel=Channel<Int>()
-    val removeFriendsEvent=removeFriendChannel.receiveAsFlow()
+    //  private val removeFriendChannel = Channel<Int>()
+    //  val removeFriendsEvent = removeFriendChannel.receiveAsFlow()
 
     val totalFriendsList = MutableStateFlow(0)
+
 
     fun getFriendsList(userId: String) {
         viewModelScope.launch {
@@ -42,13 +44,15 @@ class FriendsListViewModel : BaseViewModel() {
     }
 
 
-    fun removeFriend(item: FriendDetailResponse,userId: String, position:Int) {
+    fun removeFriend(item: FriendDetailResponse, userId: String, count: Int) {
         viewModelScope.launch {
             when (val result =
-                safeApi { NetworkService.apiService.deleteFriend(item.friendId,userId) }) {
+                safeApi { NetworkService.apiService.deleteFriend(item.friendId, userId) }) {
                 is NetworkResult.Success -> {
+                    totalFriendsList.value = count
                     toastEventChannel.trySend(result.data.message() ?: "")
-                    removeFriendChannel.trySend(position)
+                    Log.e("TAG", "removeFriend:-${friendsList.value.size} ")
+                    //    removeFriendChannel.trySend(position)
                 }
                 is NetworkResult.Failure -> {
                     toastEventChannel.trySend(result.message ?: "")

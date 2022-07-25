@@ -67,11 +67,11 @@
                 style="@style/wrap_wrap"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="20dp"
+                android:visibility="@{!userFriendsVM.friendsList.empty ? View.VISIBLE : View.GONE}"
                 android:text="@{userFriendsVM.totalFriendsList+` Friends`}"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:visibility="@{!userFriendsVM.friendsList.empty ? View.VISIBLE : View.GONE}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/search_friends_edt"
                 tools:text="@string/total_friends_tv" />

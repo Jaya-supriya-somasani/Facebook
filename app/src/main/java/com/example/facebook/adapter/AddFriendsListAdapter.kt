@@ -7,10 +7,12 @@ import com.example.facebook.base.BaseAdapter
 import com.example.facebook.base.BaseHolder
 import com.example.facebook.base.BaseViewHolder
 import com.example.facebook.databinding.ItemFriendsBinding
+import com.example.facebook.generated.callback.OnClickListener
 import com.example.facebook.util.inflate
 
 class AddFriendsListAdapter(
-    private val onDeleteFriend: (FriendDetailResponse,Int) -> Unit,
+    private val onDeleteFriend: (FriendDetailResponse, Int,Int) -> Unit,
+    private val onDeleteFriendClickListener: OnClickListener? = null
 ) : BaseAdapter<FriendDetailResponse>() {
 
     override fun onCreateViewHolder(
@@ -24,14 +26,40 @@ class AddFriendsListAdapter(
 
         override fun onBind(item: FriendDetailResponse) {
             binding.item = item
-            binding.removeFriendBtn.setOnClickListener { onDeleteFriend(getItem(adapterPosition),adapterPosition) }
+            binding.removeFriendBtn.setOnClickListener {
+                onDeleteFriend(
+                    getItem(layoutPosition),
+                    layoutPosition,
+                    itemCount-1
+                )
+
+                onDeleteFriendClickListener?.onClick(position)
+                removeProduct(getItem(layoutPosition))
+            }
         }
 
     }
 
     fun setUpdatedData(items: ArrayList<FriendDetailResponse>) {
-        this.listItems = items
+        listItems.clear()
+        listItems.addAll(items)
         notifyDataSetChanged()
     }
 
+
+    fun removeProduct(model: FriendDetailResponse) {
+        val position = listItems.indexOf(model)
+        listItems.remove(model)
+        notifyItemRemoved(position)
+    }
+
+    companion object {
+        interface OnClickListener {
+            fun onClick(position: Int) {
+
+            }
+        }
+    }
+
 }
+

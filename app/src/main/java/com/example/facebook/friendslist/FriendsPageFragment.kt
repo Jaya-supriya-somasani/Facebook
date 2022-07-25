@@ -1,6 +1,7 @@
 package com.example.facebook.friendslist
 
 import android.annotation.SuppressLint
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.facebook.R
@@ -41,11 +42,16 @@ class FriendsPageFragment : BaseFragment<FragmentUserFriendsBinding, FriendsList
         lifecycleScope.launchWhenResumed {
             viewModel.getFriendsList(userId)
         }
+
         lifecycleScope.launchWhenResumed {
-            viewModel.removeFriendsEvent.collectLatest {
-                adapter.notifyItemRemoved(it)
+            viewModel.totalFriendsList.collectLatest {
+                if (it == 0) {
+                    dataBinding.totalFrdsTv.isVisible = false
+                    dataBinding.emptyTextView.isVisible = true
+                }
             }
         }
+
         dataBinding.backArrowIcon.setOnClickListener {
             findNavController().popBackStack()
         }
@@ -60,26 +66,16 @@ class FriendsPageFragment : BaseFragment<FragmentUserFriendsBinding, FriendsList
                             .startsWith(dataBinding.searchFriendsEdt.text.toString().uppercase())
                     }
                 adapter.setUpdatedData(ArrayList(filteredList))
+                viewModel.totalFriendsList.value=filteredList.size
                 true
             }
         }
         dataBinding.rvFriends.adapter = adapter
     }
 
-    private fun onRemoveFriendClicked(item: FriendDetailResponse,position:Int) {
-        viewModel.removeFriend(item,userId,position)
+    private fun onRemoveFriendClicked(item: FriendDetailResponse, position: Int, count: Int) {
+        viewModel.removeFriend(item, userId, count)
     }
-
-//
-//    private fun validateEmail() {
-//        if (p0.isNullOrEmpty()) {
-//            adapter.submitList(friendsList)
-//        } else {
-//            val filteredList =
-//                friendsList.filter { it.userName.startsWith(dataBinding.searchFriendsEdt.text.toString()) }
-//            adapter.setUpdatedData(ArrayList(filteredList))
-//        }
-//    }
 
 
 }

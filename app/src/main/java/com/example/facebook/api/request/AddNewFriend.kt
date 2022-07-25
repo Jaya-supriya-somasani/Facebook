@@ -36,7 +36,7 @@ data class FriendDetailResponse(
 
 
         override fun areContentsTheSame(oldItem: FriendDetailResponse, newItem: FriendDetailResponse) =
-            oldItem.userId == newItem.userId
+            oldItem.friendId == newItem.friendId
     }
 }
 
