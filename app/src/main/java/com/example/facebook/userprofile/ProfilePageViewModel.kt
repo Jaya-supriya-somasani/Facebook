@@ -2,7 +2,7 @@ package com.example.facebook.userprofile
 
 import androidx.lifecycle.viewModelScope
 import com.example.facebook.NetworkResult
-import com.example.facebook.api.NetworkService
+import com.example.facebook.api.ApiService
 import com.example.facebook.api.request.GetUserProfile
 import com.example.facebook.safeApi
 import com.example.facebook.util.BaseViewModel
@@ -10,8 +10,9 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ProfilePageViewModel : BaseViewModel() {
+class ProfilePageViewModel @Inject constructor(val apiService: ApiService) : BaseViewModel() {
 
     private val profileDetailsStateFlow = MutableStateFlow<GetUserProfile?>(null)
     val profileData: MutableStateFlow<GetUserProfile?> = profileDetailsStateFlow
@@ -19,7 +20,7 @@ class ProfilePageViewModel : BaseViewModel() {
     val toastEvent = toastEventChannel.receiveAsFlow()
     fun getProfileData(userId: String) {
         viewModelScope.launch {
-            when (val result = safeApi { NetworkService.apiService.getUserProfile(userId) }) {
+            when (val result = safeApi { apiService.getUserProfile(userId) }) {
                 is NetworkResult.Success -> {
                     profileDetailsStateFlow.value = result.data.body()?.data
                 }

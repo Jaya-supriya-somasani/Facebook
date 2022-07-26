@@ -12,7 +12,6 @@ import kotlinx.coroutines.flow.collectLatest
 import java.text.SimpleDateFormat
 import java.util.*
 
-
 class RegisterAccountActivity :
     BaseFragment<FragmentRegisterAccountBinding, RegisterAccountViewModel>() {
     override fun getViewModel() = RegisterAccountViewModel::class.java

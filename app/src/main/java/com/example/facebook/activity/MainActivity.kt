@@ -95,4 +95,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, HomeActivityViewModel>() 
 
 
     override fun getResourceId(): Int = R.layout.activity_main
+
+    override fun getViewBinding() = ActivityMainBinding.inflate(layoutInflater)
+
+
 }

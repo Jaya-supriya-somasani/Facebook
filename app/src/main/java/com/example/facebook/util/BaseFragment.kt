@@ -9,15 +9,15 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import com.example.facebook.internetconnection.NetworkStatus
 import com.example.facebook.internetconnection.NetworkStatusHelper
 
-abstract class BaseFragment<Binding : ViewDataBinding, VM : ViewModel> : Fragment() {
+
+abstract class BaseFragment<MyBinding : ViewDataBinding, VM : ViewModel> : Fragment() {
     abstract fun getViewModel(): Class<VM>
     lateinit var viewModel: VM
     abstract fun getResourceId(): Int
-    protected lateinit var dataBinding: Binding
+    protected lateinit var dataBinding: MyBinding
     abstract fun initViews()
     abstract fun getData()
 
@@ -34,7 +34,7 @@ abstract class BaseFragment<Binding : ViewDataBinding, VM : ViewModel> : Fragmen
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         dataBinding.lifecycleOwner = viewLifecycleOwner
-        viewModel = ViewModelProvider(this)[getViewModel()]
+//        viewModel = ViewModelProvider(this)[getViewModel()]
         initViews()
 
     }

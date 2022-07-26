@@ -3,7 +3,7 @@ package com.example.facebook.friendslist
 import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.example.facebook.NetworkResult
-import com.example.facebook.api.NetworkService
+import com.example.facebook.api.ApiService
 import com.example.facebook.api.request.FriendDetailResponse
 import com.example.facebook.safeApi
 import com.example.facebook.util.BaseViewModel
@@ -11,8 +11,9 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class FriendsListViewModel : BaseViewModel() {
+class FriendsListViewModel @Inject constructor(val apiService: ApiService): BaseViewModel() {
     private val friendsListStateFlow = MutableStateFlow<List<FriendDetailResponse>>(emptyList())
     val friendsList: MutableStateFlow<List<FriendDetailResponse>> = friendsListStateFlow
     private val toastEventChannel = Channel<String>()
@@ -25,7 +26,7 @@ class FriendsListViewModel : BaseViewModel() {
 
     fun getFriendsList(userId: String) {
         viewModelScope.launch {
-            when (val result = safeApi { NetworkService.apiService.getFriendsList(userId) }) {
+            when (val result = safeApi { apiService.getFriendsList(userId) }) {
                 is NetworkResult.Success -> {
                     friendsListStateFlow.value = result.data.data!!
                     totalFriendsList.value = friendsListStateFlow.value.size
@@ -47,7 +48,7 @@ class FriendsListViewModel : BaseViewModel() {
     fun removeFriend(item: FriendDetailResponse, userId: String, count: Int) {
         viewModelScope.launch {
             when (val result =
-                safeApi { NetworkService.apiService.deleteFriend(item.friendId, userId) }) {
+                safeApi { apiService.deleteFriend(item.friendId, userId) }) {
                 is NetworkResult.Success -> {
                     totalFriendsList.value = count
                     toastEventChannel.trySend(result.data.message() ?: "")

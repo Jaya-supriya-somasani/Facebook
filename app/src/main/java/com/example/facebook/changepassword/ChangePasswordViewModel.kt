@@ -2,15 +2,16 @@ package com.example.facebook.changepassword
 
 import androidx.lifecycle.viewModelScope
 import com.example.facebook.NetworkResult
-import com.example.facebook.api.NetworkService
+import com.example.facebook.api.ApiService
 import com.example.facebook.api.response.ChangePasswordRequest
 import com.example.facebook.safeApi
 import com.example.facebook.util.BaseViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ChangePasswordViewModel : BaseViewModel() {
+class ChangePasswordViewModel @Inject constructor(val apiService: ApiService) : BaseViewModel() {
     private val resetPasswordChannel = Channel<Unit>()
     val resetPasswordEvent = resetPasswordChannel.receiveAsFlow()
     private val toastEventChannel = Channel<String>()
@@ -19,7 +20,7 @@ class ChangePasswordViewModel : BaseViewModel() {
     fun changePassword(userId: Int, newPassword: String, confirmPassword: String) {
         viewModelScope.launch {
             val result = safeApi {
-                NetworkService.apiService.changePassword(
+                apiService.changePassword(
                     ChangePasswordRequest(
                         newPassword,
                         confirmPassword

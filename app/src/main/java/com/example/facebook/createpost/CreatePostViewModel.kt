@@ -2,15 +2,16 @@ package com.example.facebook.createpost
 
 import androidx.lifecycle.viewModelScope
 import com.example.facebook.NetworkResult
-import com.example.facebook.api.NetworkService
+import com.example.facebook.api.ApiService
 import com.example.facebook.api.request.CreatePost
 import com.example.facebook.safeApi
 import com.example.facebook.util.BaseViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class CreatePostViewModel : BaseViewModel() {
+class CreatePostViewModel @Inject constructor(val apiService: ApiService): BaseViewModel() {
     private val status = Channel<Boolean>()
     val statusEvent = status.receiveAsFlow()
     private val toastEventChannel = Channel<String>()
@@ -19,7 +20,7 @@ class CreatePostViewModel : BaseViewModel() {
     fun uploadPost(userId: String, postDesc: String) {
         viewModelScope.launch {
             val result = safeApi {
-                NetworkService.apiService.createPost(
+                apiService.createPost(
                     CreatePost(userId = userId, postDesc = postDesc)
                 )
             }

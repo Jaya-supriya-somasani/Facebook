@@ -3,7 +3,7 @@ package com.example.facebook.viewmodels
 import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.example.facebook.NetworkResult
-import com.example.facebook.api.NetworkService
+import com.example.facebook.api.ApiService
 import com.example.facebook.api.request.AddNewFriend
 import com.example.facebook.api.request.SuggestFriendResponse
 import com.example.facebook.api.response.PostsResponsesItem
@@ -14,8 +14,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class HomeMainViewModel : BaseViewModel() {
+class HomeMainViewModel @Inject constructor(val apiService: ApiService) : BaseViewModel() {
     val postDetailsMutableState = MutableStateFlow<List<PostsResponsesItem>>(emptyList())
 
     private val likePostChangeChanel = Channel<Int>()
@@ -46,7 +47,7 @@ class HomeMainViewModel : BaseViewModel() {
     }
 
     suspend fun getPosts() {
-        when (val result = safeApi { NetworkService.apiService.getPosts(userId.value) }) {
+        when (val result = safeApi { apiService.getPosts(userId.value) }) {
             is NetworkResult.Success -> {
                 postDetailsMutableState.value = result.data.data!!
                 progressIndicator.value=false
@@ -62,7 +63,7 @@ class HomeMainViewModel : BaseViewModel() {
         val likeStatus = !item.likeStatus
         viewModelScope.launch {
             val result = safeApi {
-                NetworkService.apiService.updateLike( userId.value, item.postId, likeStatus)
+                apiService.updateLike( userId.value, item.postId, likeStatus)
             }
 
             when (result) {
@@ -89,7 +90,7 @@ class HomeMainViewModel : BaseViewModel() {
     fun onDeleteClicked(item: PostsResponsesItem, position: Int) {
         viewModelScope.launch {
             when (val result = safeApi {
-                NetworkService.apiService.deletePost(userId.value, item.postId)
+               apiService.deletePost(userId.value, item.postId)
 
             }) {
                 is NetworkResult.Success -> {
@@ -106,7 +107,7 @@ class HomeMainViewModel : BaseViewModel() {
     suspend fun getSuggestFriends() {
         progressIndicator.value=true
         when (val result =
-            safeApi { NetworkService.apiService.getSuggestUser(userId.value) }) {
+            safeApi { apiService.getSuggestUser(userId.value) }) {
             is NetworkResult.Success -> {
                 suggestFriendsListStateFlow.value = result.data.data!!
 
@@ -125,7 +126,7 @@ class HomeMainViewModel : BaseViewModel() {
     fun addFriend(item: SuggestFriendResponse, position: Int) {
         viewModelScope.launch {
             when (val result =
-                safeApi { NetworkService.apiService.addFriend( AddNewFriend( item.friendId, userId.value ))
+                safeApi { apiService.addFriend( AddNewFriend( item.friendId, userId.value ))
                 }) {
                 is NetworkResult.Success -> {
                     toastEventChannel.trySend(result.data.body()?.message ?: "")

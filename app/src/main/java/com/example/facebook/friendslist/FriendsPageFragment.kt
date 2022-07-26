@@ -12,7 +12,6 @@ import com.example.facebook.datastore.AppDataStore
 import com.example.facebook.util.BaseFragment
 import kotlinx.coroutines.flow.collectLatest
 
-
 class FriendsPageFragment : BaseFragment<FragmentUserFriendsBinding, FriendsListViewModel>() {
     override fun getViewModel() = FriendsListViewModel::class.java
     private val adapter = AddFriendsListAdapter(

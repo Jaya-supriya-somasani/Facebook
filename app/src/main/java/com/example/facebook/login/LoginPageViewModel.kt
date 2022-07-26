@@ -2,7 +2,7 @@ package com.example.facebook.login
 
 import androidx.lifecycle.viewModelScope
 import com.example.facebook.NetworkResult
-import com.example.facebook.api.NetworkService
+import com.example.facebook.api.ApiService
 import com.example.facebook.api.request.LoginDataClass
 import com.example.facebook.api.response.LoginStatus
 import com.example.facebook.safeApi
@@ -11,8 +11,9 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class LoginPageViewModel : BaseViewModel() {
+class LoginPageViewModel @Inject constructor(val apiService: ApiService) : BaseViewModel() {
     val userName = MutableStateFlow("")
     val userPassword = MutableStateFlow("")
 
@@ -69,7 +70,7 @@ class LoginPageViewModel : BaseViewModel() {
         viewModelScope.launch {
 
             when (val loginResult =
-                safeApi { NetworkService.apiService.performLogin(loginRequest) }) {
+                safeApi { apiService.performLogin(loginRequest) }) {
                 is NetworkResult.Success -> {
                     loginResult.data.data?.let {
                         it.userName = userName.value

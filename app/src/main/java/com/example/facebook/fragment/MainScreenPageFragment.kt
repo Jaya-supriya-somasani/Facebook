@@ -14,7 +14,6 @@ import com.example.facebook.util.BaseFragment
 import com.example.facebook.viewmodels.HomeMainViewModel
 import kotlinx.coroutines.flow.collectLatest
 
-
 class MainScreenPageFragment : BaseFragment<FragmentMainScreenPageBinding, HomeMainViewModel>() {
 
     private val suggestFriendsAdapter = SuggestFriendsAdapter(::onAddClicked, ::onRemoveClicked)

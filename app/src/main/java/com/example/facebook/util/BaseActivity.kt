@@ -6,16 +6,16 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
+import java.lang.reflect.ParameterizedType
 
-abstract class BaseActivity<Binding : ViewDataBinding, T : BaseViewModel> : AppCompatActivity(),
+abstract class BaseActivity<ABinding : ViewDataBinding, VM : BaseViewModel> : AppCompatActivity(),
     LifecycleOwner {
 
     abstract fun setupViews()
-    abstract fun getViewModel(): Class<T>
-    lateinit var viewModel: T
-    protected lateinit var dataBinding: Binding
+    abstract fun getViewModel(): Class<VM>
+    lateinit var viewModel: VM
+    protected lateinit var dataBinding: ABinding
     abstract fun getResourceId(): Int
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,5 +23,13 @@ abstract class BaseActivity<Binding : ViewDataBinding, T : BaseViewModel> : AppC
         viewModel = ViewModelProvider(this)[getViewModel()]
         setupViews()
     }
+
+    private fun getViewModelClass(): Class<VM> {
+        val type = (javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0]
+        return type as Class<VM>
+    }
+
+    abstract fun getViewBinding(): ABinding
+
 
 }

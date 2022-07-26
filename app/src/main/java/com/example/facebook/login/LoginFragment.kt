@@ -14,7 +14,6 @@ import com.example.facebook.internetconnection.NetworkStatusHelper
 import com.example.facebook.util.BaseFragment
 import kotlinx.coroutines.flow.collectLatest
 
-
 class LoginFragment : BaseFragment<FragmentLoginBinding, LoginPageViewModel>() {
     override fun getViewModel() = LoginPageViewModel::class.java
 

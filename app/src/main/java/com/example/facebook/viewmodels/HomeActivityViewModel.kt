@@ -2,7 +2,7 @@ package com.example.facebook.viewmodels
 
 import androidx.lifecycle.viewModelScope
 import com.example.facebook.NetworkResult
-import com.example.facebook.api.NetworkService
+import com.example.facebook.api.ApiService
 import com.example.facebook.safeApi
 import com.example.facebook.util.BaseViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -13,8 +13,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class HomeActivityViewModel : BaseViewModel() {
+class HomeActivityViewModel @Inject constructor(val apiService: ApiService): BaseViewModel() {
 
     private val toastEventChannel = Channel<String>()
     val toastEvent = toastEventChannel.receiveAsFlow()
@@ -46,7 +47,7 @@ class HomeActivityViewModel : BaseViewModel() {
 
     fun logout(userId: String) {
         viewModelScope.launch {
-            when (val result = safeApi { NetworkService.apiService.logOutUser(userId) }) {
+            when (val result = safeApi { apiService.logOutUser(userId) }) {
                 is NetworkResult.Success -> {
                     toastEventChannel.trySend(result.data.body()?.message ?: "")
 

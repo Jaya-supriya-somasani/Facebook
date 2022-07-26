@@ -2,7 +2,7 @@ package com.example.facebook.register
 
 import androidx.lifecycle.viewModelScope
 import com.example.facebook.NetworkResult
-import com.example.facebook.api.NetworkService
+import com.example.facebook.api.ApiService
 import com.example.facebook.api.request.RegisterUser
 import com.example.facebook.safeApi
 import com.example.facebook.util.BaseViewModel
@@ -10,8 +10,9 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class RegisterAccountViewModel : BaseViewModel() {
+class RegisterAccountViewModel @Inject constructor(val apiService: ApiService): BaseViewModel() {
     private val createAccountChannel = Channel<Unit>(Channel.BUFFERED)
     val createAccountEvent = createAccountChannel.receiveAsFlow()
     val userName = MutableStateFlow("")
@@ -68,7 +69,7 @@ class RegisterAccountViewModel : BaseViewModel() {
         viewModelScope.launch {
 
             when (val registerResult =
-                safeApi { NetworkService.apiService.registerUser(registerReq) }) {
+                safeApi {apiService.registerUser(registerReq) }) {
                 is NetworkResult.Success -> {
                     if (registerResult.data.body()?.status?.equals("success") == true) {
                         createAccountChannel.trySend(Unit)
