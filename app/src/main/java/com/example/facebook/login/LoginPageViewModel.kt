@@ -19,8 +19,6 @@ class LoginPageViewModel : BaseViewModel() {
     val userNameError = MutableStateFlow("")
     val userPasswordError = MutableStateFlow("")
 
-
-
     private val loginEventChannel = Channel<LoginStatus>()
     val loginEvent = loginEventChannel.receiveAsFlow()
 
@@ -32,6 +30,7 @@ class LoginPageViewModel : BaseViewModel() {
 
     private val toastEventChannel = Channel<String>()
     val toastEvent = toastEventChannel.receiveAsFlow()
+
 
     fun loginBtnClicked() {
         loginValidation()
@@ -58,14 +57,13 @@ class LoginPageViewModel : BaseViewModel() {
             else -> {
                 userNameError.value = ""
                 userPasswordError.value = ""
-                login()
 
             }
         }
     }
 
-    fun login() {
 
+    fun login() {
         val loginRequest = LoginDataClass(username = userName.value, password = userPassword.value)
 
         viewModelScope.launch {
@@ -85,7 +83,6 @@ class LoginPageViewModel : BaseViewModel() {
 //                    toastEventChannel.trySend(loginResult.message?:"")
 //                }
             }
-
 
 
         }

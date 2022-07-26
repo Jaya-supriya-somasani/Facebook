@@ -3,7 +3,9 @@ package com.example.facebook.util
 import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Context
+import android.view.View
 import androidx.annotation.IdRes
+import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import androidx.fragment.app.Fragment
 import androidx.navigation.*
@@ -37,7 +39,10 @@ fun NavDestination.matches(
 
 typealias ApiResponse<R> = Response<BaseResponse<R>>
 
-
+@BindingAdapter("progressBarLoading")
+fun View.showProgressBar(visible:Boolean){
+    this.isVisible=visible
+}
 fun showProgressDialogue(context: Context, message: String) {
     val pd = ProgressDialog(context).apply {
         setMessage(message)

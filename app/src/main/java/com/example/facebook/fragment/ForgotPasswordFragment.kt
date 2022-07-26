@@ -24,4 +24,7 @@ class ForgotPasswordFragment:
     override fun getViewModel(): Class<ForgotPasswordViewModel> = ForgotPasswordViewModel::class.java
 
     override fun getResourceId(): Int = R.layout.fragment_forgot_password
+    override fun getData() {
+        //
+    }
 }

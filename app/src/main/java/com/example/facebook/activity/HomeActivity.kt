@@ -11,23 +11,14 @@ import kotlinx.coroutines.flow.collectLatest
 
 class HomeActivity : BaseActivity<ActivityHomeBinding, HomeActivityViewModel>() {
     override fun getViewModel(): Class<HomeActivityViewModel> = HomeActivityViewModel::class.java
-
     override fun getResourceId(): Int = R.layout.activity_home
     override fun setupViews() {
-//        val appdataStore = AppDataStore(this)
-//        lifecycleScope.launchWhenResumed {
-//            appdataStore.userLoggedStatusFlow.collectLatest {
-//                viewModel.moveToNextScreen(it)
-//            }
-//        }
         lifecycleScope.launchWhenCreated {
             viewModel.navigateNextScreenEvent.collectLatest {
                 moveToScreen(it)
-
             }
         }
     }
-
     private fun moveToScreen(status: Boolean) {
         if (status) {
             val intent = Intent(this, MainActivity::class.java)

@@ -63,10 +63,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, HomeActivityViewModel>() 
                                 }
                             }
                         }
-
                     val dialog = builder.create()
                     dialog.show()
-
                 }
             }
             true
@@ -88,6 +86,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, HomeActivityViewModel>() 
                 finish()
             }
         }
+
+
     }
 
 

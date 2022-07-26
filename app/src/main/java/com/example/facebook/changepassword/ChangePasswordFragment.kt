@@ -119,4 +119,8 @@ class ChangePasswordFragment :
             }
         }
     }
+
+    override fun getData() {
+        //
+    }
 }

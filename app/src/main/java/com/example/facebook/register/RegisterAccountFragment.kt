@@ -82,4 +82,8 @@ class RegisterAccountActivity :
         viewModel.passwordValidation()
     }
 
+    override fun getData() {
+        //
+    }
+
 }

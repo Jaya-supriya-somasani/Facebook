@@ -4,11 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.facebook.internetconnection.NetworkStatus
+import com.example.facebook.internetconnection.NetworkStatusHelper
 
 abstract class BaseFragment<Binding : ViewDataBinding, VM : ViewModel> : Fragment() {
     abstract fun getViewModel(): Class<VM>
@@ -16,6 +19,7 @@ abstract class BaseFragment<Binding : ViewDataBinding, VM : ViewModel> : Fragmen
     abstract fun getResourceId(): Int
     protected lateinit var dataBinding: Binding
     abstract fun initViews()
+    abstract fun getData()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,5 +36,21 @@ abstract class BaseFragment<Binding : ViewDataBinding, VM : ViewModel> : Fragmen
         dataBinding.lifecycleOwner = viewLifecycleOwner
         viewModel = ViewModelProvider(this)[getViewModel()]
         initViews()
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        NetworkStatusHelper(requireContext()).observe(viewLifecycleOwner){
+            when(it){
+                NetworkStatus.Available->{getData()}
+
+                NetworkStatus.Unavailable->{
+                    Toast.makeText(requireContext(),"No Internet Connection", Toast.LENGTH_SHORT).show()}
+
+//                NetworkStatus.UnDetermined->{
+//                    Toast.makeText(requireContext(),"Undetermined Internet Connection",Toast.LENGTH_SHORT).show()}
+            }
+        }
     }
 }

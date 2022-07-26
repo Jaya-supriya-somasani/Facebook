@@ -77,5 +77,9 @@ class FriendsPageFragment : BaseFragment<FragmentUserFriendsBinding, FriendsList
         viewModel.removeFriend(item, userId, count)
     }
 
+    override fun getData() {
+        //
+    }
+
 
 }

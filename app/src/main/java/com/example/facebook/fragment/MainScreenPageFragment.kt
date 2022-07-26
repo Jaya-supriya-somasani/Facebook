@@ -106,4 +106,11 @@ class MainScreenPageFragment : BaseFragment<FragmentMainScreenPageBinding, HomeM
         }
     }
 
+    override fun getData() {
+    lifecycleScope.launchWhenResumed {
+        viewModel.getPosts()
+        viewModel.getSuggestFriends()
+    }
+    }
+
 }

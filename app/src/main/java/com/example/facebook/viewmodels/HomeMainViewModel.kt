@@ -17,6 +17,7 @@ import kotlinx.coroutines.launch
 
 class HomeMainViewModel : BaseViewModel() {
     val postDetailsMutableState = MutableStateFlow<List<PostsResponsesItem>>(emptyList())
+
     private val likePostChangeChanel = Channel<Int>()
     val likePostChangeEvent = likePostChangeChanel.receiveAsFlow()
 
@@ -25,8 +26,7 @@ class HomeMainViewModel : BaseViewModel() {
     private val toastEventChannel = Channel<String>()
     val toastEvent = toastEventChannel.receiveAsFlow()
 
-    private val suggestFriendsListStateFlow =
-        MutableStateFlow<List<SuggestFriendResponse>>(emptyList())
+    val suggestFriendsListStateFlow = MutableStateFlow<List<SuggestFriendResponse>>(emptyList())
 
     private val addFriendChannel=Channel<Int>()
     val addFriendEvent=addFriendChannel.receiveAsFlow()
@@ -37,6 +37,10 @@ class HomeMainViewModel : BaseViewModel() {
     private val deletePostChangeChannel = Channel<Int>()
     val deletePostChangeEvent=deletePostChangeChannel.receiveAsFlow()
 
+    val progressIndicator= MutableStateFlow(false)
+
+
+
     val userPostFlow = userId.map {
         getPosts()
     }
@@ -45,6 +49,7 @@ class HomeMainViewModel : BaseViewModel() {
         when (val result = safeApi { NetworkService.apiService.getPosts(userId.value) }) {
             is NetworkResult.Success -> {
                 postDetailsMutableState.value = result.data.data!!
+                progressIndicator.value=false
             }
             is NetworkResult.Exception -> {
                 toastEventChannel.trySend(result.message ?: "")
@@ -99,10 +104,12 @@ class HomeMainViewModel : BaseViewModel() {
     }
 
     suspend fun getSuggestFriends() {
+        progressIndicator.value=true
         when (val result =
             safeApi { NetworkService.apiService.getSuggestUser(userId.value) }) {
             is NetworkResult.Success -> {
                 suggestFriendsListStateFlow.value = result.data.data!!
+
             }
             is NetworkResult.Failure -> {
                 toastEventChannel.trySend(result.message ?: "")

@@ -36,4 +36,8 @@ class ProfilePageFragment :
             }
         }
     }
+
+    override fun getData() {
+        //
+    }
 }

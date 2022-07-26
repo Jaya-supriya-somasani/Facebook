@@ -62,4 +62,8 @@ class CreatePostFragment : BaseFragment<FragmentCreatePostBinding, CreatePostVie
             }
         }, 500)
     }
+
+    override fun getData() {
+        //
+    }
 }

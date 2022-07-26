@@ -8,6 +8,8 @@
         <variable
             name="viewModel"
             type="com.example.facebook.viewmodels.HomeMainViewModel" />
+
+        <import type="android.view.View" />
     </data>
 
 
@@ -28,6 +30,15 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     style="@style/match_match"
                     android:fitsSystemWindows="true">
+
+
+                    <com.google.android.material.progressindicator.CircularProgressIndicator
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:progressBarLoading="@{viewModel.progressIndicator}" />
 
                     <com.google.android.material.appbar.MaterialToolbar
                         android:id="@+id/toolbar"
@@ -57,12 +68,13 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tvPeopleKnow"
-                        style="@style/wrap_wrap"
+                        style="@style/match_wrap"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="10dp"
                         android:text="@string/people_may_know"
                         android:textColor="@color/black"
                         android:textStyle="bold"
+                        app:layout_constraintEnd_toStartOf="@id/ivMore"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/dividerLayoutCreatePost" />
 
@@ -82,6 +94,7 @@
                         android:layout_height="250dp"
                         android:layout_margin="10dp"
                         android:orientation="horizontal"
+                        android:visibility="@{!viewModel.suggestFriendsList.empty?View.VISIBLE : View.GONE}"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -94,6 +107,7 @@
                         style="@style/match_wrap"
                         android:layout_marginVertical="20dp"
                         android:orientation="vertical"
+                        android:visibility="@{!viewModel.postDetailsMutableState.empty?View.VISIBLE : View.GONE}"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/recyclerViewFriends"
