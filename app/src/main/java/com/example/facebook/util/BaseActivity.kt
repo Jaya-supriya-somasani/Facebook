@@ -6,7 +6,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
-import java.lang.reflect.ParameterizedType
 
 abstract class BaseActivity<ABinding : ViewDataBinding, VM : BaseViewModel> : AppCompatActivity(),
     LifecycleOwner {
@@ -24,10 +23,10 @@ abstract class BaseActivity<ABinding : ViewDataBinding, VM : BaseViewModel> : Ap
         setupViews()
     }
 
-    private fun getViewModelClass(): Class<VM> {
-        val type = (javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0]
-        return type as Class<VM>
-    }
+//    private fun getViewModelClass(): Class<VM> {
+//        val type = (javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0]
+//        return type as Class<VM>
+//    }
 
     abstract fun getViewBinding(): ABinding
 

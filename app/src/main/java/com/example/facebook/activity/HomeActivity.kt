@@ -7,11 +7,9 @@ import com.example.facebook.R
 import com.example.facebook.databinding.ActivityHomeBinding
 import com.example.facebook.util.BaseActivity
 import com.example.facebook.viewmodels.HomeActivityViewModel
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
 
-@AndroidEntryPoint
 class HomeActivity : BaseActivity<ActivityHomeBinding, HomeActivityViewModel>() {
 
     override fun getViewModel(): Class<HomeActivityViewModel> = HomeActivityViewModel::class.java
