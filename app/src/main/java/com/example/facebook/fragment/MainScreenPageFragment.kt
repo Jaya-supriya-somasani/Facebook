@@ -3,6 +3,7 @@ package com.example.facebook.fragment
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.example.facebook.DaggerApplicationComponent
 import com.example.facebook.R
 import com.example.facebook.adapter.DiffAdapter
 import com.example.facebook.adapter.SuggestFriendsAdapter
@@ -44,6 +45,8 @@ class MainScreenPageFragment : BaseFragment<FragmentMainScreenPageBinding, HomeM
     override fun getResourceId(): Int = R.layout.fragment_main_screen_page
 
     override fun initViews() {
+        val applicationComponent=DaggerApplicationComponent.builder().build()
+        applicationComponent.inject(this)
         dataBinding.viewModel = viewModel
         initData()
         val appDataStore = AppDataStore(requireContext())

@@ -5,6 +5,7 @@ import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.example.facebook.DaggerApplicationComponent
 import com.example.facebook.R
 import com.example.facebook.activity.MainActivity
 import com.example.facebook.databinding.FragmentLoginBinding
@@ -15,16 +16,17 @@ import com.example.facebook.util.BaseFragment
 import kotlinx.coroutines.flow.collectLatest
 
 class LoginFragment : BaseFragment<FragmentLoginBinding, LoginPageViewModel>() {
-
-
     override fun getViewModel() = LoginPageViewModel::class.java
 
     override fun getResourceId(): Int {
         return R.layout.fragment_login
     }
     override fun initViews() {
+        val applicationComponent=DaggerApplicationComponent.builder().build()
+        applicationComponent.inject(this)
         dataBinding.loginVM = viewModel
 //        val internetStatus = viewModel.internetChecking(requireContext())
+//        applicationComponent.inject(this)
         val appDataStore = AppDataStore(requireContext())
         lifecycleScope.launchWhenResumed {
             appDataStore.setLaunchImmediate(false)

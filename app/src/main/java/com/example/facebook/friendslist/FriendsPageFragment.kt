@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.example.facebook.DaggerApplicationComponent
 import com.example.facebook.R
 import com.example.facebook.adapter.AddFriendsListAdapter
 import com.example.facebook.api.request.FriendDetailResponse
@@ -25,6 +26,8 @@ class FriendsPageFragment : BaseFragment<FragmentUserFriendsBinding, FriendsList
 
     @SuppressLint("ClickableViewAccessibility")
     override fun initViews() {
+        val applicationComponent=DaggerApplicationComponent.builder().build()
+        applicationComponent.inject(this)
         dataBinding.userFriendsVM = viewModel
         val appDataStore = AppDataStore(requireContext())
         lifecycleScope.launchWhenResumed {

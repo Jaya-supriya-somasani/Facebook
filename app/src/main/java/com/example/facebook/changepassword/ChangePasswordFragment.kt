@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.example.facebook.DaggerApplicationComponent
 import com.example.facebook.R
 import com.example.facebook.databinding.FragmentChangePasswordBinding
 import com.example.facebook.util.BaseFragment
@@ -21,6 +22,8 @@ class ChangePasswordFragment :
 
     override fun initViews() {
         setupListeners()
+        val applicationComponent=DaggerApplicationComponent.builder().build()
+        applicationComponent.inject(this)
 
         dataBinding.changePasswordBtn.setOnClickListener {
             if (validateEmail() && validatePassword() && validateConfirmPassword()) {

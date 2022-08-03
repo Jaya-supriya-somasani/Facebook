@@ -3,6 +3,7 @@ package com.example.facebook.activity
 import android.content.Intent
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
+import com.example.facebook.DaggerApplicationComponent
 import com.example.facebook.R
 import com.example.facebook.databinding.ActivityHomeBinding
 import com.example.facebook.util.BaseActivity
@@ -17,6 +18,10 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeActivityViewModel>() 
     override fun getResourceId(): Int = R.layout.activity_home
 
     override fun setupViews() {
+
+        val applicationComponent=DaggerApplicationComponent.builder().build()
+        applicationComponent.inject(this)
+
         lifecycleScope.launchWhenCreated {
             viewModel.navigateNextScreenEvent.collectLatest {
                 moveToScreen(it)

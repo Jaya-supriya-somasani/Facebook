@@ -11,10 +11,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import com.example.facebook.internetconnection.NetworkStatus
 import com.example.facebook.internetconnection.NetworkStatusHelper
+import javax.inject.Inject
 
 
 abstract class BaseFragment<MyBinding : ViewDataBinding, VM : ViewModel> : Fragment() {
     abstract fun getViewModel(): Class<VM>
+    @Inject
     lateinit var viewModel: VM
     abstract fun getResourceId(): Int
     protected lateinit var dataBinding: MyBinding

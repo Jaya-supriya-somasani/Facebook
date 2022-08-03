@@ -1,19 +1,20 @@
 package com.example.facebook.api
 
+import android.content.Context
+import com.example.facebook.datastore.AppDataStore
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Singleton
 
 
 @Module
 class NetworkService {
     private val mainUrl = "http://stagetao.gcf.education:3000"
 
-    @Singleton
+//    @Singleton
     @Provides
     fun providingRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
@@ -23,13 +24,13 @@ class NetworkService {
             .build()
     }
 
-    @Singleton
+//    @Singleton
     @Provides
     fun providingApiService(retrofit: Retrofit): ApiService {
         return retrofit.create(ApiService::class.java)
     }
 
-    @Singleton
+//    @Singleton
     @Provides
     fun loginIntercept(): HttpLoggingInterceptor {
         return HttpLoggingInterceptor().apply {
@@ -37,13 +38,19 @@ class NetworkService {
         }
     }
 
-    @Singleton
+//    @Singleton
     @Provides
-    fun providingHttpClient(okHttpClient: OkHttpClient, loggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
+    fun providingHttpClient(loggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(loggingInterceptor)
             .build()
     }
+
+    @Provides
+    fun provideDataStore(context: Context): AppDataStore {
+        return AppDataStore(context)
+    }
+
 }
 
 // class NetworkService {

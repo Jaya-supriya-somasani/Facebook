@@ -4,6 +4,7 @@ import android.app.ProgressDialog
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.example.facebook.DaggerApplicationComponent
 import com.example.facebook.R
 import com.example.facebook.databinding.FragmentCreatePostBinding
 import com.example.facebook.datastore.AppDataStore
@@ -20,6 +21,8 @@ class CreatePostFragment : BaseFragment<FragmentCreatePostBinding, CreatePostVie
 
     override fun initViews() {
         val appDataStore = AppDataStore(requireContext())
+        val applicationComponent=DaggerApplicationComponent.builder().build()
+        applicationComponent.inject(this)
         dataBinding.postBtn.setOnClickListener {
             lifecycleScope.launch {
                 appDataStore.userIdFlow.collectLatest {

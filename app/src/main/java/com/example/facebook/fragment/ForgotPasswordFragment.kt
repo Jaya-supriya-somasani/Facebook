@@ -10,6 +10,7 @@ class ForgotPasswordFragment:
     BaseFragment<FragmentForgotPasswordBinding,ForgotPasswordViewModel>() {
 
     override fun initViews() {
+
         dataBinding.btReset.setOnClickListener {
             // reset btn
         }

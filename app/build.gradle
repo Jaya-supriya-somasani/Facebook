@@ -79,12 +79,12 @@ dependencies {
 
     // architecture components
 
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.0'
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.0'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
 
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
     // Saved state module for ViewModel
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-savedstate:2.5.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-savedstate:2.5.1'
 
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
     implementation 'androidx.core:core-splashscreen:1.0.0-beta02'

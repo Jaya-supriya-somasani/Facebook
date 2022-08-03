@@ -3,6 +3,7 @@ package com.example.facebook.fragment
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.example.facebook.DaggerApplicationComponent
 import com.example.facebook.R
 import com.example.facebook.databinding.FragmentRegisterAccountBinding
 import com.example.facebook.register.RegisterAccountViewModel
@@ -12,7 +13,7 @@ import kotlinx.coroutines.flow.collectLatest
 import java.text.SimpleDateFormat
 import java.util.*
 
-class RegisterAccountActivity :
+class RegisterAccountFragment :
     BaseFragment<FragmentRegisterAccountBinding, RegisterAccountViewModel>() {
     override fun getViewModel() = RegisterAccountViewModel::class.java
 
@@ -22,6 +23,8 @@ class RegisterAccountActivity :
 
     override fun initViews() {
         registrationValidation()
+        val applicationComponent=DaggerApplicationComponent.builder().build()
+        applicationComponent.inject(this)
         dataBinding.signBtn.setOnClickListener {
             registrationValidation()
         }

@@ -9,6 +9,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
+import com.example.facebook.DaggerApplicationComponent
 import com.example.facebook.R
 import com.example.facebook.databinding.ActivityMainBinding
 import com.example.facebook.datastore.AppDataStore
@@ -25,6 +26,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, HomeActivityViewModel>() 
         get() = navHostFragment.navController
 
     override fun setupViews() {
+        val applicationComponent=DaggerApplicationComponent.builder().build()
+        applicationComponent.inject(this)
 
         val appDataStore = AppDataStore(this)
         dataBinding.bottomNavigation.setupWithNavController(navController)
